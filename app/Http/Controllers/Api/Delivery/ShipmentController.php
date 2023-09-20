@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Http\Controllers\Api\Delivery;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Delivery\EndDeliverShipmentValidation;
+use App\Http\Requests\Api\Delivery\RecieveShipmentValidation;
+use App\Http\Requests\Api\Delivery\StartDeliverShipmentValidation;
+use App\Http\Requests\Api\Delivery\FailDeliverShipmentValidation;
+
+use App\Http\Traits\ApiResponseTrait;
+use App\Services\Delivery\ShipmentService;
+class ShipmentController extends Controller
+{
+    use ApiResponseTrait;
+    protected $shipmentService;
+    public function __construct(ShipmentService $shipmentService)
+    {
+        $this->shipmentService =  $shipmentService;
+    }
+    public function index(){
+        return $this->shipmentService->index();
+    }
+    public function recieve(RecieveShipmentValidation $request){
+        $data = $request->validated();
+        return $this->shipmentService->recieve($data);
+    }
+
+    public function startDeliverShipment(StartDeliverShipmentValidation $request){
+        $data = $request->validated();
+        return $this->shipmentService->startDeliverShipment($data);
+    }
+    public function endDeliverShipment(EndDeliverShipmentValidation $request){
+        $data = $request->validated();
+        return $this->shipmentService->endDeliverShipment($data);
+    }
+    public function failDeliverShipment(FailDeliverShipmentValidation $request){
+        $data = $request->validated();
+        return $this->shipmentService->failDeliverShipment($data);
+    }
+}
