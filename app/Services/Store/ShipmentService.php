@@ -12,7 +12,7 @@ class ShipmentService{
 
     public function index(){
 
-        $statusArr = ['all' , 'delivered' ,'failed','returned','out_for_delivery'];
+        $statusArr = ['all' , 'delivered' ,'failed','returned','out_for_delivery' ];
 
         $status = request('status');
 
