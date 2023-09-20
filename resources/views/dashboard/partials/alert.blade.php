@@ -8,7 +8,7 @@
             icon: "success",
             buttonsStyling: false,
             showConfirmButton: true,
-            confirmButtonText: "<?php echo __('Ok') ?>",
+            confirmButtonText: "<?php echo __('translation.Ok') ?>",
             customClass: {
                 confirmButton: "btn btn-success"
             }
@@ -22,7 +22,7 @@
             text: "<?php echo $message ?>",
             icon: "error",
             buttonsStyling: false,
-            confirmButtonText: "<?php echo __('Ok') ?>",
+            confirmButtonText: "<?php echo __('translation.Ok') ?>",
             customClass: {
                 confirmButton: "btn btn-danger"
             }
@@ -42,7 +42,7 @@
             cancelButtonText: "{{ __('translation.Cancel') }}",
             customClass: {
                 confirmButton: "btn btn-danger ml-10",
-                cancelButton: 'btn btn-primary'
+                cancelButton: 'btn btn-success'
             }
         }).then((result) => {
             if (result.isConfirmed) {

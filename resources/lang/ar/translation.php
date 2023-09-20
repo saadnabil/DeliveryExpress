@@ -124,5 +124,9 @@ return [
     'Shipment #NO is not assigned to this delivery or not found in the stock!' => 'هذه الشحنة غير مخصصة لهذا الديليفري او غير موجودة',
     'On/Off' => 'تشغيل/تعطيل',
     'On' => 'تشغيل',
-    'Off' => 'تعطيل'
+    'Off' => 'تعطيل',
+    'Add New Delivery' => 'اضافة مندوب',
+    'Deliveries' => 'المناديب',
+    'Edit Delivery' => 'تعديل المندوب',
+    'Ok' => 'تم'
 ];

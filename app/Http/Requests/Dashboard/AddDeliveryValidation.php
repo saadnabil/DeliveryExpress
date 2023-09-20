@@ -37,7 +37,7 @@ class AddDeliveryValidation extends FormRequest
             'image' => ['required' , 'image' , 'mimes:png,jpg,jpeg,svg'],
             'city' => ['required','array','min:1'],
             'city.*' => ['numeric'],
-            'worktimes' => ['required' , 'array'],
+            'worktimes' => ['required' , 'array','min:1'],
             'worktimes.*.start_time' => ['required' , 'string'],
             'worktimes.*.end_time' => ['required' , 'string'],
             'worktimes.*.day' => ['required' , 'string'],

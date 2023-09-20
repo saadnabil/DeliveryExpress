@@ -19,6 +19,7 @@ class ProfileController extends Controller
     {
         $this->profileService = $profileService;
     }
+
     public function show(){
 
         return $this->profileService->show();

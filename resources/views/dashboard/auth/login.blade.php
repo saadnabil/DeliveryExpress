@@ -39,7 +39,7 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="d-grid">
-                                                <button type="submit" class="btn btn-primary">{{ __('translation.Sign in') }}</button>
+                                                <button type="submit" class="btn btn-success">{{ __('translation.Sign in') }}</button>
                                             </div>
                                         </div>
                                     </form>

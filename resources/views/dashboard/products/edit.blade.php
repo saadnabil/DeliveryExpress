@@ -220,7 +220,7 @@
                             <div class="error-validation">{{ $message }}</div>
                         @enderror
                         <div class="mt-3">
-                            <button data-count="{{ old('variants') ? count(old('variants')) : count($product->variants) }}" class="btn btn-primary btn-sm add-variant">
+                            <button data-count="{{ old('variants') ? count(old('variants')) : count($product->variants) }}" class="btn btn-success btn-sm add-variant">
                                 {{ __('translation.New Variant') }}
                                 <i class="bx bx-plus"></i>
                             </button>
@@ -364,7 +364,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-primary">{{ __('translation.Save') }}</button>
+                                        <button type="submit" class="btn btn-success">{{ __('translation.Save') }}</button>
                                     </div>
                                 </div>
                             </div>

@@ -27,4 +27,26 @@ class SettingController extends Controller
         ];
         return $this->sendResponse($data);
     }
+
+    public function terms(){
+        $termsAndConditions = '<p style="color:#f00;">لوريم ايبسوم دولار سيت أميت ,كونسيكتيتو</p>' ; //constant
+
+        $responseData = [
+            'termsAndConditions' => $termsAndConditions,
+        ];
+        return $this->sendResponse($responseData);
+    }
+
+    public function privacy(){
+        $privacyPolicy = '<p style="color:#f00;">لوريم ايبسوم دولار سيت أميت ,كونسيكتيتو</p>'; //constant
+
+        $responseData = [
+            'privacyPolicy' => $privacyPolicy,
+        ];
+
+        return $this->sendResponse($responseData);
+    }
+
+
+
 }

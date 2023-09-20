@@ -5,7 +5,7 @@
                         <h6 class="mb-0 text-uppercase">{{ __('Categories') }} </h6>
                     </div>
                     <div class="col-6">
-                        <a href="{{ route('category.create') }}" class="btn btn-primary btn-sm" style="float:right;">{{ __('translation.Add') }} <i class="bx bx-plus"></i></a>
+                        <a href="{{ route('category.create') }}" class="btn btn-success btn-sm" style="float:right;">{{ __('translation.Add') }} <i class="bx bx-plus"></i></a>
                     </div>
                 </div>
 

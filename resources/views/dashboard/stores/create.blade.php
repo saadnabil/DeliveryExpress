@@ -170,7 +170,7 @@
                                     </div>
                                     <div class="d-grid">
                                         <button type="submit"
-                                            class="btn btn-primary">{{ __('translation.Save') }}</button>
+                                            class="btn btn-success">{{ __('translation.Save') }}</button>
                                     </div>
                                 </div>
                             </div>

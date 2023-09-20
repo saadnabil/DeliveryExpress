@@ -32,6 +32,8 @@ Route::group(['prefix' => 'v1'],function(){
     Route::get('setting' , [SettingController::class , 'index']);
     Route::get('cities',[CityController::class, 'index']);
     Route::get('countries',[CountryController::class, 'index']);
+    Route::get('/terms', [SettingController::class, 'terms']);
+    Route::get('/privacy', [SettingController::class, 'privacy']);
     Route::group(['prefix' => 'store'],function(){
         Route::post('register' , [AuthController::class , 'register']);
         Route::post('login' , [AuthController::class , 'login']);

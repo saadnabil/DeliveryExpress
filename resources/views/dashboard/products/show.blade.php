@@ -14,8 +14,8 @@
         </div>
         <div class="ms-auto">
             <div class="btn-group">
-                <button type="button" class="btn btn-primary">Settings</button>
-                <button type="button" class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split"
+                <button type="button" class="btn btn-success">Settings</button>
+                <button type="button" class="btn btn-success split-bg-primary dropdown-toggle dropdown-toggle-split"
                     data-bs-toggle="dropdown"> <span class="visually-hidden">Toggle Dropdown</span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end"> <a class="dropdown-item"
@@ -95,7 +95,7 @@
 
                     </div>
                     <div class="d-flex gap-3 mt-3">
-                        <a href="#" class="btn btn-primary">Buy Now</a>
+                        <a href="#" class="btn btn-success">Buy Now</a>
                         <a href="#" class="btn btn-outline-primary"><span class="text">Add to cart</span> <i
                                 class='bx bxs-cart-alt'></i></a>
                     </div>

@@ -9,10 +9,9 @@ use Illuminate\Http\Request;
 
 class ShipmentService{
     use ApiResponseTrait;
-
     public function index(){
 
-        $statusArr = ['all' , 'delivered' ,'failed','returned','out_for_delivery' ];
+        $statusArr = ['all' , 'delivered' ,'failed','returned','out_for_delivery','in_stock','recieved_by_delivery' ,'pending' ];
 
         $status = request('status');
 
@@ -29,6 +28,7 @@ class ShipmentService{
                        ->simplePaginate();
         }else{
             $rows = Shipment::with(['images','delivery'])
+                       ->where('status' , '!=' , 'incomplete')
                        ->latest()
                        ->simplePaginate();
         }

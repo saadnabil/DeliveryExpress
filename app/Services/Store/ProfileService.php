@@ -15,19 +15,9 @@ class ProfileService{
     public function show(){
         $store = auth()->user();
         $store = $store->load('activity','city','country');
-        $cities = City::get();
-        $countries = Country::get();
-        $activities = Activity::get();
-        $termsAndConditions = 'Terms And Conditions'; //constant
-        $privacyPolicy = 'Privacy Policy'; //constant
+
         $responseData = [
             'store' => new ProfileResource($store),
-            'termsAndConditions' => $termsAndConditions,
-            'privacyPolicy' => $privacyPolicy,
-            'cities' => $cities,
-            'countries' => $countries,
-            'activities' => $activities,
-
         ];
         return $this->sendResponse($responseData);
     }

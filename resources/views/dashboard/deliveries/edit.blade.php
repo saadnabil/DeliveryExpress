@@ -91,7 +91,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label">{{ __('translation.Active Status') }}:</label>
-                                <select requierd name="active"
+                                <select required name="active"
                                     class="form-select mb-3 @error('active') error-input @enderror"
                                     aria-label="Default select example">
                                     <option value="" selected>{{ __('translation.Select Status') }}</option>
@@ -110,6 +110,9 @@
                         <div class="border border-3 p-4 rounded">
                             <div class="row g-3">
                                 <div class="col-12">
+                                    <div class="text-center">
+                                        <img style="margin:20px auto" src="{{ url('storage/'.$delivery->image) }}" class="ml-3 rounded-circle p-1 border" width="90" height="90" alt="...">
+                                    </div>
                                     <div class="mb-3">
                                         <label for="productTitleEnglish"
                                             class="form-label">{{ __('translation.Assign Work Cities') }}</label>
@@ -126,7 +129,7 @@
                                                 @foreach ($cities as $city)
                                                     <div class="col-md-6">
                                                         <input
-                                                            {{ in_array($city->id, $deliveryCitiesWorkIds) ? 'checked' : '' }}
+                                                            {{ in_array($city->id, old('city' , $deliveryCitiesWorkIds)) ? 'checked' : '' }}
                                                             name="city[]" value="{{ $city->id }}" multiple
                                                             id="city{{ $city->id }}"
                                                             style="margin-right:10px;display:inline-block;"
@@ -149,6 +152,7 @@
                         <div class="mt-4 border border-3 p-4 rounded">
                             <div class="row g-3">
                                 <div class="col-12">
+
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.City') }}:</label>
                                         <select requierd name="city_id"
@@ -194,7 +198,7 @@
                                     </div>
                                     <div class="d-grid">
                                         <button type="submit"
-                                            class="btn btn-primary">{{ __('translation.Save') }}</button>
+                                            class="btn btn-success">{{ __('translation.Save') }}</button>
                                     </div>
                                 </div>
                             </div>
@@ -230,7 +234,7 @@
                                     <div class="mb-3">
                                         <label for="worktimes[0][day]"
                                             class="form-label">{{ __('translation.Day') }}</label>
-                                        <input disabled="{{ !isset($deliveryData['Saturday']) ? true : false }}" readonly required name="worktimes[0][day]" value="Saturday" type="text"
+                                        <input {{ !isset($deliveryData['Saturday']) ? 'disabled' : '' }} readonly required name="worktimes[0][day]" value="Saturday" type="text"
                                             class="form-control @error('worktimes[0][day]') error-input @enderror"
                                             id="worktimes[0][day]">
                                         @error('worktimes[0][day]')
@@ -242,7 +246,7 @@
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.Start Time') }}:</label>
-                                        <input disabled="{{ !isset($deliveryData['Saturday']) ? true : false }}" type="time" name="worktimes[0][start_time]"
+                                        <input {{ !isset($deliveryData['Saturday']) ? 'disabled' : '' }} type="time" name="worktimes[0][start_time]"
                                             value="{{ old('worktimes[0][start_time]', $deliveryData['Saturday'] ? Carbon\Carbon::parse($deliveryData['Saturday']->start_time)->format('H:i') : '') }}"
                                             class="form-control @error('worktimes[0][start_time]') error-input @enderror">
                                         @error('worktimes[0][start_time]')
@@ -254,7 +258,7 @@
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.End Time') }}:</label>
-                                        <input disabled="{{ !isset($deliveryData['Saturday']) ? true : false }}" type="time" name="worktimes[0][end_time]"
+                                        <input {{ !isset($deliveryData['Saturday']) ? 'disabled' : '' }} type="time" name="worktimes[0][end_time]"
                                             value="{{ old('worktimes[0][end_time]', $deliveryData['Saturday'] ? Carbon\Carbon::parse($deliveryData['Saturday']->end_time)->format('H:i') : '') }}"
                                             class="form-control @error('worktimes[0][end_time]') error-input @enderror">
                                         @error('worktimes[0][end_time]')
@@ -283,7 +287,7 @@
                                     <div class="mb-3">
                                         <label for="worktimes[1][day]"
                                             class="form-label">{{ __('translation.Day') }}</label>
-                                        <input disabled="{{ !isset($deliveryData['Sunday']) ? true : false }}" readonly required name="worktimes[1][day]" value="Sunday" type="text"
+                                        <input {{ !isset($deliveryData['Sunday']) ? 'disabled' : '' }} readonly required name="worktimes[1][day]" value="Sunday" type="text"
                                             class="form-control @error('worktimes[1][day]') error-input @enderror"
                                             id="worktimes[1][day]">
                                         @error('worktimes[1][day]')
@@ -295,7 +299,7 @@
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.Start Time') }}:</label>
-                                        <input  disabled="{{ !isset($deliveryData['Sunday']) ? true : false }}" type="time" name="worktimes[1][start_time]"
+                                        <input  {{ !isset($deliveryData['Sunday']) ? 'disabled' : '' }} type="time" name="worktimes[1][start_time]"
                                             value="{{ old('worktimes[1][start_time]', $deliveryData['Sunday'] ? Carbon\Carbon::parse($deliveryData['Sunday']->start_time)->format('H:i') : '') }}"
                                             class="form-control @error('worktimes[1][start_time]') error-input @enderror">
                                         @error('worktimes[1][start_time]')
@@ -307,7 +311,7 @@
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.End Time') }}:</label>
-                                        <input  disabled="{{ !isset($deliveryData['Sunday']) ? true : false }}" type="time" name="worktimes[1][end_time]"
+                                        <input  {{ !isset($deliveryData['Sunday']) ? 'disabled' : '' }} type="time" name="worktimes[1][end_time]"
                                             value="{{ old('worktimes[1][end_time]', $deliveryData['Sunday'] ? Carbon\Carbon::parse($deliveryData['Sunday']->end_time)->format('H:i') : '') }}"
                                             class="form-control @error('worktimes[1][end_time]') error-input @enderror">
                                         @error('worktimes[1][end_time]')
@@ -336,7 +340,7 @@
                                     <div class="mb-3">
                                         <label for="worktimes[2][day]"
                                             class="form-label">{{ __('translation.Day') }}</label>
-                                        <input  disabled="{{ !isset($deliveryData['Monday']) ? true : false }}" readonly required name="worktimes[2][day]" value="Monday" type="text"
+                                        <input  {{ !isset($deliveryData['Monday']) ? 'disabled' : '' }} readonly required name="worktimes[2][day]" value="Monday" type="text"
                                             class="form-control @error('worktimes[2][day]') error-input @enderror"
                                             id="worktimes[2][day]">
                                         @error('worktimes[2][day]')
@@ -347,7 +351,7 @@
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.Start Time') }}:</label>
-                                        <input disabled="{{ !isset($deliveryData['Monday']) ? true : false }}" name="worktimes[2][start_time]" type="time"
+                                        <input {{ !isset($deliveryData['Monday']) ? 'disabled' : '' }} name="worktimes[2][start_time]" type="time"
                                             value="{{ old('worktimes[2][start_time]', $deliveryData['Monday'] ? Carbon\Carbon::parse($deliveryData['Monday']->start_time)->format('H:i') : '') }}"
                                             class="form-control @error('worktimes[2][start_time]') error-input @enderror">
                                         @error('worktimes[2][start_time]')
@@ -359,7 +363,7 @@
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.End Time') }}:</label>
-                                        <input disabled="{{ !isset($deliveryData['Monday']) ? true : false }}" name="worktimes[2][end_time]" type="time"
+                                        <input {{ !isset($deliveryData['Monday']) ? 'disabled' : '' }} name="worktimes[2][end_time]" type="time"
                                             value="{{ old('worktimes[2][end_time]', $deliveryData['Monday'] ? Carbon\Carbon::parse($deliveryData['Monday']->end_time)->format('H:i') : '') }}"
                                             class="form-control @error('worktimes[2][end_time]') error-input @enderror">
                                         @error('worktimes[2][end_time]')
@@ -388,7 +392,7 @@
                                     <div class="mb-3">
                                         <label for="worktimes[3][day]"
                                             class="form-label">{{ __('translation.Day') }}</label>
-                                        <input disabled="{{ !isset($deliveryData['Tuesday']) ? true : false }}" readonly required name="worktimes[3][day]" value="Tuesday" type="text"
+                                        <input {{ !isset($deliveryData['Tuesday']) ? 'disabled' : '' }} readonly required name="worktimes[3][day]" value="Tuesday" type="text"
                                             class="form-control @error('worktimes[3][day]') error-input @enderror"
                                             id="worktimes[3][day]">
                                         @error('worktimes[3][day]')
@@ -400,7 +404,7 @@
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.Start Time') }}:</label>
-                                        <input disabled="{{ !isset($deliveryData['Tuesday']) ? true : false }}" type="time" name="worktimes[3][start_time]"
+                                        <input {{ !isset($deliveryData['Tuesday']) ? 'disabled' : '' }} type="time" name="worktimes[3][start_time]"
                                             value="{{ old('worktimes[3][start_time]', $deliveryData['Tuesday'] ? Carbon\Carbon::parse($deliveryData['Tuesday']->start_time)->format('H:i') : '') }}"
                                             class="form-control @error('worktimes[3][start_time]') error-input @enderror">
                                         @error('worktimes[3][start_time]')
@@ -412,7 +416,7 @@
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.End Time') }}:</label>
-                                        <input disabled="{{ !isset($deliveryData['Tuesday']) ? true : false }}" type="time" name="worktimes[3][end_time]"
+                                        <input {{ !isset($deliveryData['Tuesday']) ? 'disabled' : '' }} type="time" name="worktimes[3][end_time]"
                                             value="{{ old('worktimes[3][end_time]', $deliveryData['Tuesday'] ? Carbon\Carbon::parse($deliveryData['Tuesday']->end_time)->format('H:i') : '') }}"
                                             class="form-control @error('worktimes[3][end_time]') error-input @enderror">
                                         @error('worktimes[3][end_time]')
@@ -441,7 +445,7 @@
                                     <div class="mb-3">
                                         <label for="worktimes[4][day]"
                                             class="form-label">{{ __('translation.Day') }}</label>
-                                        <input disabled="{{ !isset($deliveryData['Wednesday']) ? true : false }}" readonly required name="worktimes[4][day]" value="Wednesday"
+                                        <input {{ !isset($deliveryData['Wednesday']) ? 'disabled' : '' }} readonly required name="worktimes[4][day]" value="Wednesday"
                                             type="text"
                                             class="form-control @error('worktimes[4][day]') error-input @enderror"
                                             id="worktimes[4][day]">
@@ -454,7 +458,7 @@
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.Start Time') }}:</label>
-                                        <input disabled="{{ !isset($deliveryData['Wednesday']) ? true : false }}" type="time" name="worktimes[4][start_time]"
+                                        <input {{ !isset($deliveryData['Wednesday']) ? 'disabled' : '' }} type="time" name="worktimes[4][start_time]"
                                             value="{{ old('worktimes[4][start_time]', $deliveryData['Wednesday'] ? Carbon\Carbon::parse($deliveryData['Wednesday']->start_time)->format('H:i') : '') }}"
                                             class="form-control @error('worktimes[4][start_time]') error-input @enderror">
                                         @error('worktimes[4][start_time]')
@@ -466,7 +470,7 @@
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.End Time') }}:</label>
-                                        <input disabled="{{ !isset($deliveryData['Wednesday']) ? true : false }}" type="time" name="worktimes[4][end_time]"
+                                        <input {{ !isset($deliveryData['Wednesday']) ? 'disabled' : '' }} type="time" name="worktimes[4][end_time]"
                                             value="{{ old('worktimes[4][end_time]', $deliveryData['Wednesday'] ? Carbon\Carbon::parse($deliveryData['Wednesday']->end_time)->format('H:i') : '') }}"
                                             class="form-control @error('worktimes[4][end_time]') error-input @enderror">
                                         @error('worktimes[4][end_time]')
@@ -494,7 +498,7 @@
                                     <div class="mb-3">
                                         <label for="worktimes[5][day]"
                                             class="form-label">{{ __('translation.Day') }}</label>
-                                        <input disabled="{{ !isset($deliveryData['Thursday']) ? true : false }}" readonly required name="worktimes[5][day]" value="Thursday" type="text"
+                                        <input {{ !isset($deliveryData['Thursday']) ? 'disabled' : '' }} readonly required name="worktimes[5][day]" value="Thursday" type="text"
                                             class="form-control @error('worktimes[5][day]') error-input @enderror"
                                             id="worktimes[5][day]">
                                         @error('worktimes[5][day]')
@@ -506,7 +510,7 @@
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.Start Time') }}:</label>
-                                        <input disabled="{{ !isset($deliveryData['Thursday']) ? true : false }}" name="worktimes[5][start_time]" type="time"
+                                        <input {{ !isset($deliveryData['Thursday']) ? 'disabled' : '' }} name="worktimes[5][start_time]" type="time"
                                             value="{{ old('worktimes[5][start_time]', $deliveryData['Thursday'] ? Carbon\Carbon::parse($deliveryData['Thursday']->start_time)->format('H:i') : '') }}"
                                             class="form-control @error('worktimes[5][start_time]') error-input @enderror">
                                         @error('worktimes[5][start_time]')
@@ -518,7 +522,7 @@
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.End Time') }}:</label>
-                                        <input disabled="{{ !isset($deliveryData['Thursday']) ? true : false }}" type="time" name="worktimes[5][end_time]"
+                                        <input {{ !isset($deliveryData['Thursday']) ? 'disabled' : '' }} type="time" name="worktimes[5][end_time]"
                                             value="{{ old('worktimes[5][end_time]', $deliveryData['Thursday'] ? Carbon\Carbon::parse($deliveryData['Thursday']->end_time)->format('H:i') : '') }}"
                                             class="form-control @error('worktimes[5][end_time]') error-input @enderror">
                                         @error('worktimes[5][end_time]')
@@ -546,7 +550,7 @@
                                     <div class="mb-3">
                                         <label for="worktimes[6][day]"
                                             class="form-label">{{ __('translation.Day') }}</label>
-                                        <input disabled="{{ !isset($deliveryData['Friday']) ? true : false }}" readonly required name="worktimes[6][day]" value="Friday" type="text"
+                                        <input {{ !isset($deliveryData['Friday']) ? 'disabled' : '' }} readonly required name="worktimes[6][day]" value="Friday" type="text"
                                             class="form-control @error('worktimes[6][day]') error-input @enderror"
                                             id="worktimes[6][day]">
                                         @error('worktimes[6][day]')
@@ -558,7 +562,7 @@
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.Start Time') }}:</label>
-                                        <input disabled="{{ !isset($deliveryData['Friday']) ? true : false }}" name="worktimes[6][start_time]" type="time"
+                                        <input {{ !isset($deliveryData['Friday']) ? 'disabled' : '' }} name="worktimes[6][start_time]" type="time"
                                             value="{{ old('worktimes[6][start_time]', $deliveryData['Friday'] ? Carbon\Carbon::parse($deliveryData['Friday']->start_time)->format('H:i') : '') }}"
                                             class="form-control @error('worktimes[6][start_time]') error-input @enderror">
                                         @error('worktimes[6][start_time]')
@@ -570,7 +574,7 @@
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.End Time') }}:</label>
-                                        <input disabled="{{ !isset($deliveryData['Friday']) ? true : false }}" name="worktimes[6][end_time]" type="time"
+                                        <input {{ !isset($deliveryData['Friday']) ? 'disabled' : '' }} name="worktimes[6][end_time]" type="time"
                                             value="{{ old('worktimes[6][end_time]', $deliveryData['Friday'] ? Carbon\Carbon::parse($deliveryData['Friday']->end_time)->format('H:i') : '') }}"
                                             class="form-control @error('worktimes[6][end_time]') error-input @enderror">
                                         @error('worktimes[6][end_time]')
@@ -589,10 +593,12 @@
 @endsection
 @push('script')
     <script>
+
         $(".checkall").click(function(e) {
             e.preventDefault();
             $("input[type=checkbox]").prop('checked', true);
         });
+
         $(".uncheckall").click(function(e) {
             e.preventDefault();
             $("input[type=checkbox]").prop('checked', false);
@@ -600,12 +606,14 @@
 
         $('.form-switch input[type=checkbox]').click(function() {
             var parentRow = $(this).closest('.row');
-
             if (!$(this).is(":checked")) {
                 parentRow.find('input').not('.form-switch input').prop('disabled', true);
+                 parentRow.find('input').not('.form-switch input').prop('required', false);
             } else {
                 parentRow.find('input').prop('disabled', false);
+                 parentRow.find('input').not('.form-switch input').prop('required', true);
             }
         });
+
     </script>
 @endpush

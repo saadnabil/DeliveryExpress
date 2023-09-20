@@ -2,7 +2,7 @@
 @section('content')
     <div class="card">
         <div class="card-body p-4">
-            <h5 class="card-title">{{ __('translation.Add New Store') }}</h5>
+            <h5 class="card-title">{{ __('translation.Add New Delivery') }}</h5>
             <hr />
             <form class="form-body mt-4" method="post" action="{{ route('deliveries.store') }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -84,7 +84,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label">{{ __('translation.Active Status') }}:</label>
-                                <select requierd name="active"
+                                <select required name="active"
                                     class="form-select mb-3 @error('active') error-input @enderror"
                                     aria-label="Default select example">
                                     <option value="" selected>{{ __('translation.Select Status') }}</option>
@@ -118,7 +118,8 @@
                                             <div class="row">
                                                 @foreach ($cities as $city)
                                                     <div class="col-md-6">
-                                                        <input name="city[]" value="{{ $city->id }}" multiple
+
+                                                        <input {{ in_array($city->id , old('city' , []) ) ? 'checked' : '' }} name="city[]" value="{{ $city->id }}" multiple
                                                             id="city{{ $city->id }}"
                                                             style="margin-right:10px;display:inline-block;"
                                                             type="checkbox" />
@@ -185,7 +186,7 @@
                                         @enderror
                                     </div>
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-primary">{{ __('translation.Save') }}</button>
+                                        <button type="submit" class="btn btn-success">{{ __('translation.Save') }}</button>
                                     </div>
                                 </div>
                             </div>
@@ -193,236 +194,380 @@
                     </div>
                      <div class="col-lg-8">
                         <div class="border border-3 p-4 rounded mt-4">
+
                            <div class="row">
-                                <div class="col-md-4">
-                                      <div class="mb-3">
-                                        <label for="worktimes[0][day]" class="form-label">{{ __('translation.Day') }}</label>
-                                        <input readonly required name ="worktimes[0][day]" value="Saturday" type="text"
-                                            class="form-control @error('worktimes[0][day]') error-input @enderror" id="worktimes[0][day]">
+                                <div class="col-md-3">
+                                    <div class="mb-3  form-switch" style="padding-right:0 !important;">
+                                        <label style="margin-bottom:" for="worktimes[0][on]"
+                                            class="form-label">{{ __('translation.On/Off') }}</label> </br>
+                                        <input  class="form-check-input" value="1"
+                                            {{ old('worktimes[0][on]') == 1 ? 'checked' : '' }}
+                                            style="width:70px;height:30px;margin-right:0px !important;" type="checkbox"
+                                            id="worktimes[0][on]">
+                                        @error('worktimes[0][on]')
+                                            <div class="error-validation">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label for="worktimes[0][day]"
+                                            class="form-label">{{ __('translation.Day') }}</label>
+                                        <input {{ old('worktimes[0][on]') != 1 ? 'disabled' : '' }} readonly required name="worktimes[0][day]" value="Saturday" type="text"
+                                            class="form-control @error('worktimes[0][day]') error-input @enderror"
+                                            id="worktimes[0][day]">
                                         @error('worktimes[0][day]')
                                             <div class="error-validation">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
 
-
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.Start Time') }}:</label>
-                                        <input type="time" name="worktimes[0][start_time]" value="{{ old('worktimes[0][start_time]') }}" class="form-control @error('worktimes[0][start_time]') error-input @enderror">
+                                        <input {{ old('worktimes[0][on]') != 1 ? 'disabled' : '' }} type="time" name="worktimes[0][start_time]"
+                                            value="{{ old('worktimes[0][start_time]') }}"
+                                            class="form-control @error('worktimes[0][start_time]') error-input @enderror">
                                         @error('worktimes[0][start_time]')
                                             <div class="error-validation">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.End Time') }}:</label>
-                                        <input type="time" name="worktimes[0][end_time]" value="{{ old('worktimes[0][end_time]') }}" class="form-control @error('worktimes[0][end_time]') error-input @enderror">
+                                        <input {{ old('worktimes[0][on]') != 1 ? 'disabled' : '' }} type="time" name="worktimes[0][end_time]"
+                                            value="{{ old('worktimes[0][end_time]') }}"
+                                            class="form-control @error('worktimes[0][end_time]') error-input @enderror">
                                         @error('worktimes[0][end_time]')
                                             <div class="error-validation">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
+                            </div>
 
-                           </div>
-                           <div class="row">
-                                <div class="col-md-4">
-                                      <div class="mb-3">
-                                        <label for="worktimes[1][day]" class="form-label">{{ __('translation.Day') }}</label>
-                                        <input readonly required name ="worktimes[1][day]" value="Sunday" type="text"
-                                            class="form-control @error('worktimes[1][day]') error-input @enderror" id="worktimes[1][day]">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="mb-3  form-switch" style="padding-right:0 !important;">
+                                        <label style="margin-bottom:" for="worktimes[1][on]"
+                                            class="form-label">{{ __('translation.On/Off') }}</label> </br>
+                                        <input class="form-check-input" value="1"
+                                            {{ old('worktimes[1][on]') == 1 ? 'checked' : '' }}
+                                            style="width:70px;height:30px;margin-right:0px !important;" type="checkbox"
+                                            id="worktimes[1][on]">
+                                        @error('worktimes[1][on]')
+                                            <div class="error-validation">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label for="worktimes[1][day]"
+                                            class="form-label">{{ __('translation.Day') }}</label>
+                                        <input {{ old('worktimes[1][on]') != 1 ? 'disabled' : '' }} readonly required name="worktimes[1][day]" value="Sunday" type="text"
+                                            class="form-control @error('worktimes[1][day]') error-input @enderror"
+                                            id="worktimes[1][day]">
                                         @error('worktimes[1][day]')
                                             <div class="error-validation">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.Start Time') }}:</label>
-                                        <input type="time" name="worktimes[1][start_time]" value="{{ old('worktimes[1][start_time]') }}" class="form-control @error('worktimes[1][start_time]') error-input @enderror">
+                                        <input  {{old('worktimes[1][on]') != 1 ? 'disabled' : '' }} type="time" name="worktimes[1][start_time]"
+                                            value="{{ old('worktimes[1][start_time]') }}"
+                                            class="form-control @error('worktimes[1][start_time]') error-input @enderror">
                                         @error('worktimes[1][start_time]')
                                             <div class="error-validation">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.End Time') }}:</label>
-                                        <input type="time" name="worktimes[1][end_time]" value="{{ old('worktimes[1][end_time]') }}" class="form-control @error('worktimes[1][end_time]') error-input @enderror">
+                                        <input  {{old('worktimes[1][on]') != 1 ? 'disabled' : '' }} type="time" name="worktimes[1][end_time]"
+                                            value="{{ old('worktimes[1][end_time]') }}"
+                                            class="form-control @error('worktimes[1][end_time]') error-input @enderror">
                                         @error('worktimes[1][end_time]')
                                             <div class="error-validation">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
 
-                           </div>
-                           <div class="row">
-                                <div class="col-md-4">
-                                      <div class="mb-3">
-                                        <label for="worktimes[2][day]" class="form-label">{{ __('translation.Day') }}</label>
-                                        <input readonly required name ="worktimes[2][day]" value="Monday" type="text"
-                                            class="form-control @error('worktimes[2][day]') error-input @enderror" id="worktimes[2][day]">
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="mb-3  form-switch" style="padding-right:0 !important;">
+                                        <label style="margin-bottom:" for="worktimes[2][on]"
+                                            class="form-label">{{ __('translation.On/Off') }}</label> </br>
+                                        <input class="form-check-input" value="1"
+                                            {{ old('worktimes[2][on]') == 1 ? 'checked' : '' }}
+                                            style="width:70px;height:30px;margin-right:0px !important;" type="checkbox"
+                                            id="worktimes[2][on]">
+                                        @error('worktimes[2][on]')
+                                            <div class="error-validation">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label for="worktimes[2][day]"
+                                            class="form-label">{{ __('translation.Day') }}</label>
+                                        <input  {{ old('worktimes[2][on]') != 1 ? 'disabled' : '' }} readonly required name="worktimes[2][day]" value="Monday" type="text"
+                                            class="form-control @error('worktimes[2][day]') error-input @enderror"
+                                            id="worktimes[2][day]">
                                         @error('worktimes[2][day]')
                                             <div class="error-validation">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
-
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.Start Time') }}:</label>
-                                        <input name="worktimes[2][start_time]"  type="time" value="{{ old('worktimes[2][start_time]') }}" class="form-control @error('worktimes[2][start_time]') error-input @enderror">
+                                        <input {{old('worktimes[2][on]') != 1 ? 'disabled' : '' }} name="worktimes[2][start_time]" type="time"
+                                            value="{{ old('worktimes[2][start_time]') }}"
+                                            class="form-control @error('worktimes[2][start_time]') error-input @enderror">
                                         @error('worktimes[2][start_time]')
                                             <div class="error-validation">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.End Time') }}:</label>
-                                        <input name="worktimes[2][end_time]" type="time" value="{{ old('worktimes[2][end_time]') }}" class="form-control @error('worktimes[2][end_time]') error-input @enderror">
+                                        <input {{ old('worktimes[2][on]') != 1 ? 'disabled' : '' }} name="worktimes[2][end_time]" type="time"
+                                            value="{{ old('worktimes[2][end_time]') }}"
+                                            class="form-control @error('worktimes[2][end_time]') error-input @enderror">
                                         @error('worktimes[2][end_time]')
                                             <div class="error-validation">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
 
-                           </div>
-                           <div class="row">
-                                <div class="col-md-4">
-                                      <div class="mb-3">
-                                        <label for="worktimes[3][day]" class="form-label">{{ __('translation.Day') }}</label>
-                                        <input readonly required name ="worktimes[3][day]" value="Tuesday" type="text"
-                                            class="form-control @error('worktimes[3][day]') error-input @enderror" id="worktimes[3][day]">
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="mb-3  form-switch" style="padding-right:0 !important;">
+                                        <label style="margin-bottom:" for="worktimes[3][on]"
+                                            class="form-label">{{ __('translation.On/Off') }}</label> </br>
+                                        <input class="form-check-input" value="1"
+                                            {{ old('worktimes[3][on]') == 1 ? 'checked' : '' }}
+                                            style="width:70px;height:30px;margin-right:0px !important;" type="checkbox"
+                                            id="worktimes[3][on]">
+                                        @error('worktimes[3][on]')
+                                            <div class="error-validation">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label for="worktimes[3][day]"
+                                            class="form-label">{{ __('translation.Day') }}</label>
+                                        <input {{ old('worktimes[3][on]') != 1 ? 'disabled' : '' }} readonly required name="worktimes[3][day]" value="Tuesday" type="text"
+                                            class="form-control @error('worktimes[3][day]') error-input @enderror"
+                                            id="worktimes[3][day]">
                                         @error('worktimes[3][day]')
                                             <div class="error-validation">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.Start Time') }}:</label>
-                                        <input type="time" name="worktimes[3][start_time]" value="{{ old('worktimes[3][start_time]') }}" class="form-control @error('worktimes[3][start_time]') error-input @enderror">
+                                        <input {{ old('worktimes[3][on]') != 1 ? 'disabled' : '' }} type="time" name="worktimes[3][start_time]"
+                                            value="{{ old('worktimes[3][start_time]') }}"
+                                            class="form-control @error('worktimes[3][start_time]') error-input @enderror">
                                         @error('worktimes[3][start_time]')
                                             <div class="error-validation">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.End Time') }}:</label>
-                                        <input type="time" name="worktimes[3][end_time]" value="{{ old('worktimes[3][end_time]') }}" class="form-control @error('worktimes[3][end_time]') error-input @enderror">
+                                        <input {{old('worktimes[3][on]') != 1 ? 'disabled' : '' }} type="time" name="worktimes[3][end_time]"
+                                            value="{{ old('worktimes[3][end_time]') }}"
+                                            class="form-control @error('worktimes[3][end_time]') error-input @enderror">
                                         @error('worktimes[3][end_time]')
                                             <div class="error-validation">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
 
-                           </div>
-                           <div class="row">
-                                <div class="col-md-4">
-                                      <div class="mb-3">
-                                        <label for="worktimes[4][day]" class="form-label">{{ __('translation.Day') }}</label>
-                                        <input readonly required name ="worktimes[4][day]" value="Wednesday" type="text"
-                                            class="form-control @error('worktimes[4][day]') error-input @enderror" id="worktimes[4][day]">
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="mb-3  form-switch" style="padding-right:0 !important;">
+                                        <label style="margin-bottom:" for="worktimes[4][on]"
+                                            class="form-label">{{ __('translation.On/Off') }}</label> </br>
+                                        <input class="form-check-input" value="1"
+                                            {{ old('worktimes[4][on]') == 1 ? 'checked' : '' }}
+                                            style="width:70px;height:30px;margin-right:0px !important;" type="checkbox"
+                                            id="worktimes[4][on]">
+                                        @error('worktimes[4][on]')
+                                            <div class="error-validation">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label for="worktimes[4][day]"
+                                            class="form-label">{{ __('translation.Day') }}</label>
+                                        <input {{ old('worktimes[4][on]') != 1 ? 'disabled' : '' }} readonly required name="worktimes[4][day]" value="Wednesday"
+                                            type="text"
+                                            class="form-control @error('worktimes[4][day]') error-input @enderror"
+                                            id="worktimes[4][day]">
                                         @error('worktimes[4][day]')
                                             <div class="error-validation">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.Start Time') }}:</label>
-                                        <input type="time" name="worktimes[4][start_time]" value="{{ old('worktimes[4][start_time]') }}" class="form-control @error('worktimes[4][start_time]') error-input @enderror">
+                                        <input {{ old('worktimes[4][on]') != 1 ? 'disabled' : '' }} type="time" name="worktimes[4][start_time]"
+                                            value="{{ old('worktimes[4][start_time]') }}"
+                                            class="form-control @error('worktimes[4][start_time]') error-input @enderror">
                                         @error('worktimes[4][start_time]')
                                             <div class="error-validation">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.End Time') }}:</label>
-                                        <input type="time" name="worktimes[4][end_time]" value="{{ old('worktimes[4][end_time]') }}" class="form-control @error('worktimes[4][end_time]') error-input @enderror">
+                                        <input {{ old('worktimes[4][on]') != 1 ? 'disabled' : '' }} type="time" name="worktimes[4][end_time]"
+                                            value="{{ old('worktimes[4][end_time]') }}"
+                                            class="form-control @error('worktimes[4][end_time]') error-input @enderror">
                                         @error('worktimes[4][end_time]')
                                             <div class="error-validation">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
-                           </div>
+                            </div>
+
                             <div class="row">
-                                <div class="col-md-4">
-                                      <div class="mb-3">
-                                        <label for="worktimes[5][day]" class="form-label">{{ __('translation.Day') }}</label>
-                                        <input readonly required name ="worktimes[5][day]" value="Thursday" type="text"
-                                            class="form-control @error('worktimes[5][day]') error-input @enderror" id="worktimes[5][day]">
+                                <div class="col-md-3">
+                                    <div class="mb-3  form-switch" style="padding-right:0 !important;">
+                                        <label style="margin-bottom:" for="worktimes[5][on]"
+                                            class="form-label">{{ __('translation.On/Off') }}</label> </br>
+                                        <input class="form-check-input" value="1"
+                                            {{ old('worktimes[5][on]') == 1 ? 'checked' : '' }}
+                                            style="width:70px;height:30px;margin-right:0px !important;" type="checkbox"
+                                            id="worktimes[5][on]">
+                                        @error('worktimes[5][on]')
+                                            <div class="error-validation">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label for="worktimes[5][day]"
+                                            class="form-label">{{ __('translation.Day') }}</label>
+                                        <input {{ old('worktimes[5][on]') != 1 ? 'disabled' : '' }} readonly required name="worktimes[5][day]" value="Thursday" type="text"
+                                            class="form-control @error('worktimes[5][day]') error-input @enderror"
+                                            id="worktimes[5][day]">
                                         @error('worktimes[5][day]')
                                             <div class="error-validation">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.Start Time') }}:</label>
-                                        <input name="worktimes[5][start_time]" type="time" value="{{ old('worktimes[5][start_time]') }}" class="form-control @error('worktimes[5][start_time]') error-input @enderror">
+                                        <input {{ old('worktimes[5][on]') != 1 ? 'disabled' : '' }} name="worktimes[5][start_time]" type="time"
+                                            value="{{ old('worktimes[5][start_time]') }}"
+                                            class="form-control @error('worktimes[5][start_time]') error-input @enderror">
                                         @error('worktimes[5][start_time]')
                                             <div class="error-validation">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.End Time') }}:</label>
-                                        <input type="time" name="worktimes[5][end_time]" value="{{ old('worktimes[5][end_time]') }}" class="form-control @error('worktimes[5][end_time]') error-input @enderror">
+                                        <input {{ old('worktimes[5][on]') != 1 ? 'disabled' : '' }} type="time" name="worktimes[5][end_time]"
+                                            value="{{ old('worktimes[5][end_time]') }}"
+                                            class="form-control @error('worktimes[5][end_time]') error-input @enderror">
                                         @error('worktimes[5][end_time]')
                                             <div class="error-validation">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
-                           </div>
-                           <div class="row">
-                                <div class="col-md-4">
-                                      <div class="mb-3">
-                                        <label for="worktimes[6][day]" class="form-label">{{ __('translation.Day') }}</label>
-                                        <input readonly required name ="worktimes[6][day]" value="Friday" type="text"
-                                            class="form-control @error('worktimes[6][day]') error-input @enderror" id="worktimes[6][day]">
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="mb-3  form-switch" style="padding-right:0 !important;">
+                                        <label style="margin-bottom:" for="worktimes[6][on]"
+                                            class="form-label">{{ __('translation.On/Off') }}</label> </br>
+                                        <input class="form-check-input" value="1"
+                                            {{ old('worktimes[6][on]') == 1 ? 'checked' : '' }}
+                                            style="width:70px;height:30px;margin-right:0px !important;" type="checkbox"
+                                            id="worktimes[6][on]">
+                                        @error('worktimes[6][on]')
+                                            <div class="error-validation">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label for="worktimes[6][day]"
+                                            class="form-label">{{ __('translation.Day') }}</label>
+                                        <input {{ old('worktimes[6][on]') != 1 ? 'disabled' : '' }} readonly required name="worktimes[6][day]" value="Friday" type="text"
+                                            class="form-control @error('worktimes[6][day]') error-input @enderror"
+                                            id="worktimes[6][day]">
                                         @error('worktimes[6][day]')
                                             <div class="error-validation">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.Start Time') }}:</label>
-                                        <input name="worktimes[6][start_time]" type="time" value="{{ old('worktimes[6][start_time]') }}" class="form-control @error('worktimes[6][start_time]') error-input @enderror">
+                                        <input {{ old('worktimes[6][on]') != 1 ? 'disabled' : '' }} name="worktimes[6][start_time]" type="time"
+                                            value="{{ old('worktimes[6][start_time]') }}"
+                                            class="form-control @error('worktimes[6][start_time]') error-input @enderror">
                                         @error('worktimes[6][start_time]')
                                             <div class="error-validation">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('translation.End Time') }}:</label>
-                                        <input name="worktimes[6][end_time]" type="time" value="{{ old('worktimes[6][end_time]') }}" class="form-control @error('worktimes[6][end_time]') error-input @enderror">
+                                        <input {{ old('worktimes[6][on]') != 1 ? 'disabled' : '' }} name="worktimes[6][end_time]" type="time"
+                                            value="{{ old('worktimes[6][end_time]') }}"
+                                            class="form-control @error('worktimes[6][end_time]') error-input @enderror">
                                         @error('worktimes[6][end_time]')
                                             <div class="error-validation">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
-                           </div>
+                            </div>
+
                         </div>
+                        @error('worktimes')
+                            <div class="error-validation">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div><!--end row-->
             </form>
@@ -438,6 +583,16 @@
         $(".uncheckall").click(function(e) {
             e.preventDefault();
             $("input[type=checkbox]").prop('checked', false);
+        });
+         $('.form-switch input[type=checkbox]').click(function() {
+            var parentRow = $(this).closest('.row');
+            if (!$(this).is(":checked")) {
+                parentRow.find('input').not('.form-switch input').prop('disabled', true);
+                 parentRow.find('input').not('.form-switch input').prop('required', false);
+            } else {
+                parentRow.find('input').prop('disabled', false);
+                 parentRow.find('input').not('.form-switch input').prop('required', true);
+            }
         });
     </script>
 @endpush
