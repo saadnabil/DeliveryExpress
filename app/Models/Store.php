@@ -18,6 +18,11 @@ class Store extends Authenticatable
     protected $hidden = ['password'];
     protected $guard = ['store'];
 
+    public function complains(): MorphMany
+    {
+        return $this->morphMany(Complain::class, 'complainable');
+    }
+
 
     public function otps(): MorphMany
     {

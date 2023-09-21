@@ -64,9 +64,13 @@ Route::group(['prefix' => 'v1'],function(){
             });
             Route::group(['prefix' => 'profile'] , function(){
                 Route::get('/show', [ProfileController::class, 'show']);
+                Route::get('/deleteAccount', [ProfileController::class, 'deleteAccount']);
                 Route::post('/update/personalData', [ProfileController::class, 'updatePersonal']);
                 Route::post('/update/storeData', [ProfileController::class, 'updateStore']);
                 Route::post('/update/password', [ProfileController::class, 'updatePassword']);
+            });
+            Route::group(['prefix' => 'complain'] , function(){
+                Route::post('/store', [ComplainController::class, 'store']);
             });
         });
     });
@@ -84,6 +88,7 @@ Route::group(['prefix' => 'v1'],function(){
                 Route::post('failDeliverShipment', [DeliveryShipmentController::class , 'failDeliverShipment']);
             });
             Route::group(['prefix' => 'profile'] , function(){
+                Route::get('/deleteAccount', [DeliveryProfileController::class, 'deleteAccount']);
                 Route::get('/show', [DeliveryProfileController::class, 'show']);
                 Route::post('/update/personalData', [DeliveryProfileController::class, 'updatePersonal']);
                 Route::post('/update/password', [DeliveryProfileController::class, 'updatePassword']);

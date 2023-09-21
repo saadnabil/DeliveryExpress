@@ -128,5 +128,17 @@ return [
     'Add New Delivery' => 'اضافة مندوب',
     'Deliveries' => 'المناديب',
     'Edit Delivery' => 'تعديل المندوب',
-    'Ok' => 'تم'
+    'Ok' => 'تم',
+    'Shipments' => 'الشحنات',
+    'QR Image' => 'رمز الاستجابة السريعة',
+    'Deposit' => 'عربون',
+    'New' => 'جديدة',
+    'Multiple Exchange' => 'تبادل متعدد',
+    'Shipment Type' => 'نوع الشحنة',
+    'Add Notes' => 'اضف ملاحظاتك',
+    'Shipment Details' => 'تفاصيل الشحنة',
+    'Client Details' => 'تفاصيل العميل',
+    'Add Address' => 'اضف العنوان',
+    'Add New Shipment' => 'اضافة شحنة جديدة',
+    'Select Payment Type' => 'اختر طريقة الدفع'
 ];

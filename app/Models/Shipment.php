@@ -38,5 +38,8 @@ class Shipment extends Model
     public function country(){
         return $this->belongsTo(Country::class);
     }
+    public function store(){
+        return $this->belongsTo(Store::class);
+    }
 
 }

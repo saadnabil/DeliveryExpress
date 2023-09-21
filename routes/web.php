@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DeliveriesController;
 use App\Http\Controllers\Dashboard\FaqsController;
 use App\Http\Controllers\Dashboard\RoleController;
+use App\Http\Controllers\Dashboard\ShipmentsController;
 use App\Http\Controllers\Dashboard\StoresController;
 use App\Http\Controllers\Dashboard\UsersController;
 use App\Http\Controllers\TrackOrder\TrackOrderController;
@@ -43,6 +44,8 @@ Route::resource('users' ,UsersController::class);
 Route::resource('collectionRequests' ,CollectionRequestsController::class);// فيها شغل حلو
 Route::resource('stores' ,StoresController::class);
 Route::resource('deliveries' ,DeliveriesController::class);
+Route::resource('shipments' ,ShipmentsController::class);
+
 
 
 

@@ -29,4 +29,7 @@ class ProfileController extends Controller
         $data = $request->validated();
         return $this->profileService->updatePassword($data);
     }
+    public function deleteAccount(){
+        return $this->profileService->deleteAccount();
+    }
 }

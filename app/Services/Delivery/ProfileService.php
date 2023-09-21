@@ -52,4 +52,10 @@ class ProfileService{
         return $this->sendResponse([]);
     }
 
+    public function deleteAccount(){
+        $delivery = auth()->user();
+        $delivery->delete();
+        return $this->sendResponse([]);
+    }
+
 }
