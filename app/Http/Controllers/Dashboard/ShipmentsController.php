@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\AddDeliveryValidation;
+use App\Http\Requests\Dashboard\StoreShipmentValidation;
 use App\Http\Requests\Dashboard\UpdateDeliveryValidation;
 use App\Models\Delivery;
 use App\Services\Dashboard\DeliveryService;
@@ -32,9 +33,9 @@ class ShipmentsController extends Controller
         return $this->shipmentService->create();
     }
 
-    public function store(AddDeliveryValidation $request){
+    public function store(StoreShipmentValidation $request){
         $data = $request->validated();
-        return $this->deliveryService->store($data);
+        return $this->shipmentService->store($data);
     }
 
     public function edit(Delivery $delivery){

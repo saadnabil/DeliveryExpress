@@ -24,11 +24,13 @@ class ShipmentService{
         if($status != 'all'){
             $rows = Shipment::with(['images','delivery'])
                        ->where('status' ,$status )
+                       ->where('store_id' , auth()->user()->id )
                        ->latest()
                        ->simplePaginate();
         }else{
             $rows = Shipment::with(['images','delivery'])
                        ->where('status' , '!=' , 'incomplete')
+                       ->where('store_id' , auth()->user()->id )
                        ->latest()
                        ->simplePaginate();
         }

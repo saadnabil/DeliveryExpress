@@ -51,6 +51,7 @@ class ProfileService{
 
     public function deleteAccount(){
         $store = auth()->user();
+        $store ->tokens()->delete();
         $store->delete();
         return $this->sendResponse([]);
     }

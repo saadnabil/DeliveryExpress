@@ -5,6 +5,8 @@
             <h5 class="card-title">{{ __('translation.Edit Delivery') }}</h5>
             <hr />
 
+            
+
             <form class="form-body mt-4" method="post" action="{{ route('deliveries.update', $delivery) }}"
                 enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -30,6 +32,10 @@
                                     <div class="error-validation">{{ $message }}</div>
                                 @enderror
                             </div>
+
+
+
+
 
                             <div class="mb-3">
                                 <label for="birth_date" class="form-label">{{ __('translation.Birth Date') }}:</label>

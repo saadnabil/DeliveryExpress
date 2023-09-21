@@ -9,6 +9,7 @@ use App\Models\Delivery;
 use App\Models\DeliveryWorkCity;
 use App\Models\DeliveryWorkTime;
 use App\Models\Shipment;
+use App\Models\ShipmentType;
 use App\Models\Store;
 use App\Models\User;
 use Carbon\Carbon;
@@ -26,36 +27,16 @@ class ShipmentService{
     public function create(){
         $cities = City::get();
         $countries = Country::get();
-        return view('dashboard.shipments.create' , compact('cities','countries'));
+        $stores = Store::get();
+        $shipmentTypes = ShipmentType::get();
+        return view('dashboard.shipments.create' , compact('cities','countries','stores','shipmentTypes'));
     }
 
     public function store(array $data){
-        $data['password'] = bcrypt($data['password']);
-        $cities = $data['city'];
-        $worktimes = $data['worktimes'];
-        if(isset($data['image'])){
-            $image = FileHelper::upload_file('uploads' , $data['image']);
-            $data['image'] = $image;
-        }
-        unset($data['city']);
-        unset($data['worktimes']);
-        $data['birth_date'] = Carbon::parse($data['birth_date'])->format('Y/m/d');
-        $delivery = Delivery::create($data);
-        foreach($cities as $city){
-            DeliveryWorkCity::create([
-                'delivery_id' => $delivery->id,
-                'city_id' => $city
-            ]);
-        }
-        foreach($worktimes as $worktime){
-            DeliveryWorkTime::create([
-                'delivery_id' => $delivery->id,
-                'day' => $worktime['day'],
-                'start_time' => $worktime['start_time'],
-                'end_time' => $worktime['end_time'],
-            ]);
-        }
-        return redirect()->route('deliveries.index')->with(['success' => __('translation.Added Successfully')]);
+        $data['shipment_code'] = generate_code_unique();
+        $data['qr_code_image'] = generateQrCode($data['shipment_code']);
+        Shipment::create($data);
+        return redirect()->route('shipments.index')->with(['success' => __('translation.Added Successfully')]);
     }
 
     public function edit($delivery){

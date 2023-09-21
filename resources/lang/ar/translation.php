@@ -80,7 +80,7 @@ return [
     'Weight' => 'الوزن',
     'Length' => 'الطول',
     'Height' => 'الارتغاع',
-    'width' => 'العرض',
+    'Width' => 'العرض',
     'Breakable' => 'قابل للكسر',
     'Measurement Is Allowed' => 'مسموح القياس',
     'Shipment Packaging' => 'تغليف الشحنة',
@@ -140,5 +140,9 @@ return [
     'Client Details' => 'تفاصيل العميل',
     'Add Address' => 'اضف العنوان',
     'Add New Shipment' => 'اضافة شحنة جديدة',
-    'Select Payment Type' => 'اختر طريقة الدفع'
+    'Select Payment Type' => 'اختر طريقة الدفع',
+    'Select Store' => 'اختر المتجر',
+    'Add Description' => 'اضف الوصف',
+    'Replace Reason' => 'سبب الالغاء',
+    'Add Replace Reason' => 'اضف سبب التبديل'
 ];
