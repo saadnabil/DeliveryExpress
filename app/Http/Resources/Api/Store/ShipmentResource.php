@@ -17,6 +17,8 @@ class ShipmentResource extends JsonResource
         $data =  [
             'shipmentCode' => $this->shipment_code,
             'qrCodeImage' => $this->qr_code_image,
+            'shipmentTypeId' => $this->shipmentType->id,
+            'shipmentTypeName' =>  $this->shipmentType->type,
             'status' => $this->status,
             'notes' => $this->notes,
             'clientName' => $this->client_name,

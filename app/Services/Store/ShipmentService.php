@@ -22,19 +22,18 @@ class ShipmentService{
         }
 
         if($status != 'all'){
-            $rows = Shipment::with(['images','delivery'])
+            $rows = Shipment::with(['images','delivery','shipmentType'])
                        ->where('status' ,$status )
                        ->where('store_id' , auth()->user()->id )
                        ->latest()
                        ->simplePaginate();
         }else{
-            $rows = Shipment::with(['images','delivery'])
+            $rows = Shipment::with(['images','delivery','shipmentType'])
                        ->where('status' , '!=' , 'incomplete')
                        ->where('store_id' , auth()->user()->id )
                        ->latest()
                        ->simplePaginate();
         }
-
         return $this->sendResponse(resource_collection(ShipmentResource::collection($rows)));
     }
 
