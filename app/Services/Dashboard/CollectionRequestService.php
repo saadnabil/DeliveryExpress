@@ -15,6 +15,7 @@ class CollectionRequestService{
     public function index(){
         $rows = CollectionRequest::with('store')
                                  ->where('type' , 1)
+                                 ->latest()
                                  ->get();
         return view('dashboard.collectionRequest.index',compact('rows'));
     }

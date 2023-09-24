@@ -6,7 +6,7 @@ use Spatie\Permission\Models\Permission;
 class RoleService{
 
     public function index(){
-        $rows = Role::get();
+        $rows = Role::latest()->get();
         return view('dashboard.roles.index' , compact('rows'));
     }
 

@@ -24,14 +24,16 @@
                                         class="form-label">{{ __('translation.Shipment Type') }}</label>
                                     <div class="col-md-12">
                                         @foreach ($shipmentTypes as $key => $shipmentType)
-                                            <div class="form-check">
-                                                <input class="shipmentType" {{ old('shipment_type_id', $shipment->shipment_type_id ) == $shipmentType->id  ? 'checked' : '' }}
-                                                    value="{{ $shipmentType->id }}"  name="shipment_type_id"
-                                                    class="form-check-input" type="radio"
-                                                    id="{{ $shipmentType->id }}">
-                                                <label class="form-check-label"
-                                                    for="{{ $shipmentType->id }}">{{ $shipmentType->type }}</label>
-                                            </div>
+                                            @if( $shipment->shipment_type_id ==  $shipmentType->id )
+                                                <div class="form-check">
+                                                    <input class="shipmentType" {{ $shipment->shipment_type_id == $shipmentType->id  ? 'checked' : '' }}
+                                                        value="{{ $shipmentType->id }}"  name="shipment_type_id"
+                                                        class="form-check-input" type="radio"
+                                                        id="{{ $shipmentType->id }}">
+                                                    <label class="form-check-label"
+                                                        for="{{ $shipmentType->id }}">{{ $shipmentType->type }}</label>
+                                                </div>
+                                            @endif
                                         @endforeach
                                         <div class="d-grid">
                                             @php
@@ -53,7 +55,11 @@
                     <div class="border border-3 p-4 mt-4 rounded">
                         <div class="row mb-3 row-cols-auto g-2 justify-content-center mt-3">
                                 @foreach($shipment->images as $key => $image)
-                                     <div class="col"><img {{ $image->id }} src="{{ url('storage/'.$image->image ) }}" width="70" class="border rounded cursor-pointer" alt=""></div>
+                                     <div class="col">
+                                        <a target="_blank" href="{{ url('storage/'.$image->image) }}">
+                                            <img {{ $image->id }} src="{{ url('storage/'.$image->image ) }}" width="70" class="border rounded cursor-pointer" alt="">
+                                        </a>
+                                     </div>
                                 @endforeach
                         </div>
                     </div>

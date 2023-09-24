@@ -1,7 +1,8 @@
  <form id="newShipmentForm"
      style="display:{{ old('shipment_type_id', $shipment->shipment_type_id) == 1 ? 'block' : 'none' }};" class="form-body"
-     method="post" action="{{ route('shipments.store') }}" enctype="multipart/form-data">
+     method="post" action="{{ route('shipments.update', $shipment) }}" enctype="multipart/form-data">
      {{ csrf_field() }}
+     @method('put')
      <input type="hidden" value="1" name="shipment_type_id" />
      <div class="border border-3 p-4 rounded newData">
          <h5>{{ __('translation.Shipment Details') }}</h5>

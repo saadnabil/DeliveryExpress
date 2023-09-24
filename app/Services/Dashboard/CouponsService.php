@@ -12,7 +12,7 @@ use Spatie\Permission\Models\Permission;
 class CouponsService{
 
     public function index(){
-        $rows = Coupon::with('store')->get();
+        $rows = Coupon::with('store')->latest()->get();
         return view('dashboard.coupons.index',compact('rows'));
     }
 

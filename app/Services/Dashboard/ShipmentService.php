@@ -21,6 +21,7 @@ class ShipmentService{
     public function index(){
         $rows = Shipment::with(['shipmentType','store'])
                          ->where('status','!=','incomplete')
+                         ->latest()
                          ->get();
         return view('dashboard.shipments.index',compact('rows'));
     }
@@ -50,12 +51,13 @@ class ShipmentService{
         $data['shipment_code'] = generate_code_unique();
         $data['qr_code_image'] = generateQrCode($data['shipment_code']);
         $data['status'] = 'pending';
+        $shipmentImages = null;
         if(isset($data['images'])){
+            $shipmentImages = $data['images'];
             unset($data['images']);
         }
         $shipment = Shipment::create($data);
         if(isset($data['images'])){
-            $shipmentImages = $data['images'];
             foreach($shipmentImages as $image){
                 $imagename = FileHelper::upload_file('uploads' , $image);
                 ShipmentImage::create([
@@ -80,39 +82,26 @@ class ShipmentService{
         return view('dashboard.shipments.edit' , compact('cities','countries','stores','shipmentTypes','shipment','returnedShipments'));
     }
 
-    public function update(array $data , $delivery){
-        $delivery = $delivery->load('deliveryWorkCities','deliveryWorkTimes');
-        $data['password'] = bcrypt($data['password']);
-        $cities = $data['city'];
-        $worktimes = $data['worktimes'];
-        if(isset($data['image'])){
-            $image = FileHelper::upload_file('uploads' , $data['image']);
-            $data['image'] = $image;
+    public function update(array $data , $shipment){
+        $data['breakable'] = $data['breakable'] ?? 0 ;
+        $data['measurement_is_allowed'] =  $data['measurement_is_allowed'] ?? 0 ;
+        $data['shipment_packaging'] =  $data['shipment_packaging']?? 0;
+        $data['preview_allowed'] = $data['preview_allowed'] ?? 0 ;
+        if(isset($data['images'])){
+            foreach($data['images'] as $image){
+                $imagename = FileHelper::upload_file('uploads' , $image);
+                ShipmentImage::create([
+                    'image' => $imagename,
+                    'shipment_id' => $shipment->id
+                ]);
+            }
         }
-        unset($data['city']);
-        unset($data['worktimes']);
-        $delivery->deliveryWorkCities()->delete();
-        $delivery->deliveryWorkTimes()->delete();
-        $data['birth_date'] = Carbon::parse($data['birth_date'])->format('Y/m/d');
-        $delivery->update($data);
-        foreach($cities as $city){
-            DeliveryWorkCity::create([
-                'delivery_id' => $delivery->id,
-                'city_id' => $city
-            ]);
-        }
-        foreach($worktimes as $worktime){
-            DeliveryWorkTime::create([
-                'delivery_id' => $delivery->id,
-                'day' => $worktime['day'],
-                'start_time' => $worktime['start_time'],
-                'end_time' => $worktime['end_time'],
-            ]);
-        }
-        return redirect()->route('deliveries.index')->with(['success' => __('translation.Updated Successfully')]);
+        unset($data['images']);
+        $shipment->update($data);
+        return redirect()->route('shipments.index')->with(['success' => __('translation.Updated Successfully')]);
     }
-    public function destroy($delivery){
-        $delivery->delete();
-        return redirect()->route('deliveries.index')->with(['success' => __('translation.Deleted Successfully')]);
+    public function destroy($shipment){
+        $shipment->delete();
+        return redirect()->route('shipments.index')->with(['success' => __('translation.Deleted Successfully')]);
     }
 }

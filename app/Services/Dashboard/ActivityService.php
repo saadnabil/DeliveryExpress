@@ -8,7 +8,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 class ActivityService{
     public function index(){
-        $rows = Activity::get();
+        $rows = Activity::latest()->get();
         return view('dashboard.activities.index',compact('rows'));
     }
 

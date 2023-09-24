@@ -16,7 +16,7 @@ use Spatie\Permission\Models\Role;
 class DeliveryService{
 
     public function index(){
-        $rows = Delivery::get();
+        $rows = Delivery::latest()->get();
         return view('dashboard.deliveries.index',compact('rows'));
     }
 

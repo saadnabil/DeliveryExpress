@@ -24,14 +24,16 @@
                                         class="form-label">{{ __('translation.Shipment Type') }}</label>
                                     <div class="col-md-12">
                                         @foreach ($shipmentTypes as $key => $shipmentType)
-                                            <div class="form-check">
-                                                <input class="shipmentType" {{ old('shipment_type_id', 1 ) == $shipmentType->id  ? 'checked' : '' }}
-                                                    value="{{ $shipmentType->id }}"  name="shipment_type_id"
-                                                    class="form-check-input" type="radio"
-                                                    id="{{ $shipmentType->id }}">
-                                                <label class="form-check-label"
-                                                    for="{{ $shipmentType->id }}">{{ $shipmentType->type }}</label>
-                                            </div>
+
+                                                <div class="form-check">
+                                                    <input class="shipmentType" {{ old('shipment_type_id', 1 ) == $shipmentType->id  ? 'checked' : '' }}
+                                                        value="{{ $shipmentType->id }}"  name="shipment_type_id"
+                                                        class="form-check-input" type="radio"
+                                                        id="{{ $shipmentType->id }}">
+                                                    <label class="form-check-label"
+                                                        for="{{ $shipmentType->id }}">{{ $shipmentType->type }}</label>
+                                                </div>
+
                                         @endforeach
                                         <div class="d-grid">
                                             @php

@@ -1,6 +1,7 @@
- <form id="depositShipmentForm" style="display:{{ old('shipment_type_id',$shipment->shipment_type_id) == 3 ? 'block' : 'none' }};" class="form-body" method="post" action="{{ route('shipments.store') }}"
+ <form id="depositShipmentForm" style="display:{{ old('shipment_type_id',$shipment->shipment_type_id) == 3 ? 'block' : 'none' }};" class="form-body" method="post" action="{{ route('shipments.update', $shipment) }}"
                         enctype="multipart/form-data">
                         {{ csrf_field() }}
+                        @method('put')
                         <input type="hidden" value="3" name="shipment_type_id" />
                         <div  class="border border-3 p-4 rounded depositData">
                             <h5>{{ __('translation.Shipment Details') }}</h5>

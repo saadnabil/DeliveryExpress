@@ -9,7 +9,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 class CancelReasonService{
     public function index(){
-        $rows = CancelReason::get();
+        $rows = CancelReason::latest()->get();
         return view('dashboard.cancelReasons.index',compact('rows'));
     }
 

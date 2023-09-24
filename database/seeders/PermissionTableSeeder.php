@@ -62,6 +62,12 @@ class PermissionTableSeeder extends Seeder
             'delivery-edit',
             'delivery-delete',
 
+            'shipment-list',
+            'shipment-create',
+            'shipment-edit',
+            'shipment-delete',
+            'shipment-show',
+
         ];
         foreach ($permissions as $permission) {
             Permission::firstOrCreate(

@@ -8,7 +8,7 @@ use Spatie\Permission\Models\Role;
 class UserService{
 
     public function index(){
-        $rows = User::get();
+        $rows = User::latest()->get();
         return view('dashboard.users.index',compact('rows'));
     }
 

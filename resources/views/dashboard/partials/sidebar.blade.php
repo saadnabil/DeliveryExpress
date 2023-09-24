@@ -24,6 +24,16 @@
             </li>
         @endcan
 
+        @can('shipment-list')
+            <li>
+                <a href="{{ route('shipments.index') }}">
+                    <div class="parent-icon"><i class='bx bx-door-open'></i>
+                    </div>
+                    <div class="menu-title">{{ __('translation.Shipments') }}</div>
+                </a>
+            </li>
+        @endcan
+
         @can('city-list')
             <li>
                 <a href="{{ route('cities.index') }}">

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\AddDeliveryValidation;
 use App\Http\Requests\Dashboard\StoreShipmentValidation;
 use App\Http\Requests\Dashboard\UpdateDeliveryValidation;
+use App\Http\Requests\Dashboard\UpdateShipmentValidation;
 use App\Models\Delivery;
 use App\Models\Shipment;
 use App\Services\Dashboard\DeliveryService;
@@ -20,10 +21,10 @@ class ShipmentsController extends Controller
     function __construct(ShipmentService $shipmentService)
     {
         $this->shipmentService = $shipmentService;
-         $this->middleware('permission:store-list', ['only' => ['index']]);
-         $this->middleware('permission:store-create', ['only' => ['create','store']]);
-         $this->middleware('permission:store-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:store-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:shipment-list', ['only' => ['index']]);
+         $this->middleware('permission:shipment-create', ['only' => ['create','store']]);
+         $this->middleware('permission:shipment-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:shipment-delete', ['only' => ['destroy']]);
     }
 
     public function index()
@@ -44,17 +45,17 @@ class ShipmentsController extends Controller
         return $this->shipmentService->edit($shipment);
     }
 
-    public function update(UpdateDeliveryValidation $request ,Delivery $delivery){
+    public function update(UpdateShipmentValidation $request ,Shipment $shipment){
         $data = $request->validated();
-        return $this->deliveryService->update($data , $delivery);
+        return $this->shipmentService->update($data , $shipment);
     }
 
     /**
     * Remove the specified resource from storage.
     */
-    public function destroy(Delivery $delivery)
+    public function destroy(Shipment $shipment)
     {
-        return $this->deliveryService->destroy($delivery);
+        return $this->shipmentService->destroy($shipment);
     }
 
     public function getStoreReturnedShipments(Request $request){

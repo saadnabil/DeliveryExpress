@@ -9,7 +9,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 class FaqService{
     public function index(){
-        $rows = Faq::get();
+        $rows = Faq::latest()->get();
         return view('dashboard.faqs.index',compact('rows'));
     }
 

@@ -7,7 +7,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 class CityService{
     public function index(){
-        $rows = City::get();
+        $rows = City::latest()->get();
         return view('dashboard.cities.index',compact('rows'));
     }
 

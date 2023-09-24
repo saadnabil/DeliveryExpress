@@ -54,8 +54,9 @@ class ShipmentResource extends JsonResource
             $data['shipmentPrice'] = $this->shipment_price;
         }
         if($this->shipment_type_id == 2){
-            $data['replacementId'] = $this->shipment_replaced_id;
-            $data['shipmentReplaceReason'] = $this->shipment_replace_reason;
+            $data['shipmentReplacedId'] = $this->shipment_replaced_id;
+            $data['shipmentReplacedReason'] = $this->shipment_replace_reason;
+            $data['shipmentReplacedCode'] = $this->shipmentReplaced->shipment_code;
         }
         return $data;
     }

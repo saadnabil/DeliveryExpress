@@ -12,7 +12,7 @@ svg{
         <div class="col-6">
             <h6 class="mb-0 text-uppercase">{{ __('translation.Shipments') }} </h6>
         </div>
-        @can('delivery-create')
+        @can('shipment-create')
         <div class="col-6">
             <a href="{{ route('shipments.create') }}" class="btn btn-success btn-sm"
                 style="float:left;">{{ __('translation.Add') }} <i class="bx bx-plus"></i></a>
@@ -46,14 +46,14 @@ svg{
                                 <td>{{ $row->payment_type == 1 ? __('translation.Cash') : __('translation.Visa On Delivery') }}</td>
                                 <td>
                                     <div class="d-flex order-actions">
-                                        @can('delivery-edit')
-                                        <a href="{{ route('deliveries.edit', $row) }}" class="ms-3"><i
+                                        @can('shipment-edit')
+                                        <a href="{{ route('shipments.edit', $row) }}" class="ms-3"><i
                                                 class="bx bxs-edit"></i></a>
                                         @endcan
-                                        @can('delivery-delete')
-                                        <a href="{{ route('deliveries.destroy', $row) }}" class="ms-3 confirm-delete"><i
+                                        @can('shipment-delete')
+                                        <a href="{{ route('shipments.destroy', $row) }}" class="ms-3 confirm-delete"><i
                                                 class="bx bxs-trash"></i></a>
-                                        <form method="POST" action="{{ route('deliveries.destroy', $row)}}">
+                                        <form method="POST" action="{{ route('shipments.destroy', $row)}}">
                                             @csrf
                                             @method('delete')
                                         </form>

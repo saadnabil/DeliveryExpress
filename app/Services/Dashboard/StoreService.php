@@ -12,7 +12,7 @@ use Spatie\Permission\Models\Role;
 class StoreService{
 
     public function index(){
-        $rows = Store::with('activity')->get();
+        $rows = Store::with('activity')->latest()->get();
         return view('dashboard.stores.index',compact('rows'));
     }
 

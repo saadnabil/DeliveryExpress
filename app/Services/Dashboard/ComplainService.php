@@ -9,7 +9,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 class ComplainService{
     public function index(){
-        $rows = Complain::with('complainable')->get();
+        $rows = Complain::with('complainable')->latest()->get();
         return view('dashboard.complains.index',compact('rows'));
     }
 

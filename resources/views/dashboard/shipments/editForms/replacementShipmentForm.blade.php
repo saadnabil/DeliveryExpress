@@ -1,6 +1,7 @@
- <form style="display:{{ old('shipment_type_id',$shipment->shipment_type_id) == 2 ? 'block' : 'none' }};" id="replacedShipmentForm" class="form-body" method="post" action="{{ route('shipments.store') }}"
+ <form style="display:{{ old('shipment_type_id',$shipment->shipment_type_id) == 2 ? 'block' : 'none' }};" id="replacedShipmentForm" class="form-body" method="post" action="{{ route('shipments.update', $shipment) }}"
                         enctype="multipart/form-data">
                         {{ csrf_field() }}
+                        @method('put')
                         <input type="hidden" value="2" name="shipment_type_id" />
                         <div class="border border-3 p-4 rounded newData">
                             <div class="mb-3">
@@ -114,7 +115,7 @@
                             <div class="mb-3">
                                 <label for="replace_store_id" class="form-label">{{ __('translation.Store') }}:</label>
                                 <select id="replace_store_id" requierd name="store_id"
-                                    class="form-select single-select-field mb-3 @error('store_id') error-input @enderror"
+                                    class="form-select single-select-field mb-3 @error('store_id') error-input @enderror storeSelect"
                                     aria-label="Default select example">
                                     <option value="">{{ __('translation.Select Store') }}</option>
                                     @foreach ($stores as $store)

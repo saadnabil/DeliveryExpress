@@ -42,4 +42,8 @@ class Shipment extends Model
         return $this->belongsTo(Store::class);
     }
 
+    public function shipmentReplaced(){
+        return $this->hasOne(Shipment::class);
+    }
+
 }
