@@ -6,8 +6,10 @@ use App\Http\Requests\Dashboard\AddDeliveryValidation;
 use App\Http\Requests\Dashboard\StoreShipmentValidation;
 use App\Http\Requests\Dashboard\UpdateDeliveryValidation;
 use App\Models\Delivery;
+use App\Models\Shipment;
 use App\Services\Dashboard\DeliveryService;
 use App\Services\Dashboard\ShipmentService;
+use Illuminate\Http\Request;
 
 class ShipmentsController extends Controller
 {
@@ -38,8 +40,8 @@ class ShipmentsController extends Controller
         return $this->shipmentService->store($data);
     }
 
-    public function edit(Delivery $delivery){
-        return $this->deliveryService->edit($delivery);
+    public function edit(Shipment $shipment){
+        return $this->shipmentService->edit($shipment);
     }
 
     public function update(UpdateDeliveryValidation $request ,Delivery $delivery){
@@ -48,10 +50,16 @@ class ShipmentsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     */
+    * Remove the specified resource from storage.
+    */
     public function destroy(Delivery $delivery)
     {
         return $this->deliveryService->destroy($delivery);
+    }
+
+    public function getStoreReturnedShipments(Request $request){
+        $store_id = $request->store_id;
+        return $this->shipmentService->getStoreReturnedShipments($store_id);
+
     }
 }

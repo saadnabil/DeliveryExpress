@@ -143,6 +143,11 @@ return [
     'Select Payment Type' => 'اختر طريقة الدفع',
     'Select Store' => 'اختر المتجر',
     'Add Description' => 'اضف الوصف',
-    'Replace Reason' => 'سبب الالغاء',
-    'Add Replace Reason' => 'اضف سبب التبديل'
+    'Replace Reason' => 'سبب التبديل',
+    'Add Replace Reason' => 'اضف سبب التبديل',
+    'Returned Shipments' => 'الشحنات المرتجة',
+    'Select Replaced Shipment' => 'اخترالشحنة المرتجعة',
+    'No Replaced Shipments In This Store !' => 'لايوجد شحنات مرتجعة في هذا المتجر !',
+    'Shipment Images' => 'صور الشحنات',
+    'Edit Shipment' => 'تعديل الشحنة'
 ];

@@ -9,6 +9,7 @@ use App\Models\Delivery;
 use App\Models\DeliveryWorkCity;
 use App\Models\DeliveryWorkTime;
 use App\Models\Shipment;
+use App\Models\ShipmentImage;
 use App\Models\ShipmentType;
 use App\Models\Store;
 use App\Models\User;
@@ -32,19 +33,51 @@ class ShipmentService{
         return view('dashboard.shipments.create' , compact('cities','countries','stores','shipmentTypes'));
     }
 
+    public function getStoreReturnedShipments($store_id){
+        $returnedShipments = Shipment::where([
+            'status' => 'returned',
+            'store_id' => $store_id,
+        ])->get();
+        $view = view('dashboard.shipments.returnedShipments',compact('returnedShipments'))->render();
+        $data = [
+            'count' => count($returnedShipments),
+            'view' => $view
+        ];
+        return response()->json($data);
+    }
+
     public function store(array $data){
         $data['shipment_code'] = generate_code_unique();
         $data['qr_code_image'] = generateQrCode($data['shipment_code']);
-        Shipment::create($data);
+        $data['status'] = 'pending';
+        if(isset($data['images'])){
+            unset($data['images']);
+        }
+        $shipment = Shipment::create($data);
+        if(isset($data['images'])){
+            $shipmentImages = $data['images'];
+            foreach($shipmentImages as $image){
+                $imagename = FileHelper::upload_file('uploads' , $image);
+                ShipmentImage::create([
+                    'image' => $imagename,
+                    'shipment_id' => $shipment->id
+                ]);
+            }
+        }
         return redirect()->route('shipments.index')->with(['success' => __('translation.Added Successfully')]);
     }
 
-    public function edit($delivery){
+    public function edit($shipment){
+        $shipment = $shipment->load('images');
         $cities = City::get();
         $countries = Country::get();
-        $delivery = $delivery->load('deliveryWorkCities','deliveryWorkTimes');
-        $deliveryCitiesWorkIds = $delivery->deliveryWorkCities()->pluck('city_id')->toarray();
-        return view('dashboard.deliveries.edit' , compact('cities','countries','delivery','deliveryCitiesWorkIds'));
+        $stores = Store::get();
+        $shipmentTypes = ShipmentType::get();
+        $returnedShipments = Shipment::where([
+            'status' => 'returned',
+            'store_id' => $shipment->store_id,
+        ])->get();
+        return view('dashboard.shipments.edit' , compact('cities','countries','stores','shipmentTypes','shipment','returnedShipments'));
     }
 
     public function update(array $data , $delivery){

@@ -45,6 +45,8 @@ Route::resource('collectionRequests' ,CollectionRequestsController::class);// ف
 Route::resource('stores' ,StoresController::class);
 Route::resource('deliveries' ,DeliveriesController::class);
 Route::resource('shipments' ,ShipmentsController::class);
+Route::post('getStoreReturnedShipments' ,[ShipmentsController::class , 'getStoreReturnedShipments'])->name('getStoreReturnedShipments');
+
 
 
 
