@@ -34,7 +34,6 @@ class ShipmentService{
                        ->latest()
                        ->simplePaginate();
         }
-        return response()->json($rows);
         return $this->sendResponse(resource_collection(ShipmentResource::collection($rows)));
     }
 

@@ -14,6 +14,7 @@ use App\Http\Controllers\Dashboard\ShipmentsController;
 use App\Http\Controllers\Dashboard\StoresController;
 use App\Http\Controllers\Dashboard\UsersController;
 use App\Http\Controllers\TrackOrder\TrackOrderController;
+use App\Models\Shipment;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -47,17 +48,10 @@ Route::resource('deliveries' ,DeliveriesController::class);
 Route::resource('shipments' ,ShipmentsController::class);
 Route::post('getStoreReturnedShipments' ,[ShipmentsController::class , 'getStoreReturnedShipments'])->name('getStoreReturnedShipments');
 
-
-
-
-
-
-
-
-
-
-
-
+// Route::get('test',function(){
+//     $row = Shipment::with('shipmentReplaced')->where('id', 64)->first();
+//     return response()->json($row);
+// });
 
 
 /**
