@@ -95,5 +95,4 @@ class ShipmentService{
         ];
         return $this->sendResponse($response);
     }
-
 }
