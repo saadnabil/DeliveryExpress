@@ -23,7 +23,7 @@ class StoreShipmentStepThreeValidation extends FormRequest
     {
         return [
             'shipment_id' => ['required' , 'numeric'],
-            'payment_type' => ['required' , 'in:1,2'] //1 for cash , 2 for visa
+            'payment_type' => ['required' , 'in:1,2' ] //1 for cash , 2 for visa
         ];
     }
 }

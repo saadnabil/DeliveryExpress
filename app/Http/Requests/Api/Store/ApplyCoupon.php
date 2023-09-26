@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Api\Store;
 
+use App\Rules\ValidateCoupon;
+use App\Rules\ValidateCouponBelongToStore;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ApplyCoupon extends FormRequest
@@ -23,7 +25,7 @@ class ApplyCoupon extends FormRequest
     {
         return [
             'shipment_id' => ['required' , 'numeric'],
-            'coupon_id' => ['required' , 'numeric'],
+            'coupon_id' => ['required' , 'numeric' , new ValidateCoupon()],
         ];
     }
 }

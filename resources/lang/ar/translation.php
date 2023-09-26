@@ -149,5 +149,17 @@ return [
     'Select Replaced Shipment' => 'اخترالشحنة المرتجعة',
     'No Replaced Shipments In This Store !' => 'لايوجد شحنات مرتجعة في هذا المتجر !',
     'Shipment Images' => 'صور الشحنات',
-    'Edit Shipment' => 'تعديل الشحنة'
+    'Edit Shipment' => 'تعديل الشحنة',
+    'Application Name' => 'اسم التطبيق',
+    'Edit Setting' => 'تعديل الاعدادات',
+    'Setting' => 'الاعدادات',
+    'This code is not found' => 'كود خصم غير موجود',
+    'This code is not assigned to this store' => 'هذا الكود غير مخصص لهذا المتجر',
+    'Tax Fee' => 'ضريبة سعر الشحنة اكثر من 1000 والمدينة جنوبية او شرقية',
+    'Of Total Price' => 'من السعر الكلي',
+    'Shipment not found' => 'شحنة غير موجودة',
+    'Coupon not found' => 'كوبون غير موجود',
+    'Coupon is expired' => 'كوبون منتهي الصلاحية',
+    'Shipment already has coupon' => 'تم تطبيق كود خصم علي هذه الشحنة'
+
 ];

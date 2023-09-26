@@ -5,23 +5,35 @@ use App\Http\Resources\Api\Store\CouponResource;
 use App\Http\Traits\ApiResponseTrait;
 use App\Models\Coupon;
 use App\Models\Shipment;
+use Carbon\Carbon;
 
 class CouponService{
 
     use ApiResponseTrait;
 
     public function apply(array $data){
-        $row = Shipment::find($data['shipment_id']);
+
+        $shipment = Shipment::find($data['shipment_id']);
         $coupon = Coupon::find($data['coupon_id']);
-        if(!$row ||  !$coupon){
-            return $this->sendResponse(['error'=>'Shipment or Coupon id is not correct!'] , 'fail' , 404);
+
+        if(!$shipment){
+            return $this->sendResponse(['error'=>__('translation.Shipment not found')] , 'fail' , 404);
         }
-        $row->update([
-            'coupon_id' =>  $data['coupon_id'],
+
+        if($shipment->coupon_id != null){
+            return $this->sendResponse(['error'=>__('translation.Shipment already has coupon')] , 'fail' , 400);
+        }
+
+        $total =   $shipment->total_price - ($shipment->total_price * $coupon->discount / 100);
+
+        $shipment->update([
+            'coupon_id' => $coupon->id,
             'discount_fee' => $coupon->discount,
+            'total_price' => $total,
         ]);
-        $response = shipment_price_reciept($row);
-        return $this->sendResponse($response);
+
+        $invoice = $shipment->printShipmentInvoice();
+        return $this->sendResponse($invoice);
     }
 
     public function coupons(){

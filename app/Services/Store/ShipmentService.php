@@ -8,7 +8,9 @@ use App\Models\ShipmentImage;
 use Illuminate\Http\Request;
 
 class ShipmentService{
+
     use ApiResponseTrait;
+
     public function index(){
 
         $statusArr = ['all' , 'delivered' ,'failed','returned','out_for_delivery','in_stock','recieved_by_delivery' ,'pending' ];
@@ -17,7 +19,7 @@ class ShipmentService{
 
         if(!in_array($status , $statusArr )){
             return $this->sendResponse([
-                'error' => 'Status must be in: delivered ,failed,returned,out_for_delivery',
+                'error' => 'Status must be in: all , delivered ,failed,returned,out_for_delivery,in_stock,recieved_by_delivery,pending',
             ] , 'fail' , 404);
         }
 
@@ -35,6 +37,7 @@ class ShipmentService{
                        ->simplePaginate();
         }
         return $this->sendResponse(resource_collection(ShipmentResource::collection($rows)));
+
     }
 
     public function storeStepOne(array $data){
@@ -60,28 +63,37 @@ class ShipmentService{
     }
 
     public function storeStepTwo(array $data){
-        $row = Shipment::with('coupon')->find($data['shipment_id']);
-        if(!$row){
-            return $this->sendResponse(['error'=>'Shipment not found!'] , 'fail' , 404);
+        $shipment = Shipment::find($data['shipment_id']);
+        if(!$shipment){
+            return $this->sendResponse(['error'=> __('translation.Shipment not found')] , 'fail' , 404);
         }
         unset($data['shipment_id']);
-        $row->update($data);
-        $response = shipment_price_reciept($row);
-        return $this->sendResponse($response);
+        $shipment->update($data);
+        $shipment = $shipment->load('city');
+        $shipment->calculateShipmentInvoice();
+        $shipmentInvoice = $shipment->printShipmentInvoice();
+        return $this->sendResponse($shipmentInvoice);
     }
 
     public function storeStepThree(array $data){
-        $row = Shipment::find($data['shipment_id']);
-        if(!$row){
-            return $this->sendResponse(['error'=>'Shipment not found!'] , 'fail' , 404);
+        $shipment = Shipment::with('coupon')->find($data['shipment_id']);
+        if(!$shipment){
+            return $this->sendResponse(['error'=>__('translation.Shipment not found')] , 'fail' , 404);
+        }
+        if($shipment->coupon->is_used == 1){
+            return $this->sendResponse(['error'=> __('translation.Coupon is expired')] , 'fail' , 400);
         }
         unset($data['shipment_id']);
         $data['status'] = 'pending';
-        $row->update($data);
+        $shipment->update($data);
+        $shipment->coupon->update([
+            'is_used' => 1,
+        ]);
         $response = [
-            'shipmentCode' => $row->shipment_code,
-            'qrImage' => $row->qr_code_image
+            'shipmentCode' => $shipment->shipment_code,
+            'qrImage' => $shipment->qr_code_image
         ];
         return $this->sendResponse($response);
     }
+
 }

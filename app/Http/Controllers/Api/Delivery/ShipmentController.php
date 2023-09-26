@@ -8,6 +8,7 @@ use App\Http\Requests\Api\Delivery\StartDeliverShipmentValidation;
 use App\Http\Requests\Api\Delivery\FailDeliverShipmentValidation;
 
 use App\Http\Traits\ApiResponseTrait;
+use App\Models\Shipment;
 use App\Services\Delivery\ShipmentService;
 class ShipmentController extends Controller
 {
@@ -36,5 +37,24 @@ class ShipmentController extends Controller
     public function failDeliverShipment(FailDeliverShipmentValidation $request){
         $data = $request->validated();
         return $this->shipmentService->failDeliverShipment($data);
+    }
+
+    public function shipmentInvoice(){
+        $delivery = auth()->user();
+        $shipmentsAssignedToDelivery = Shipment::where([
+            'delivery_id' =>  $delivery->id,
+            'status' => 'recieved_by_delivery',
+        ])->get();
+        $shipmentsDelivered = Shipment::where([
+            'delivery_id' =>  $delivery->id,
+            'status' => 'delivered',
+        ])->get();
+        $data = [
+            'totalCount' => count($shipmentsAssignedToDelivery),
+            'totalPrice' => $shipmentsAssignedToDelivery->sum('total_price'),
+            'deliveredCount' => count($shipmentsDelivered),
+            'deliveredPrice' =>  $shipmentsDelivered->sum('total_price'),
+        ];
+        return response()->json($data );
     }
 }

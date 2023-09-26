@@ -29,36 +29,59 @@ function generate_code_unique() {
     return $shipmentCode;
 }
 
-function shipment_price_reciept($shipment){
-    $total = $shipment->shipment_price + $shipment->delivery_fee + $shipment->weight_fee + $shipment->collect_fee;
-    if($shipment->shipment_price > 1000){ //check city and order is more than 1000 denar liby;
-        $total = $total + ($shipment->shipment_price * 1 / 100);
-    }
-    if($shipment -> coupon_id){
-        $total =   $total - ($total * $shipment->coupon->discount / 100);
-    }
-    $shipment->update(['total_price' => $total]);
-    $response = [
-        'shipmentId' => $shipment->id,
-        'shipmentCode' => $shipment->shipment_code,
-        'shipmentPrice' => $shipment->shipment_price,
-        'deliveryFee' => $shipment->delivery_fee,
-        'weightFee' => $shipment->weight_fee,
-        'collectFee' => $shipment->collect_fee,
-        'total' => $shipment->total_price,
-    ];
-    if($shipment->shipment_price > 1000){
-        $response['tax_fee'] = '1 %';
-    }
-    if($shipment->coupon_id){
-        $response['discount'] = $shipment->coupon->discount.'%';
-    }
-    return $response;
-}
+
 
 function generateQrCode($shipmentCode){
     return QrCode::size(300)->generate($shipmentCode);
-
 }
 
+function pushNotificationStore($title, $body, $token)
+{
+    if (!$token) return;
 
+    if (!is_array($token)) {
+        $token = [$token];
+    }
+
+    $url = 'https://fcm.googleapis.com/fcm/send';
+    $serverKey = 'AAAAEdvg3CI:APA91bEspQQ7Eb7PFcCPtgj3VVE7ietM1DGtG4H55SMyThAnAPaChUqHSA8p9DYHXpJtQ8uU0Z_8UZALcsOelpKkDJSyVLejM77k9aLGq22oMUa7Fy0JrHt1zaVN61zLuIhmVfA7dTc6';
+
+    $data = [
+        "registration_ids" => $token,
+        "notification" => [
+            "title" => $title,
+            "body" => $body,
+            "sound" => "default",
+            "badge" => "1",
+            // "click_action" => "FCM_PLUGIN_ACTIVITY",
+        ],
+        // "data" => $notificationData
+    ];
+
+    $encodedData = json_encode($data);
+
+    $headers = [
+        'Authorization:key=' . $serverKey,
+        'Content-Type: application/json',
+    ];
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+    // Disabling SSL Certificate support temporarly
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $encodedData);
+    // Execute post
+    $result = curl_exec($ch);
+
+    // Close connection
+    curl_close($ch);
+    // FCM response
+    // dump($result);
+    return $result;
+}

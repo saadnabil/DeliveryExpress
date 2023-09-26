@@ -82,6 +82,7 @@ Route::group(['prefix' => 'v1'],function(){
             Route::post('logout', [DeliveryAuthController::class , 'logout']);
             Route::group(['prefix'=>'shipment'],function(){
                 Route::get('/', [DeliveryShipmentController::class , 'index']);
+                Route::get('/invoice', [DeliveryShipmentController::class , 'shipmentInvoice']);
                 Route::post('recieve', [DeliveryShipmentController::class , 'recieve']);
                 Route::post('startDeliverShipment', [DeliveryShipmentController::class , 'startDeliverShipment']);
                 Route::post('endDeliverShipment', [DeliveryShipmentController::class , 'endDeliverShipment']);

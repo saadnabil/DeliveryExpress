@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api\Store;
 
 use App\Rules\NotRequiredStepOneShipmentRule;
 use App\Rules\NotRequiredStoreCollectionRequest;
-use App\Rules\ShipmentCodesExist;
+use App\Rules\w;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ShipmentTypeValidation extends FormRequest

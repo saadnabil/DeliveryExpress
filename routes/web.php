@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DeliveriesController;
 use App\Http\Controllers\Dashboard\FaqsController;
 use App\Http\Controllers\Dashboard\RoleController;
+use App\Http\Controllers\Dashboard\SettingsController;
 use App\Http\Controllers\Dashboard\ShipmentsController;
 use App\Http\Controllers\Dashboard\StoresController;
 use App\Http\Controllers\Dashboard\UsersController;
@@ -47,11 +48,16 @@ Route::resource('stores' ,StoresController::class);
 Route::resource('deliveries' ,DeliveriesController::class);
 Route::resource('shipments' ,ShipmentsController::class);
 Route::post('getStoreReturnedShipments' ,[ShipmentsController::class , 'getStoreReturnedShipments'])->name('getStoreReturnedShipments');
+Route::resource('settings', SettingsController::class)->only('index','store');
 
-// Route::get('test',function(){
-//     $row = Shipment::with('shipmentReplaced')->where('id', 64)->first();
-//     return response()->json($row);
-// });
+
+Route::get('test',function(){
+    $token = 'dynUSXgdRxK0lUtLeO4RCd:APA91bG5FR3VX4Og8LQJH66qocbCJAUy_bX-l0ga2HsSMdPwl48Ge6g-bmPpOJ4OtQ25pcDk57T1QdkiTGkr4fMf3TsflTo1H2NRGvnpB2XxVdEOmhGkXgr3jJgwR21CGQjxn-qVABeb';
+    $result = pushNotificationStore('title' , 'description' , [$token]);
+    dd($result);
+});
+
+
 
 
 /**

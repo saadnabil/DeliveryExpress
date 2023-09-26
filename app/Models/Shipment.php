@@ -47,4 +47,35 @@ class Shipment extends Model
         return $this->hasOne(Shipment::class, 'id', 'shipment_replaced_id');
     }
 
+    function calculateShipmentInvoice(){
+        $data = [
+            'delivery_fee' => $this->city->shipmentPrice,
+            'weight_fee' => setting('weight_fee') ?? 0,
+            'collect_fee' => setting('collect_fee') ?? 0,
+            'tax_fee' => setting('tax_fee') ?? 0
+        ];
+
+        $data['total_price'] =$this->shipment_price + $data['delivery_fee']  +$data['weight_fee'] +   $data['collect_fee'];
+        if($this->shipment_price > 1000 && in_array($this->city->direction , ['south' , 'east']) ){
+            $data['total_price']= $data['total_price'] + ($data['total_price'] * $data['tax_fee'] / 100 );
+        }
+       $this->update($data);
+        return ;
+    }
+
+    function printShipmentInvoice(){
+        $invoice =  [
+            'shipmentId' =>$this->id,
+            'shipmentCode' =>$this->shipment_code,
+            'shipmentPrice' =>$this->shipment_price,
+            'deliveryFee' => $this->delivery_fee,
+            'weightFee' =>$this->weight_fee,
+            'collectFee' => $this->collect_fee,
+            'tax_fee' => $this->tax_fee. '% '. __('translation.Of Total Price'),
+            'discount' =>$this->discount_fee.'%',
+            'total' =>$this->total_price,
+        ];
+        return $invoice;
+    }
+
 }

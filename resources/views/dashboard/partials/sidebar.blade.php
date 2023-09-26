@@ -84,7 +84,7 @@
             </li>
         @endcan
 
-        @can('faq-list')
+        @can('complains-list')
             <li>
                 <a href="{{ route('complains.index') }}">
                     <div class="parent-icon"><i class='bx bx-menu'></i>
@@ -123,6 +123,17 @@
                 </a>
             </li>
         @endcan
+
+        @can('setting-list')
+            <li>
+                <a href="{{ route('settings.index') }}">
+                    <div class="parent-icon"><i class='bx bx-menu'></i>
+                    </div>
+                    <div class="menu-title">{{ __('translation.Setting') }}</div>
+                </a>
+            </li>
+        @endcan
+
     </ul>
     <!--end navigation-->
 </div>

@@ -8,29 +8,32 @@ class ShipmentService{
     use ApiResponseTrait;
 
     public function index(){
-        $shipments = Shipment::with(['shipmentType','images'])->where([
-            'delivery_id' => auth()->user()->id,
-        ])->latest()->get();
-        $shipmentsRecievedByDelivery =  $shipments->filter(function($shipment){
-            return $shipment->status === 'recieved_by_delivery';
-        });
-        $outForDelivery =  $shipments->filter(function($shipment){
-            return $shipment->status === 'out_for_delivery';
-        });
-        $delivered =  $shipments->filter(function($shipment){
-            return $shipment->status === 'delivered';
-        });
-        $returned =  $shipments->filter(function($shipment){
-            return $shipment->status === 'returned';
-        });
-        $data = [
-            'all' =>  ShipmentResource::collection($shipments),
-            'shipmentsRecievedByDelivery' => ShipmentResource::collection($shipmentsRecievedByDelivery),
-            'outForDelivery' => ShipmentResource::collection($outForDelivery),
-            'delivered' => ShipmentResource::collection($delivered),
-            'returned' => ShipmentResource::collection($returned),
-        ];
-        return $this->sendResponse($data);
+
+        $statusArr = ['all' , 'delivered' ,'failed','returned','out_for_delivery','in_stock','recieved_by_delivery' ,'pending' ];
+
+        $status = request('status');
+
+        if(!in_array($status , $statusArr )){
+            return $this->sendResponse([
+                'error' => 'Status must be in: all , delivered ,failed,returned,out_for_delivery,in_stock,recieved_by_delivery,pending',
+            ] , 'fail' , 404);
+        }
+
+        if($status != 'all'){
+            $rows = Shipment::with(['images','delivery','shipmentType','shipmentReplaced'])
+                       ->where('status' ,$status )
+                       ->where('delivery_id' , auth()->user()->id )
+                       ->latest()
+                       ->simplePaginate();
+        }else{
+            $rows = Shipment::with(['images','delivery','shipmentType','shipmentReplaced'])
+                       ->where('status' , '!=' , 'incomplete')
+                       ->where('delivery_id' , auth()->user()->id )
+                       ->latest()
+                       ->simplePaginate();
+        }
+
+        return $this->sendResponse(resource_collection(ShipmentResource::collection($rows)));
     }
 
     public function recieve(array $data){
