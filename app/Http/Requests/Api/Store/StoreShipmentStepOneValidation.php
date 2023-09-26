@@ -36,7 +36,7 @@ class StoreShipmentStepOneValidation extends FormRequest
             'shipment_packaging' => ['required_if:shipment_type_id,1','required_if:shipment_type_id,2',new NotRequiredStepOneShipmentRule,'numeric'],
             'preview_allowed' => ['required_if:shipment_type_id,1','required_if:shipment_type_id,2',new NotRequiredStepOneShipmentRule,'numeric'],
             'images' => ['required_if:shipment_type_id,1','required_if:shipment_type_id,2',new NotRequiredStepOneShipmentRule , 'array'],
-            'images.*' => [ 'image' ],
+            'images.*' => [ 'image' , 'mimes:png,jpg,jpeg,svg'],
             'notes' => ['required','string'],
             'money' =>['required_if:shipment_type_id,3',new NotRequiredStepOneShipmentRule,'numeric'], //required when type is عربون
             //required when type is تبادل متعدد
