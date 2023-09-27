@@ -31,8 +31,8 @@ class CouponService{
             'discount_fee' => $coupon->discount,
             'total_price' => $total,
         ]);
-
         $invoice = $shipment->printShipmentInvoice();
+        $invoice['couponTitle'] = $coupon->title;
         return $this->sendResponse($invoice);
     }
 

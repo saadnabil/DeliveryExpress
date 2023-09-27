@@ -58,7 +58,6 @@ class DeliveryAuthService {
             ]);
         }
         $delivery->update(['verified' => 1]);
-        return response($delivery);
         return $this->sendResponse(new DeliveryResource($delivery));
     }
 

@@ -21,13 +21,12 @@ class ValidateCoupon implements ValidationRule
             'store_id' => auth()->user()->id,
         ])->first();
 
-       if(!$coupon){
-            $fail(__('translation.Coupon not found'));
-       }
+        if(!$coupon){
+            $fail( __('translation.Coupon not found') );
+        }
 
-       if (Carbon::parse($coupon->expire_date)->isPast() || $coupon->is_used == 1) {
-            $fail(__('translation.Coupon is expired'));
-       }
-
+        elseif (Carbon::parse($coupon->expire_date)->isPast() || $coupon->is_used == 1) {
+            $fail( __('translation.Coupon is expired') );
+        }
     }
 }

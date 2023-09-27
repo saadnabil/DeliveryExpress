@@ -29,6 +29,7 @@ class ShipmentResource extends JsonResource
             'deliveryFee' => $this->delivery_fee,
             'weightFee' => $this->weight_fee,
             'discountFee' => $this->discount_fee,
+            'taxFee' => $this->tax_fee,
             'totalFee' => $this->total_fee,
             'collectFee' => $this->collect_fee,
             'totalPrice' => $this->total_price,

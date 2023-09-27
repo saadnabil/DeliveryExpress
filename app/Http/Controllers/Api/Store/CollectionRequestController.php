@@ -39,14 +39,11 @@ class CollectionRequestController extends Controller
 
     public function shipmentsCodes(ShipmentTypeValidation $request){
         $data = $request->validated();
-        $types = [
-            '1' => 'pending',
-            '2' => 'failed',
-        ];
-        $rows = Shipment::where([
-                    'status' => $types[$data['type']],
-                    'store_id' => auth()->user()->id
-                ])->get();
+        if($data['type'] == 1){
+            $rows = Shipment::where(['store_id' => auth()->user()->id,'status' => 'pending'])->get();
+        }elseif($data['type'] == 2){
+            $rows = Shipment::where(['store_id' => auth()->user()->id])->whereIn('status', ['returned','fail'])->get();
+        }
         return $this->sendResponse($rows);
     }
 

@@ -51,6 +51,8 @@ Route::group(['prefix' => 'v1'],function(){
                 Route::post('/storeStepOne', [ShipmentController::class, 'storeStepOne']);
                 Route::post('/storeStepTwo', [ShipmentController::class, 'storeStepTwo']);
                 Route::post('/storeStepThree', [ShipmentController::class, 'storeStepThree']);
+                Route::get('/returnedCodes', [ShipmentController::class, 'returnedCodes']);
+                Route::post('/search',  [ShipmentController::class, 'search']);
             });
             Route::group(['prefix' => 'collectionRequest'] , function(){
                 Route::post('store', [CollectionRequestController::class, 'store']);

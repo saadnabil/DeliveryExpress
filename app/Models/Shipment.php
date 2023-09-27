@@ -66,14 +66,14 @@ class Shipment extends Model
     function printShipmentInvoice(){
         $invoice =  [
             'shipmentId' =>$this->id,
-            'shipmentCode' =>$this->shipment_code,
-            'shipmentPrice' =>$this->shipment_price,
-            'deliveryFee' => $this->delivery_fee,
-            'weightFee' =>$this->weight_fee,
-            'collectFee' => $this->collect_fee,
+            'shipmentCode' => $this->shipment_code,
+            'shipmentPrice' => (double)$this->shipment_price,
+            'deliveryFee' => (double) $this->delivery_fee,
+            'weightFee' =>(double)$this->weight_fee,
+            'collectFee' => (double)$this->collect_fee,
             'tax_fee' => $this->tax_fee. '% '. __('translation.Of Total Price'),
             'discount' =>$this->discount_fee.'%',
-            'total' =>$this->total_price,
+            'total' => (double)$this->total_price,
         ];
         return $invoice;
     }

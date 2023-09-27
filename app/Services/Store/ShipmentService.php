@@ -80,19 +80,68 @@ class ShipmentService{
         if(!$shipment){
             return $this->sendResponse(['error'=>__('translation.Shipment not found')] , 'fail' , 404);
         }
-        if($shipment->coupon->is_used == 1){
-            return $this->sendResponse(['error'=> __('translation.Coupon is expired')] , 'fail' , 400);
+        if($shipment->coupon){
+            if($shipment->coupon->is_used == 1){
+                return $this->sendResponse(['error'=> __('translation.Coupon is expired')] , 'fail' , 400);
+            }
+            $shipment->coupon->update([
+                'is_used' => 1,
+            ]);
         }
         unset($data['shipment_id']);
         $data['status'] = 'pending';
         $shipment->update($data);
-        $shipment->coupon->update([
-            'is_used' => 1,
-        ]);
         $response = [
             'shipmentCode' => $shipment->shipment_code,
             'qrImage' => $shipment->qr_code_image
         ];
         return $this->sendResponse($response);
+    }
+    public function returnedCodes(){
+        $rows = Shipment::whereIn('status', ['returned' , 'fail'])
+            ->where([
+                'store_id' => auth()->user()->id
+            ])->get();
+         return $this->sendResponse($rows);
+    }
+    public function search(array $data){
+        $query =  $data['query'];
+        $shipments = Shipment::with(['images','delivery','shipmentType','shipmentReplaced'])->where([
+            'store_id' => auth()->user()->id,
+        ]);
+        if ($data['status'] !== 'all') {
+            $shipments = $shipments->where('status', $data['status']);
+        }
+        $filteredShipments = $shipments->where('shipment_code', 'like', "%{$query}%")
+            ->orWhere('quantity', 'like', "%{$query}%")
+            ->orWhere('description', 'like', "%{$query}%")
+            ->orWhere('money', 'like', "%{$query}%")
+            ->orWhere('weight', 'like', "%{$query}%")
+            ->orWhere('length', 'like', "%{$query}%")
+            ->orWhere('height', 'like', "%{$query}%")
+            ->orWhere('width', 'like', "%{$query}%")
+            ->orWhere('notes', 'like', "%{$query}%")
+            ->orWhere('shipment_replace_reason', 'like', "%{$query}%")
+            ->orWhere('client_name', 'like', "%{$query}%")
+            ->orWhere('client_phone', 'like', "%{$query}%")
+            ->orWhere('client_other_phone', 'like', "%{$query}%")
+            ->orWhere('shipment_price', 'like', "%{$query}%")
+            ->orWhere('delivery_fee', 'like', "%{$query}%")
+            ->orWhere('weight_fee', 'like', "%{$query}%")
+            ->orWhere('discount_fee', 'like', "%{$query}%")
+            ->orWhere('collect_fee', 'like', "%{$query}%")
+            ->orWhere('total_price', 'like', "%{$query}%")
+            ->orWhere('cancel_reason_note', 'like', "%{$query}%")
+            ->orWhere('delivered_date', 'like', "%{$query}%")
+            ->orWhere('tax_fee', 'like', "%{$query}%")
+            ->orWhereHas('city', function ($q) use ($query) {
+                $q->where('name', 'like', "%{$query}%");
+            })
+            ->orWhereHas('country', function ($q) use ($query) {
+                $q->where('name', 'like', "%{$query}%");
+            })->simplepaginate();
+
+        // Return the filtered shipments
+        return $this->sendResponse(resource_collection(ShipmentResource::collection($filteredShipments)));
     }
 }

@@ -17,14 +17,7 @@
                                     <div class="error-validation">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="mb-3">
-                                <label for="delivery_fee" class="form-label">{{ __('translation.Delivery Fee') }}</label>
-                                <input required name="delivery_fee" min="0" value="{{ old('delivery_fee' , setting('delivery_fee')) }}" step="0.01" type="number"
-                                    class="form-control @error('delivery_fee') error-input @enderror" id="delivery_fee">
-                                @error('delivery_fee')
-                                    <div class="error-validation">{{ $message }}</div>
-                                @enderror
-                            </div>
+
                             <div class="mb-3">
                                 <label for="weight_fee" class="form-label">{{ __('translation.Weight Fee') }}</label>
                                 <input required name="weight_fee" min="0" value="{{ old('weight_fee' , setting('weight_fee')) }}" step="0.01" type="number"

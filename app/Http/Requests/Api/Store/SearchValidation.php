@@ -2,18 +2,16 @@
 
 namespace App\Http\Requests\Api\Store;
 
-use App\Rules\ValidateCoupon;
-use App\Rules\ValidateCouponBelongToStore;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ApplyCoupon extends FormRequest
+class SearchValidation extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return true ;
     }
 
     /**
@@ -24,8 +22,8 @@ class ApplyCoupon extends FormRequest
     public function rules(): array
     {
         return [
-            'shipment_id' => ['required' , 'numeric'],
-            'coupon_id' => ['required' , 'numeric' , new ValidateCoupon],
+            'query' => ['required' , 'string'],
+            'status' => ['required' , 'in:all,delivered,failed,returned,out_for_delivery,in_stock,recieved_by_delivery ,pending']
         ];
     }
 }

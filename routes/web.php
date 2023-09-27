@@ -34,7 +34,7 @@ use Illuminate\Support\Facades\Route;
  * Dashboard Routes
  */
 Route::auth();
-Route::get('/', [DashboardController::class , 'index']);
+Route::get('admin' , [DashboardController::class,'index']);
 Route::resource('roles' , RoleController::class);
 Route::resource('cities' ,CitiesController::class);
 Route::resource('activities' ,ActivitiesController::class);
@@ -56,18 +56,3 @@ Route::get('test',function(){
     $result = pushNotificationStore('title' , 'description' , [$token]);
     dd($result);
 });
-
-
-
-
-/**
- *
- * Dashboard Routes
- */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('trackShipment/{shipmentCode}' , [TrackOrderController::class , 'trackShipment'])->name('trackShipmentView');
-
