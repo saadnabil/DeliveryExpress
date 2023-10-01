@@ -58,7 +58,7 @@ class LoginController extends Controller
         if (method_exists($this, 'redirectTo')) {
             return $this->redirectTo();
         }
-        return route('/');
+        return route('adminDashboard');
     }
 
     public function __construct()

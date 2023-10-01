@@ -6,7 +6,7 @@ use App\Http\Requests\Api\Delivery\EndDeliverShipmentValidation;
 use App\Http\Requests\Api\Delivery\RecieveShipmentValidation;
 use App\Http\Requests\Api\Delivery\StartDeliverShipmentValidation;
 use App\Http\Requests\Api\Delivery\FailDeliverShipmentValidation;
-
+use App\Http\Requests\Api\Delivery\SearchValidation;
 use App\Http\Traits\ApiResponseTrait;
 use App\Models\Shipment;
 use App\Services\Delivery\ShipmentService;
@@ -56,5 +56,11 @@ class ShipmentController extends Controller
             'deliveredPrice' =>  $shipmentsDelivered->sum('total_price'),
         ];
         return response()->json($data );
+    }
+
+    public function search(SearchValidation $request)
+    {
+        $data = $request->validated();
+        return $this->shipmentService->search($data);
     }
 }

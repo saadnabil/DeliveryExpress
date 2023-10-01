@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\Delivery\AuthController as DeliveryAuthController;
 use App\Http\Controllers\Api\Delivery\ComplainController;
+use App\Http\Controllers\Api\Delivery\NotificationController;
 use App\Http\Controllers\Api\Delivery\OtpController as DeliveryOtpController;
 use App\Http\Controllers\Api\Delivery\ProfileController as DeliveryProfileController;
 use App\Http\Controllers\Api\Delivery\ShipmentController as DeliveryShipmentController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Api\Store\AuthController;
 use App\Http\Controllers\Api\Store\CollectionRequestController;
 use App\Http\Controllers\Api\Store\CostRateController;
 use App\Http\Controllers\Api\Store\CouponController;
+use App\Http\Controllers\Api\Store\NotificationController as StoreNotificationController;
 use App\Http\Controllers\Api\Store\OtpController;
 use App\Http\Controllers\Api\Store\ProfileController;
 use App\Http\Controllers\Api\Store\ShipmentController;
@@ -71,6 +73,9 @@ Route::group(['prefix' => 'v1'],function(){
                 Route::post('/update/storeData', [ProfileController::class, 'updateStore']);
                 Route::post('/update/password', [ProfileController::class, 'updatePassword']);
             });
+            Route::group(['prefix' => 'notification'] , function(){
+                Route::get('/', [StoreNotificationController::class, 'index']);
+            });
             Route::group(['prefix' => 'complain'] , function(){
                 Route::post('/store', [ComplainController::class, 'store']);
             });
@@ -89,6 +94,7 @@ Route::group(['prefix' => 'v1'],function(){
                 Route::post('startDeliverShipment', [DeliveryShipmentController::class , 'startDeliverShipment']);
                 Route::post('endDeliverShipment', [DeliveryShipmentController::class , 'endDeliverShipment']);
                 Route::post('failDeliverShipment', [DeliveryShipmentController::class , 'failDeliverShipment']);
+                Route::post('/search',  [DeliveryShipmentController::class, 'search']);
             });
             Route::group(['prefix' => 'profile'] , function(){
                 Route::get('/deleteAccount', [DeliveryProfileController::class, 'deleteAccount']);
@@ -98,6 +104,9 @@ Route::group(['prefix' => 'v1'],function(){
             });
             Route::group(['prefix' => 'complain'] , function(){
                 Route::post('/store', [ComplainController::class, 'store']);
+            });
+            Route::group(['prefix' => 'notification'] , function(){
+                Route::get('/', [NotificationController::class, 'index']);
             });
         });
         Route::post('login' , [DeliveryAuthController::class , 'login']);

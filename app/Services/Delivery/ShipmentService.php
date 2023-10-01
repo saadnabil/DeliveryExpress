@@ -110,4 +110,43 @@ class ShipmentService{
         ]);
         return $this->sendResponse([]);
     }
+
+    public function search(array $data){
+        $query =  $data['query'];
+        $shipments = Shipment::with(['images','delivery','shipmentType','shipmentReplaced'])->where('delivery_id' , auth()->user()->id )->latest();
+        if ($data['status'] !== 'all') {
+            $shipments = $shipments->where('status', $data['status']);
+        }
+        $filteredShipments = $shipments->where('shipment_code', 'like', "%{$query}%")
+            ->orWhere('quantity', 'like', "%{$query}%")
+            ->orWhere('description', 'like', "%{$query}%")
+            ->orWhere('money', 'like', "%{$query}%")
+            ->orWhere('weight', 'like', "%{$query}%")
+            ->orWhere('length', 'like', "%{$query}%")
+            ->orWhere('height', 'like', "%{$query}%")
+            ->orWhere('width', 'like', "%{$query}%")
+            ->orWhere('notes', 'like', "%{$query}%")
+            ->orWhere('shipment_replace_reason', 'like', "%{$query}%")
+            ->orWhere('client_name', 'like', "%{$query}%")
+            ->orWhere('client_phone', 'like', "%{$query}%")
+            ->orWhere('client_other_phone', 'like', "%{$query}%")
+            ->orWhere('shipment_price', 'like', "%{$query}%")
+            ->orWhere('delivery_fee', 'like', "%{$query}%")
+            ->orWhere('weight_fee', 'like', "%{$query}%")
+            ->orWhere('discount_fee', 'like', "%{$query}%")
+            ->orWhere('collect_fee', 'like', "%{$query}%")
+            ->orWhere('total_price', 'like', "%{$query}%")
+            ->orWhere('cancel_reason_note', 'like', "%{$query}%")
+            ->orWhere('delivered_date', 'like', "%{$query}%")
+            ->orWhere('tax_fee', 'like', "%{$query}%")
+            ->orWhereHas('city', function ($q) use ($query) {
+                $q->where('name', 'like', "%{$query}%");
+            })
+            ->orWhereHas('country', function ($q) use ($query) {
+                $q->where('name', 'like', "%{$query}%");
+            })->simplepaginate();
+        // Return the filtered shipments
+        return $this->sendResponse(resource_collection(ShipmentResource::collection($filteredShipments)));
+    }
+
 }

@@ -160,6 +160,17 @@ return [
     'Shipment not found' => 'شحنة غير موجودة',
     'Coupon not found' => 'كوبون غير موجود',
     'Coupon is expired' => 'كوبون منتهي الصلاحية',
-    'Shipment already has coupon' => 'تم تطبيق كود خصم علي هذه الشحنة'
-
+    'Shipment already has coupon' => 'تم تطبيق كود خصم علي هذه الشحنة',
+    'New Shipments' => 'الشحنات الجديدة',
+    'In Stock Shipments' => 'الشحنات في المخزن',
+    'Recieved Shipments' => 'الشحنات المستلمة',
+    'Waiting Delivery Shipments' => 'شحنات منتظر تسليمها',
+    'Out For Delivery Shipments' => 'شحنات في الطريق',
+    'Delivered Shipments' => 'شحنات مستلمة',
+    'Returned Shipments' => 'شحنات مرتجعة',
+    'Out Delivery Shipments' => 'شحنات في الطريق',
+    'Failed Shipments' => 'شحنات فشل تسليمها',
+    'Shipments Status' => 'حالة الشحنات',
+    'Multi Exchange Shipments' => 'شحنات تبادل متعدد',
+    'Money Shipments' => 'شحنات عربون'
 ];

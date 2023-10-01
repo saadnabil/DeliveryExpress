@@ -23,6 +23,11 @@ class Store extends Authenticatable
         return $this->morphMany(Complain::class, 'complainable');
     }
 
+    public function notifications(): MorphMany
+    {
+        return $this->morphMany(Notification::class,'notificationable');
+    }
+
 
     public function otps(): MorphMany
     {

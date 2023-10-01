@@ -49,7 +49,7 @@ $(function() {
     });
 
 
-    
+
     // chart2
     var ctx = document.getElementById('chart2').getContext('2d');
     var myChart = new Chart(ctx, {
@@ -127,10 +127,10 @@ $(function() {
 					display: true,
 				}
 			},
-            
+
          }
      });
-    
+
 
 
       // chart4
@@ -160,13 +160,13 @@ $(function() {
 					display: true,
 				}
 			},
-             
+
           }
       });
 
 
 
-      
+
       // chart5
       var ctx = document.getElementById('chart5').getContext('2d');
       var myChart = new Chart(ctx, {
@@ -221,7 +221,7 @@ $(function() {
 
 
 
-      
+
       // chart6
       var ctx = document.getElementById('chart6').getContext('2d');
       var myChart = new Chart(ctx, {
@@ -264,7 +264,7 @@ $(function() {
       });
 
 
-    
+
 
 // chart7
 var ctx = document.getElementById('chart7').getContext('2d');
@@ -378,7 +378,7 @@ var myChart = new Chart(ctx, {
 					target: 'origin',
 					above: 'rgb(21 202 32 / 20%)',   // Area will be red above the origin
 					//below: 'rgb(21 202 32 / 100%)'   // And blue below the origin
-				  }, 
+				  },
                 tension: 0.4,
                 borderColor: [
                     '#15ca20'
@@ -404,5 +404,5 @@ var myChart = new Chart(ctx, {
         }
     });
 
-    
+
 });

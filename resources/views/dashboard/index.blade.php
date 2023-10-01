@@ -7,9 +7,8 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div>
-                            <p class="mb-0 text-secondary">Total Orders</p>
-                            <h4 class="my-1 text-info">4805</h4>
-                            <p class="mb-0 font-13">+2.5% from last week</p>
+                            <p class="mb-0 text-secondary">{{ __('translation.New Shipments') }}</p>
+                            <h4 class="my-1 text-info">{{ $newShipmentsCount }}</h4>
                         </div>
                         <div class="widgets-icons-2 rounded-circle bg-gradient-blues text-white ms-auto"><i
                                 class='bx bxs-cart'></i>
@@ -23,9 +22,8 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div>
-                            <p class="mb-0 text-secondary">Total Revenue</p>
-                            <h4 class="my-1 text-danger">$84,245</h4>
-                            <p class="mb-0 font-13">+5.4% from last week</p>
+                            <p class="mb-0 text-secondary">{{ __('translation.In Stock Shipments') }}</p>
+                            <h4 class="my-1 text-danger">{{ $inStockShipmentsCount }}</h4>
                         </div>
                         <div class="widgets-icons-2 rounded-circle bg-gradient-burning text-white ms-auto"><i
                                 class='bx bxs-wallet'></i>
@@ -39,9 +37,8 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div>
-                            <p class="mb-0 text-secondary">Bounce Rate</p>
-                            <h4 class="my-1 text-success">34.6%</h4>
-                            <p class="mb-0 font-13">-4.5% from last week</p>
+                            <p class="mb-0 text-secondary">{{ __('translation.Recieved Shipments') }}</p>
+                            <h4 class="my-1 text-success">{{ $RecievedShipmentsCount }}</h4>
                         </div>
                         <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i
                                 class='bx bxs-bar-chart-alt-2'></i>
@@ -55,9 +52,8 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div>
-                            <p class="mb-0 text-secondary">Total Customers</p>
-                            <h4 class="my-1 text-warning">8.4K</h4>
-                            <p class="mb-0 font-13">+8.4% from last week</p>
+                            <p class="mb-0 text-secondary">{{ __('translation.Waiting Delivery Shipments') }}</p>
+                            <h4 class="my-1 text-warning">{{ $waitingDeliveryCount }}</h4>
                         </div>
                         <div class="widgets-icons-2 rounded-circle bg-gradient-orange text-white ms-auto"><i
                                 class='bx bxs-group'></i>
@@ -66,7 +62,72 @@
                 </div>
             </div>
         </div>
-    </div><!--end row-->
+
+        <div class="col">
+            <div class="card radius-10 border-start border-0 border-4" style="border-color:#6a11cb !important;">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">{{ __('translation.Out For Delivery Shipments') }}</p>
+                            <h4 class="my-1" style="color:#6a11cb;">{{ $outForDeliveryCount }}</h4>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-deepblue text-white ms-auto"><i
+                                class='bx bxs-cart'></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card radius-10 border-start border-0 border-4 border-danger" style="border-color:#f54ea2 !important;" >
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">{{ __('translation.Delivered Shipments') }}</p>
+                            <h4 class="my-1" style="color:#f54ea2;">{{ $deliveredCount }}</h4>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-bloody text-white ms-auto"><i
+                                class='bx bxs-wallet'></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card radius-10 border-start border-0 border-4 border-success" style="border-color:#42e695 !important;">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">{{ __('translation.Returned Shipments') }}</p>
+                            <h4 class="my-1 " style="color:#42e695;">{{ $returnedCount }}</h4>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-quepal text-white ms-auto"><i
+                                class='bx bxs-bar-chart-alt-2'></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card radius-10 border-start border-0 border-4" style="border-color:#ffdf40 !important;" >
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">{{ __('translation.Failed Shipments') }}</p>
+                            <h4 class="my-1" style="color:#ffdf40;">{{ $failedCount }}</h4>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-blooker text-white ms-auto"><i
+                                class='bx bxs-group'></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
     <div class="row">
         <div class="col-12 col-lg-8 d-flex">
@@ -135,7 +196,7 @@
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <div>
-                            <h6 class="mb-0">Trending Products</h6>
+                            <h6 class="mb-0">{{ __('translation.Shipments Status') }}</h6>
                         </div>
                         <div class="dropdown ms-auto">
                             <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i
@@ -161,18 +222,31 @@
                     </div>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li
+                    <li  class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
+                        {{ __('translation.New Shipments') }} <span class="badge bg-info  rounded-pill"  >{{ $newShipmentsCount }}</span>
+                    </li>
+                     <li
                         class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
-                        Jeans <span class="badge bg-success rounded-pill">25</span>
+                        {{ __('translation.In Stock Shipments') }} <span class="badge bg-danger rounded-pill">{{ $inStockShipmentsCount }}</span>
                     </li>
-                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">T-Shirts
-                        <span class="badge bg-danger rounded-pill">10</span>
+                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+                        {{ __('translation.Recieved Shipments') }}
+                        <span class="badge bg-success rounded-pill">{{ $RecievedShipmentsCount }}</span>
                     </li>
-                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Shoes
-                        <span class="badge bg-primary rounded-pill">65</span>
+                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{ __('translation.Waiting Delivery Shipments') }}
+                        <span class="badge bg-warning rounded-pill">{{ $waitingDeliveryCount }}</span>
                     </li>
-                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Lingerie
-                        <span class="badge bg-warning text-dark rounded-pill">14</span>
+                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{ __('translation.Out Delivery Shipments') }}
+                        <span class="badge   rounded-pill" style="background-color:#6a11cb">{{ $outForDeliveryCount }}</span>
+                    </li>
+                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{ __('translation.Delivered Shipments') }}
+                        <span class="badge   rounded-pill" style="background-color:#f54ea2">{{ $deliveredCount }}</span>
+                    </li>
+                     <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{ __('translation.Returned Shipments') }}
+                        <span class="badge   rounded-pill"  style="background-color:#42e695">{{ $returnedCount }}</span>
+                    </li>
+                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{ __('translation.Failed Shipments') }}
+                        <span class="badge bg-warning  rounded-pill" style="background-color:#42e695">{{ $failedCount }}</span>
                     </li>
                 </ul>
             </div>
@@ -573,3 +647,160 @@
         </div>
     </div><!--end row-->
 @endsection
+
+
+@push('script')
+
+//Chart2
+<script>
+   // chart 2
+ var ctx = document.getElementById("chart2").getContext('2d');
+
+  var gradientStroke1 = ctx.createLinearGradient(0, 0, 0, 300);
+      gradientStroke1.addColorStop(0, '#56ccf2');
+      gradientStroke1.addColorStop(1, '#2f80ed');
+
+  var gradientStroke2 = ctx.createLinearGradient(0, 0, 0, 300);
+      gradientStroke2.addColorStop(0, '#ff416c');
+      gradientStroke2.addColorStop(1, '#ff4b2b');
+
+
+  var gradientStroke3 = ctx.createLinearGradient(0, 0, 0, 300);
+      gradientStroke3.addColorStop(0, '#00b09b');
+      gradientStroke3.addColorStop(1, '#96c93d');
+
+       var gradientStroke4 = ctx.createLinearGradient(0, 0, 0, 300);
+      gradientStroke4.addColorStop(0, '#fc4a1a');
+      gradientStroke4.addColorStop(1, '#f7b733');
+
+	var gradientStroke5 = ctx.createLinearGradient(0, 0, 0, 300);
+      gradientStroke5.addColorStop(0, '#6a11cb');
+      gradientStroke5.addColorStop(1, '#2575fc');
+
+      var gradientStroke6 = ctx.createLinearGradient(0, 0, 0, 300);
+      gradientStroke6.addColorStop(0, '#f54ea2');
+      gradientStroke6.addColorStop(1, '#ff7676');
+
+      var gradientStroke7 = ctx.createLinearGradient(0, 0, 0, 300);
+      gradientStroke7.addColorStop(0, '#42e695');
+      gradientStroke7.addColorStop(1, '#3bb2b8');
+
+
+
+      var gradientStroke8 = ctx.createLinearGradient(0, 0, 0, 300);
+      gradientStroke8.addColorStop(0, '#ffdf40');
+      gradientStroke8.addColorStop(1, '#ff8359');
+
+      var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ["{{ __('translation.New Shipments') }}", " {{ __('translation.In Stock Shipments') }}" , "{{ __('translation.Recieved Shipments') }}", "{{ __('translation.Waiting Delivery Shipments') }}", "{{ __('translation.Out Delivery Shipments') }}","{{ __('translation.Delivered Shipments') }}","{{ __('translation.Returned Shipments') }}","{{ __('translation.Failed Shipments') }}"],
+          datasets: [{
+            backgroundColor: [
+              gradientStroke1,
+              gradientStroke2,
+              gradientStroke3,
+              gradientStroke4,
+              gradientStroke5,
+              gradientStroke6,
+              gradientStroke7,
+              gradientStroke8,
+            ],
+            hoverBackgroundColor: [
+               gradientStroke1,
+              gradientStroke2,
+              gradientStroke3,
+              gradientStroke4,
+              gradientStroke5,
+              gradientStroke6,
+              gradientStroke7,
+              gradientStroke8,
+            ],
+            data: [{{ $newShipmentsCount }},{{ $inStockShipmentsCount }},{{ $RecievedShipmentsCount }},{{ $waitingDeliveryCount }},{{ $outForDeliveryCount }},{{ $deliveredCount }},{{ $returnedCount }},{{ $failedCount }}],
+			borderWidth: [1, 1, 1, 1]
+          }]
+        },
+        options: {
+          maintainAspectRatio: false,
+          cutout: 82,
+          plugins: {
+            legend: {
+                display: false,
+             }
+          }
+
+       }
+});
+</script>
+//Chart2
+
+<script>
+// chart 1
+
+  var ctx = document.getElementById("chart1").getContext('2d');
+
+  var gradientStroke1 = ctx.createLinearGradient(0, 0, 0, 300);
+      gradientStroke1.addColorStop(0, '#6078ea');
+      gradientStroke1.addColorStop(1, '#17c5ea');
+
+  var gradientStroke2 = ctx.createLinearGradient(0, 0, 0, 300);
+      gradientStroke2.addColorStop(0, '#ff8359');
+      gradientStroke2.addColorStop(1, '#ffdf40');
+
+      var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['يناير', 'فبراير', 'مارس', 'ابريل', 'مايو', 'يونيه', 'يوليو', 'اغسطس', 'سبتمبر', 'اكتوبر', 'نوفمبر', 'ديسمبر'],
+          datasets: [{
+            label: "{{ __('translation.New Shipments') }}",
+            data: {{ json_encode($chartTwoData['newData']) }},
+            borderColor: gradientStroke1,
+            backgroundColor: gradientStroke1,
+            hoverBackgroundColor: gradientStroke1,
+            pointRadius: 0,
+            fill: false,
+            borderRadius: 20,
+            borderWidth: 0
+          }, {
+            label: "{{ __('translation.Multi Exchange Shipments') }}",
+            data: {{ json_encode($chartTwoData['multiExhchangeData']) }},
+            borderColor: gradientStroke2,
+            backgroundColor: gradientStroke2,
+            hoverBackgroundColor: gradientStroke2,
+            pointRadius: 0,
+            fill: false,
+            borderRadius: 20,
+            borderWidth: 0
+          },{
+            label: "{{ __('translation.Money Shipments') }}",
+            data: {{ json_encode($chartTwoData['moneyData']) }},
+            borderColor: gradientStroke2,
+            backgroundColor: gradientStroke2,
+            hoverBackgroundColor: gradientStroke2,
+            pointRadius: 0,
+            fill: false,
+            borderRadius: 20,
+            borderWidth: 0
+          }]
+        },
+
+        options: {
+				  maintainAspectRatio: false,
+          barPercentage: 0.5,
+          categoryPercentage: 0.8,
+				  plugins: {
+					  legend: {
+						  display: false,
+					  }
+				  },
+				  scales: {
+					  y: {
+						  beginAtZero: true
+					  }
+				  }
+			  }
+      });
+
+</script>
+
+@endpush
