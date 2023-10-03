@@ -36,13 +36,17 @@ class ShipmentsController extends Controller
         return $this->shipmentService->create();
     }
 
+    public function show(Shipment $shipment){
+        return view('dashboard.shipments.show' ,compact('shipment'));
+    }
+
     public function store(StoreShipmentValidation $request){
         $data = $request->validated();
         return $this->shipmentService->store($data);
     }
 
     public function edit(Shipment $shipment){
-        return $this->shipmentService->edit($shipment);
+        return $this->shipmentService->edit($shipment); 
     }
 
     public function update(UpdateShipmentValidation $request ,Shipment $shipment){

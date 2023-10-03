@@ -52,3 +52,28 @@
         return false;
     });
 </script>
+
+
+<script>
+    $('.confirm-collect').click(function(e){
+        e.preventDefault();
+        Swal.fire({
+            title: '{{ __("translation.You Are About Confirm Recieving These Shipments ...") }}',
+            html: `{{ __("translation.Did You Collect These Shipments And In The Stock Now ?") }}`,
+            icon: "info",
+            buttonsStyling: false,
+            showCancelButton: true,
+            confirmButtonText: "{{ __('translation.Confirm') }}",
+            cancelButtonText: "{{ __('translation.Cancel') }}",
+            customClass: {
+                confirmButton: "btn btn-success ml-10",
+                cancelButton: 'btn btn-danger'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $(this).next('form').submit();
+            }
+        });
+        return false;
+    });
+</script>

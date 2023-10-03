@@ -56,16 +56,20 @@ Route::group(['prefix' => 'v1'],function(){
                 Route::get('/returnedCodes', [ShipmentController::class, 'returnedCodes']);
                 Route::post('/search',  [ShipmentController::class, 'search']);
             });
+
             Route::group(['prefix' => 'collectionRequest'] , function(){
                 Route::post('store', [CollectionRequestController::class, 'store']);
                 Route::post('shipmentsCodes', [CollectionRequestController::class, 'shipmentsCodes']);
             });
+
             Route::group(['prefix' => 'technicalSupport'] , function(){
                 Route::get('/', [SupportController::class, 'index']);
             });
+
             Route::group(['prefix' => 'costRate'] , function(){
                 Route::post('/calculate', [CostRateController::class, 'calculateCostRate']);
             });
+
             Route::group(['prefix' => 'profile'] , function(){
                 Route::get('/show', [ProfileController::class, 'show']);
                 Route::get('/deleteAccount', [ProfileController::class, 'deleteAccount']);

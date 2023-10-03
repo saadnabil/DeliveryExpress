@@ -23,18 +23,13 @@
                                             <label style="color:#f00;font-size:12px;" class="form-label">{{ __('translation.Email or password is incorrect') }}</label>
                                             @enderror
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-12 mb-4">
                                             <label for="inputChoosePassword" class="form-label">{{ __('translation.Password') }}</label>
                                             <div class="input-group" id="show_hide_password">
                                                 <input required type="password" name="password" class="form-control border-end-0" id="inputChoosePassword" value="12345678" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                                <label class="form-check-label" for="flexSwitchCheckChecked">{{ __('translation.Remember Me') }}</label>
-                                            </div>
-                                        </div>
+
                                         {{--  <div class="col-md-6 text-end">	<a href="authentication-forgot-password.html">{{ __('translation.Forgot Password ?') }}</a>  --}}
                                         </div>
                                         <div class="col-12">

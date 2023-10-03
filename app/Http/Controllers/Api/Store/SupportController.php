@@ -12,7 +12,9 @@ class SupportController extends Controller
     use ApiResponseTrait;
     protected $collectionRequestService;
     public function index(){
-        $rows = Faq::where('application' , 'storeApplication')->get();
-        return $this->sendResponse($rows);
+        $data['faqs'] = Faq::where('application' , 'storeApplication')->get();
+        $data['email'] = setting('email');
+        $data['phone'] = setting('phone');
+        return $this->sendResponse($data);
     }
 }

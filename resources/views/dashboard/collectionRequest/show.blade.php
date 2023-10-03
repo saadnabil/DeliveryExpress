@@ -13,20 +13,23 @@
             <div class="accordion" id="accordionExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        <button class="accordion-button " type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             {{ __('translation.Store Details') }}
                         </button>
                     </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                    <div id="collapseOne" class="accordion-collapse collapse show"  aria-labelledby="headingOne"
                         data-bs-parent="#accordionExample" style="">
                         <div class="accordion-body">
-                            @if ($collectionRequest->store->image)
-                                <div class="text-center " style="margin-bottom:40px;">
+                            <div class="text-center " style="margin-bottom:40px;">
+                                @if ($collectionRequest->store->image)
                                     <img style="width:100px;"
                                         src="{{ url('storage/' . $collectionRequest->store->image) }}" />
-                                </div>
-                            @endif
+                                @else
+                                    <img style="width:100px;" src="{{ url('dashboard/assets/images/store.png') }}" />
+                                @endif
+
+                            </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div>
@@ -34,7 +37,8 @@
                                         {{ $collectionRequest->store->store_name }}
                                     </div>
                                     <div>
-                                        <label style="font-weight:bold">{{ __('translation.Name') }}: </label> {{ $collectionRequest->store->name }}
+                                        <label style="font-weight:bold">{{ __('translation.Name') }}: </label>
+                                        {{ $collectionRequest->store->name }}
                                     </div>
                                     <div>
                                         <label style="font-weight:bold">{{ __('translation.Email') }}: </label>
@@ -91,7 +95,7 @@
                         data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             @foreach ($collectionRequest->collectionRequestShipments as $key => $collectionRequestShipment)
-                                {!!$collectionRequestShipment->shipment->qr_code_image!!}
+                                {!! $collectionRequestShipment->shipment->qr_code_image !!}
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div>
@@ -99,102 +103,40 @@
                                             {{ $collectionRequestShipment->shipment->shipment_code }}
                                         </div>
                                         <div>
-                                             <label style="font-weight:bold">{{ __('translation.Status') }}: </label>
+                                            <label style="font-weight:bold">{{ __('translation.Status') }}: </label>
                                             {{ $collectionRequestShipment->shipment->status }}
                                         </div>
                                         <div>
-                                             <label style="font-weight:bold">{{ __('translation.Type') }}: </label>
+                                            <label style="font-weight:bold">{{ __('translation.Type') }}: </label>
                                             {{ $collectionRequestShipment->shipment->shipmentType->type }}
                                         </div>
+
+
                                         <div>
-                                             <label style="font-weight:bold">{{ __('translation.Quantity') }}: </label>
-                                            {{ $collectionRequestShipment->shipment->quantity }}
-                                        </div>
-                                        @if($collectionRequestShipment->shipment->type_id !=3)
-                                            <div>
-                                                <label style="font-weight:bold">{{ __('translation.Weight') }}: </label>
-                                                {{ $collectionRequestShipment->shipment->weight }}
-                                            </div>
-                                            <div>
-                                                <label style="font-weight:bold">{{ __('translation.Length') }}: </label>
-                                                {{ $collectionRequestShipment->shipment->length }}
-                                            </div>
-                                            <div>
-                                                <label style="font-weight:bold">{{ __('translation.Height') }}: </label>
-                                                {{ $collectionRequestShipment->shipment->height }}
-                                            </div>
-                                            <div>
-                                                <label style="font-weight:bold">{{ __('translation.Breakable') }}: </label>
-                                                {{ $collectionRequestShipment->shipment->breakable }}
-                                            </div>
-                                            <div>
-                                                <label style="font-weight:bold">{{ __('translation.Measurement Is Allowed') }}: </label>
-                                                {{ $collectionRequestShipment->shipment->measurement_is_allowed }}
-                                            </div>
-                                            <div>
-                                                <label style="font-weight:bold">{{ __('translation.Shipment Packaging') }}: </label>
-                                                {{ $collectionRequestShipment->shipment->shipment_packaging }}
-                                            </div>
-                                            <div>
-                                                <label style="font-weight:bold">{{ __('translation.Preview Allowed') }}: </label>
-                                                {{ $collectionRequestShipment->shipment->preview_allowed }}
-                                            </div>
-                                             <div>
-                                                <label style="font-weight:bold;display:block">{{ __('translation.Description') }}: </label>
-                                                {{ $collectionRequestShipment->shipment->description }}
-                                            </div>
-                                        @else
-                                             <div>
-                                                <label style="font-weight:bold">{{ __('translation.Money') }}: </label>
-                                                {{ $collectionRequestShipment->shipment->money }}
-                                            </div>
-                                        @endif
-                                         <div>
-                                             <label style="font-weight:bold;display:block">{{ __('translation.Notes') }}: </label>
+                                            <label style="font-weight:bold;display:block">{{ __('translation.Notes') }}:
+                                            </label>
                                             {{ $collectionRequestShipment->shipment->notes }}
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div>
-                                            <label style="font-weight:bold">{{ __('translation.Shipment Price') }}: </label>
-                                            {{ $collectionRequestShipment->shipment->shipment_price }}
-                                        </div>
-
-                                        <div>
-                                            <label style="font-weight:bold">{{ __('translation.Delivery Fee') }}: </label>
-                                            {{ $collectionRequestShipment->shipment->delivery_fee }}
-                                        </div>
-
-                                        <div>
-                                            <label style="font-weight:bold">{{ __('translation.Weight Fee') }}: </label>
-                                            {{ $collectionRequestShipment->shipment->weight_fee }}
-                                        </div>
-
-                                        <div>
-                                            <label style="font-weight:bold">{{ __('translation.Discount Fee') }}: </label>
-                                            {{ $collectionRequestShipment->shipment->discount_fee }}
-                                        </div>
-
-                                        <div>
-                                            <label style="font-weight:bold">{{ __('translation.Collect Fee') }}: </label>
-                                            {{ $collectionRequestShipment->shipment->collect_fee }}
-                                        </div>
-
-                                        <div>
-                                            <label style="font-weight:bold">{{ __('translation.Total Fee') }}: </label>
-                                            {{ $collectionRequestShipment->shipment->total_fee }}
-                                        </div>
-
-                                        <div>
-                                            <label style="font-weight:bold">{{ __('translation.Payment Type') }}: </label>
-                                            {{ $collectionRequestShipment->shipment->payment_type == 2 ? __('translation.Visa On Delivery') : __('translation.Cash') }}
+                                            <label style="font-weight:bold">{{ __('translation.Total Price') }}:
+                                            </label>
+                                            {{ $collectionRequestShipment->shipment->total_price }}
                                         </div>
                                     </div>
-                                    <div class="col-md-12" style="margin-top:15px;">
-                                        @foreach ($collectionRequestShipment->shipment->images as $image )
-                                            <img src="{{ url('storage/'. $image->image ) }}" class="ml-3 rounded-circle p-1 border" width="90" height="90" alt="...">
-                                        @endforeach
-                                    </div>
+
+                                    @can('shipment-edit')
+                                        <a class="text-success" href="{{ route('shipments.edit', $collectionRequestShipment->shipment) }}">
+                                            <span style="font-size:15px;">
+                                                <i class="bx bx-show"></i>
+                                            </span>
+                                            <span>
+                                                {{ __('translation.Show Shipment Details') }}
+                                            </span>
+                                        </a>
+                                    @endcan
+
                                 </div>
                                 <hr>
                             @endforeach
@@ -208,11 +150,11 @@
 @endsection
 
 @push('style')
-<style>
-svg{
-    width:120px !important;
-    height:120px !important;
-    margin:20px auto;
-}
-</style>
+    <style>
+        svg {
+            width: 120px !important;
+            height: 120px !important;
+            margin: 20px auto;
+        }
+    </style>
 @endpush

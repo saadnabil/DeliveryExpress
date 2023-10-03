@@ -2,9 +2,8 @@
 
 namespace App\Http\Requests\Api\Store;
 
-use App\Rules\NotRequiredStepOneShipmentRule;
 use App\Rules\NotRequiredStoreCollectionRequest;
-use App\Rules\ShipmentCodesExist;
+use App\Rules\ValidateCollectionRequestShipment;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCollectionRequestValidation extends FormRequest
@@ -34,7 +33,7 @@ class StoreCollectionRequestValidation extends FormRequest
             'country_id' => ['required_if:type,2' , 'numeric',new NotRequiredStoreCollectionRequest],
             'address' => ['required_if:type,2' , 'string',new NotRequiredStoreCollectionRequest],
             'shipments_ids' => ['required' , 'array'],
-            'shipments_ids.*' => ['string'],
+            'shipments_ids.*' => ['string',new ValidateCollectionRequestShipment],
         ];
     }
 }

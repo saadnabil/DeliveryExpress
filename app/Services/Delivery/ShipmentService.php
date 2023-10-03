@@ -6,34 +6,19 @@ use App\Http\Traits\ApiResponseTrait;
 use App\Models\Shipment;
 class ShipmentService{
     use ApiResponseTrait;
-
     public function index(){
-
-        $statusArr = ['all' , 'delivered' ,'failed','returned','out_for_delivery','in_stock','recieved_by_delivery' ,'pending' ];
-
+        $statusArr = ['assigned_to_delivery','recieved_by_delivery','out_for_delivery','delivered' ,'fail','returned'];
         $status = request('status');
-
         if(!in_array($status , $statusArr )){
             return $this->sendResponse([
-                'error' => 'Status must be in: all , delivered ,failed,returned,out_for_delivery,in_stock,recieved_by_delivery,pending',
+                'error' => 'Status must be in: waiting_to_recieve,recieved_by_delivery,out_for_delivery,delivered,fail,returned',
             ] , 'fail' , 404);
         }
-
-        if($status != 'all'){
-            $rows = Shipment::with(['images','delivery','shipmentType','shipmentReplaced'])
-                       ->where('status' ,$status )
-                       ->where('delivery_id' , auth()->user()->id )
-                       ->latest()
-                       ->simplePaginate();
-        }else{
-            $rows = Shipment::with(['images','delivery','shipmentType','shipmentReplaced'])
-                       ->where('status' , '!=' , 'incomplete')
-                       ->where('delivery_id' , auth()->user()->id )
-                       ->latest()
-                       ->simplePaginate();
-        }
-
-        return $this->sendResponse(resource_collection(ShipmentResource::collection($rows)));
+        $shipments = Shipment::with(['images','delivery','shipmentType','shipmentReplaced'])
+                    ->where('status' ,  $status )
+                    ->where('delivery_id' , auth()->user()->id)
+                    ->latest()->simplePaginate();
+        return $this->sendResponse(resource_collection(ShipmentResource::collection($shipments)));
     }
 
     public function recieve(array $data){
@@ -43,9 +28,9 @@ class ShipmentService{
         foreach($data['shipment_codes'] as $shipmentCode){
             $shipment = Shipment::where([
                 'delivery_id' => auth()->user()->id,
-                'status' => 'in_stock',
+                'status' => 'assigned_to_delivery',
                 'shipment_code' => $shipmentCode,
-            ])->first();
+            ])->firstorfail();
             if($data['delivery_signature'] && $delivery_signature_uploaded == 0){
                 $delivery_signature_image = FileHelper::upload_file('uploads' , $data['delivery_signature'] );
                 $delivery_signature_uploaded = 1;
@@ -113,11 +98,13 @@ class ShipmentService{
 
     public function search(array $data){
         $query =  $data['query'];
-        $shipments = Shipment::with(['images','delivery','shipmentType','shipmentReplaced'])->where('delivery_id' , auth()->user()->id )->latest();
-        if ($data['status'] !== 'all') {
-            $shipments = $shipments->where('status', $data['status']);
-        }
-        $filteredShipments = $shipments->where('shipment_code', 'like', "%{$query}%")
+        $status = $data['status'];
+        $shipments = Shipment::with(['images','delivery','shipmentType','shipmentReplaced'])->where([
+            'delivery_id' => auth()->user()->id,
+            'status' => $status
+        ]);
+        $shipments = $shipments->where(function($q) use ($query){
+            $q->where('shipment_code', 'like', "%{$query}%")
             ->orWhere('quantity', 'like', "%{$query}%")
             ->orWhere('description', 'like', "%{$query}%")
             ->orWhere('money', 'like', "%{$query}%")
@@ -144,9 +131,9 @@ class ShipmentService{
             })
             ->orWhereHas('country', function ($q) use ($query) {
                 $q->where('name', 'like', "%{$query}%");
-            })->simplepaginate();
+            });
+        })->simplepaginate();
         // Return the filtered shipments
-        return $this->sendResponse(resource_collection(ShipmentResource::collection($filteredShipments)));
+        return $this->sendResponse(resource_collection(ShipmentResource::collection($shipments)));
     }
-
 }

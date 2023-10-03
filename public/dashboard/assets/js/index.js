@@ -45,51 +45,6 @@ jQuery('#geographic-map-2').vectorMap(
 });
 
 
-// chart 3
-
- var ctx = document.getElementById('chart3').getContext('2d');
-
-  var gradientStroke1 = ctx.createLinearGradient(0, 0, 0, 300);
-      gradientStroke1.addColorStop(0, '#00b09b');
-      gradientStroke1.addColorStop(1, '#96c93d');
-
-      var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-          datasets: [{
-                label: 'Facebook',
-                data: [5, 30, 16, 23, 8, 14, 2],
-                backgroundColor: [
-                  gradientStroke1
-                ],
-				fill: {
-					target: 'origin',
-					above: 'rgb(21 202 32 / 15%)',   // Area will be red above the origin
-					//below: 'rgb(21 202 32 / 100%)'   // And blue below the origin
-				  },
-                tension: 0.4,
-                borderColor: [
-                  gradientStroke1
-                ],
-                borderWidth: 3
-            }]
-        },
-        options: {
-				  maintainAspectRatio: false,
-				  plugins: {
-					  legend: {
-						  display: false,
-					  }
-				  },
-				  scales: {
-					  y: {
-						  beginAtZero: true
-					  }
-				  }
-			  }
-      });
-
 
 
 // chart 4
@@ -145,58 +100,6 @@ var ctx = document.getElementById("chart4").getContext('2d');
 
 
 
-  // chart 5
-
-    var ctx = document.getElementById("chart5").getContext('2d');
-
-      var gradientStroke1 = ctx.createLinearGradient(0, 0, 0, 300);
-      gradientStroke1.addColorStop(0, '#f54ea2');
-      gradientStroke1.addColorStop(1, '#ff7676');
-
-      var gradientStroke2 = ctx.createLinearGradient(0, 0, 0, 300);
-      gradientStroke2.addColorStop(0, '#42e695');
-      gradientStroke2.addColorStop(1, '#3bb2b8');
-
-      var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: [1, 2, 3, 4, 5],
-          datasets: [{
-            label: 'Clothing',
-            data: [40, 30, 60, 35, 60],
-            borderColor: gradientStroke1,
-            backgroundColor: gradientStroke1,
-            hoverBackgroundColor: gradientStroke1,
-            pointRadius: 0,
-            fill: false,
-            borderWidth: 1
-          }, {
-            label: 'Electronic',
-            data: [50, 60, 40, 70, 35],
-            borderColor: gradientStroke2,
-            backgroundColor: gradientStroke2,
-            hoverBackgroundColor: gradientStroke2,
-            pointRadius: 0,
-            fill: false,
-            borderWidth: 1
-          }]
-        },
-        options: {
-				  maintainAspectRatio: false,
-          barPercentage: 0.5,
-          categoryPercentage: 0.8,
-				  plugins: {
-					  legend: {
-						  display: false,
-					  }
-				  },
-				  scales: {
-					  y: {
-						  beginAtZero: true
-					  }
-				  }
-			  }
-      });
 
 
 

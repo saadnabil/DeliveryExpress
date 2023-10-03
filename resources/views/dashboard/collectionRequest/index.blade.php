@@ -4,7 +4,7 @@
 @section('content')
     <div class="row">
         <div class="col-6">
-            <h6 class="mb-0 text-uppercase">{{ __('translation.Collection Request') }} </h6>
+            <h6 class="mb-0 text-uppercase">{{ __('translation.Collection Requests') }} -  {{ __('translation.Collection Bakeup Requests') }}</h6>
         </div>
         @can('collectionRequest-create')
         <div class="col-6">
@@ -20,8 +20,9 @@
                 <table id="example2" class="table">
                     <thead class="table-light">
                         <tr>
+                            <th>#ID</th>
                             <th>{{ __('translation.Store') }}</th>
-                            <th>{{ __('translation.Date') }}</th>
+                            <th>{{ __('translation.Type') }}</th>
                             <th>{{ __('translation.Notes') }}</th>
                             <th>{{ __('translation.Actions') }}</th>
                         </tr>
@@ -29,15 +30,28 @@
                     <tbody>
                         @foreach ($rows as $key => $row)
                             <tr>
+                                <td>{{ $row->id }}</td>
                                 <td>{{ $row->store->name }}</td>
-                                <td>{{ $row->date }}</td>
+                                <td>{{ $row->type == 1 ? __('translation.Collection Requests') :  __('translation.Collection Bakeup Requests')  }}</td>
                                 <td>{{ $row->notes }}</td>
                                 <td>
                                     <div class="d-flex order-actions">
-                                        @can('collectionRequest-edit')
-                                        <a href="{{ route('collectionRequests.edit', $row) }}" class="ms-3"><i
-                                                class="bx bxs-edit"></i></a>
+                                        @can('collectionRequest-show')
+                                        <a href="{{ route('collectionRequests.show', $row) }}" class="ms-3"><i
+                                                class="bx bxs-show"></i></a>
                                         @endcan
+
+                                        @can('collectionRequest-recieve')
+                                            @if($row->status == 'pending')
+                                                <a title="{{ __('translation.Did You Collect These Shipments And In The Stock Now ?') }}" href="{{ route('collectionRequests.destroy', $row) }}" class="ms-3 confirm-collect">
+                                                <i class="fadeIn animated bx bx-message-square-check"></i>
+                                                </a>
+                                                <form method="POST" action="{{ route('collectionRequests.confirmRecieveShipments', $row)}}">
+                                                    @csrf
+                                                </form>
+                                            @endif
+                                        @endcan
+
                                         @can('collectionRequest-delete')
                                         <a href="{{ route('collectionRequests.destroy', $row) }}" class="ms-3 confirm-delete"><i
                                                 class="bx bxs-trash"></i></a>
@@ -53,8 +67,9 @@
                     </tbody>
                     <tfoot>
                         <tr>
+                           <th>#ID</th>
                             <th>{{ __('translation.Store') }}</th>
-                            <th>{{ __('translation.Date') }}</th>
+                            <th>{{ __('translation.Type') }}</th>
                             <th>{{ __('translation.Notes') }}</th>
                             <th>{{ __('translation.Actions') }}</th>
                         </tr>

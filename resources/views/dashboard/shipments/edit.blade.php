@@ -2,9 +2,7 @@
 @section('content')
     <div class="card">
         <div class="card-body p-4">
-            <h5 class="card-title">{{ __('translation.Edit Shipment') }}</h5>
-            <hr />
-
+            <h5 class="card-title">{{ __('translation.Edit Shipment') . ' ' . $shipment->shipment_code }}</h5>
             @if ($errors->any())
                 {{ implode('', $errors->all('<div>:message</div>')) }}
             @endif

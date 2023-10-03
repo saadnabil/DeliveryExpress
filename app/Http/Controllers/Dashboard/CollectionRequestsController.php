@@ -14,6 +14,7 @@ use App\Services\Dashboard\ActivityService;
 use App\Services\Dashboard\CancelReasonService;
 use App\Services\Dashboard\CollectionRequestService;
 use App\Services\Dashboard\CouponsService;
+use Illuminate\Http\Request;
 
 class CollectionRequestsController extends Controller
 {
@@ -85,5 +86,12 @@ class CollectionRequestsController extends Controller
     public function destroy(CollectionRequest $collectionRequest)
     {
         return $this->collectionRequestService->destroy( $collectionRequest);
+    }
+
+    public function confirmRecieveShipments(Request $request , CollectionRequest $collectionRequest){
+        $collectionRequest->update([
+            'status' => 'recieved_by_stock',
+        ]);
+        return redirect()->route('collectionRequests.index')->with(['success' => __('translation.Recieved Confirmed Successfully')]);
     }
 }

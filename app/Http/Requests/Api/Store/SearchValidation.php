@@ -23,7 +23,7 @@ class SearchValidation extends FormRequest
     {
         return [
             'query' => ['required' , 'string'],
-            'status' => ['required' , 'in:all,delivered,failed,returned,out_for_delivery,in_stock,recieved_by_delivery ,pending']
+            'status' => ['required' , 'in:all,delivered,fail,returned,out_for_delivery,in_stock,recieved_by_delivery ,pending']
         ];
     }
 }

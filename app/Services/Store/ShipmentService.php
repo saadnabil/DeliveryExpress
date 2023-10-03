@@ -106,13 +106,15 @@ class ShipmentService{
     }
     public function search(array $data){
         $query =  $data['query'];
+        $statusArr = ['delivered','fail','returned','out_for_delivery','in_stock','recieved_by_delivery' ,'pending'];
         $shipments = Shipment::with(['images','delivery','shipmentType','shipmentReplaced'])->where([
             'store_id' => auth()->user()->id,
-        ]);
-        if ($data['status'] !== 'all') {
+        ])->whereIn('status', $statusArr);
+        if($data['status'] !== 'all') {
             $shipments = $shipments->where('status', $data['status']);
         }
-        $filteredShipments = $shipments->where('shipment_code', 'like', "%{$query}%")
+        $shipments = $shipments->where(function($q) use ($query){
+            $q->where('shipment_code', 'like', "%{$query}%")
             ->orWhere('quantity', 'like', "%{$query}%")
             ->orWhere('description', 'like', "%{$query}%")
             ->orWhere('money', 'like', "%{$query}%")
@@ -139,9 +141,9 @@ class ShipmentService{
             })
             ->orWhereHas('country', function ($q) use ($query) {
                 $q->where('name', 'like', "%{$query}%");
-            })->simplepaginate();
-
+            });
+        })->simplepaginate();
         // Return the filtered shipments
-        return $this->sendResponse(resource_collection(ShipmentResource::collection($filteredShipments)));
+        return $this->sendResponse(resource_collection(ShipmentResource::collection($shipments)));
     }
 }

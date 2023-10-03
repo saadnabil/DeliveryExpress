@@ -18,7 +18,7 @@ class ShipmentCodeExistsForDelivery implements ValidationRule
         //
         $shipment = Shipment::where([
             'delivery_id' => auth()->user()->id,
-            'status' => 'in_stock',
+            'status' => 'assigned_to_delivery',
             'shipment_code' => $value,
         ])->first();
         if(!$shipment){

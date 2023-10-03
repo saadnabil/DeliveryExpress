@@ -29,19 +29,16 @@ class SettingController extends Controller
     }
 
     public function terms(){
-        $termsAndConditions = '<p style="color:#f00;">لوريم ايبسوم دولار سيت أميت ,كونسيكتيتو</p>' ; //constant
 
         $responseData = [
-            'termsAndConditions' => $termsAndConditions,
+            'termsAndConditions' => setting('terms_conditions'),
         ];
         return $this->sendResponse($responseData);
     }
 
     public function privacy(){
-        $privacyPolicy = '<p style="color:#f00;">لوريم ايبسوم دولار سيت أميت ,كونسيكتيتو</p>'; //constant
-
         $responseData = [
-            'privacyPolicy' => $privacyPolicy,
+            'privacyPolicy' => setting('privacy_policy'),
         ];
 
         return $this->sendResponse($responseData);

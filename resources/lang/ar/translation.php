@@ -172,5 +172,21 @@ return [
     'Failed Shipments' => 'شحنات فشل تسليمها',
     'Shipments Status' => 'حالة الشحنات',
     'Multi Exchange Shipments' => 'شحنات تبادل متعدد',
-    'Money Shipments' => 'شحنات عربون'
+    'Money Shipments' => 'شحنات عربون',
+    'Shipments To Type' => 'الشحنات بالنسبة للنوع',
+    'Delivery And Store' => 'المتجر والمندوب',
+    'Cities Count' => 'عدد المدن',
+    'Countries Count' => 'عدد الدول',
+    'Activities Count' => 'عدد النشاطات',
+    'Collection Bakeup Requests' => 'طلب تجميع طلبات بيك اب',
+    'Collection Requests' => 'طلب تجميع طلبات',
+    'Delivery Express' => 'ديليفري اكسبريس',
+    'Dashboard' => 'لوحة التحكم',
+    'Terms And Conditions' => 'الشروط والاحكام',
+    'Privacy And Policy' => 'سياسة الخصوصية',
+    'Shipment already exist in collection request' => 'الشحنة مضافة بالفعل في طلب تجميع اخر',
+    'Show Shipment Details' => 'مشاهدة تفاصيل الشحنة',
+    'Did You Collect These Shipments And In The Stock Now ?' => 'هل قمت بالفعل بتجميع هذه الشحنات وهي موجودة الان بالمخزن الخاص بديليفري اكسبريس',
+    'You Are About Confirm Recieving These Shipments ...' => 'انت علي وشك تاكيد استلامك لهذه الشحنات',
+    'Recieved Confirmed Successfully' => 'تم تاكيد الاستلام بنجاح'
 ];

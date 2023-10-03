@@ -71,6 +71,15 @@ class PermissionTableSeeder extends Seeder
             'setting-list',
             'setting-create',
 
+            'dashboard-list',
+
+            'collectionRequest-list',
+            'collectionRequest-create',
+            'collectionRequest-edit',
+            'collectionRequest-delete',
+            'collectionRequest-show',
+            'collectionRequest-recieve',
+
         ];
         foreach ($permissions as $permission) {
             Permission::firstOrCreate(

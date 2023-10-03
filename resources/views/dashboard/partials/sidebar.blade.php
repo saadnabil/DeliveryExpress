@@ -14,6 +14,16 @@
     <ul class="metismenu" id="menu">
         <li class="menu-label">{{ __('translation.Delivery Express') }}</li>
 
+         @can('dashboard-list')
+            <li>
+                <a href="{{ route('adminDashboard') }}">
+                    <div class="parent-icon"><i class='bx bx-menu'></i>
+                    </div>
+                    <div class="menu-title">{{ __('translation.Dashboard') }}</div>
+                </a>
+            </li>
+        @endcan
+
         @can('role-list')
             <li>
                 <a href="{{ route('roles.index') }}">
@@ -30,6 +40,16 @@
                     <div class="parent-icon"><i class='bx bx-door-open'></i>
                     </div>
                     <div class="menu-title">{{ __('translation.Shipments') }}</div>
+                </a>
+            </li>
+        @endcan
+
+         @can('collectionRequest-list')
+            <li>
+                <a href="{{ route('collectionRequests.index') }}">
+                    <div class="parent-icon"><i class='bx bx-door-open'></i>
+                    </div>
+                    <div class="menu-title">{{ __('translation.Collection Requests') }}</div>
                 </a>
             </li>
         @endcan
