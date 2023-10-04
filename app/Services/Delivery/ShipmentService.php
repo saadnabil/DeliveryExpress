@@ -23,7 +23,6 @@ class ShipmentService{
 
     public function recieve(array $data){
         $totalAmount = 0;
-        $delivery_signature_uploaded = 0;
         $delivery_signature_image = null;
         foreach($data['shipment_codes'] as $shipmentCode){
             $shipment = Shipment::where([
@@ -31,19 +30,18 @@ class ShipmentService{
                 'status' => 'assigned_to_delivery',
                 'shipment_code' => $shipmentCode,
             ])->firstorfail();
-            if($data['delivery_signature'] && $delivery_signature_uploaded == 0){
+            if($data['delivery_signature'] &&  $delivery_signature_image == null){
                 $delivery_signature_image = FileHelper::upload_file('uploads' , $data['delivery_signature'] );
-                $delivery_signature_uploaded = 1;
             }
             $shipment->update([
                 'status' => 'recieved_by_delivery',
                 'delivery_signature' =>  $delivery_signature_image,
             ]);
             $totalAmount += $shipment->total_price;
-            return $this->sendResponse([
-                'totalAmount' => $totalAmount,
-            ]);
         }
+        return $this->sendResponse([
+            'totalAmount' => $totalAmount,
+        ]);
     }
 
     public function startDeliverShipment(array $data){

@@ -199,4 +199,6 @@ return [
     'Delivery Assigned Successfully' => 'تم تعيين المندوب لتوصيل الشحنة بنجاح',
     'Select Themes' => 'اختر السمات',
     'Theme' => 'السمة',
+    'Your Verification PIN Is:' => 'رقم التعريف الشخصي الخاص بك هو',
+    'Replaced shipment not found' => 'الشحنة المستبدلة غير موجودة'
 ];

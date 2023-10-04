@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api\Store;
 
+use App\Rules\CheckReplacedShipmentExist;
 use App\Rules\NotRequiredStepOneShipmentRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -40,7 +41,7 @@ class StoreShipmentStepOneValidation extends FormRequest
             'notes' => ['required','string'],
             'money' =>['required_if:shipment_type_id,3',new NotRequiredStepOneShipmentRule,'numeric'], //required when type is عربون
             //required when type is تبادل متعدد
-            'shipment_replaced_id' =>  ['required_if:shipment_type_id,2',new NotRequiredStepOneShipmentRule,'numeric'],
+            'shipment_replaced_id' =>  ['required_if:shipment_type_id,2',new NotRequiredStepOneShipmentRule,new CheckReplacedShipmentExist,'numeric'],
             'shipment_replace_reason' => ['required_if:shipment_type_id,2',new NotRequiredStepOneShipmentRule,'string'],
             //required when type is تبادل متعدد
         ];

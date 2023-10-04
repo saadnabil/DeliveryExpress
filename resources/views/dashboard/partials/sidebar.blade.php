@@ -37,7 +37,7 @@
         @can('shipment-list')
             <li>
                 <a href="{{ route('shipments.index') }}">
-                    <div class="parent-icon"><i class="bx bx-category"></i>
+                    <div class="parent-icon"><i class="fadeIn animated bx bx-cube"></i>
                     </div>
                     <div class="menu-title">{{ __('translation.Shipments') }}</div>
                 </a>

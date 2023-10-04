@@ -25,9 +25,7 @@
         </div>
         <!--end wrapper-->
         @include('dashboard.partials.searchmodal')
-        <!--start switcher-->
-        @include('dashboard.partials.colorswitcher')
-        <!--end switcher-->
+
         @include('dashboard.partials.script')
 </body>
 

@@ -20,7 +20,7 @@
                                 <div class="col-md-12">
                                     <div class="row">
                                         @foreach ($permissions as $permission)
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <input name="permission[]" value="{{ $permission->id }}" multiple
                                                     id="permission{{ $permission->id }}"
                                                     style="margin-right:10px;display:inline-block;" type="checkbox" />

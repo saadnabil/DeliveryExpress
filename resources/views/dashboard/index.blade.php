@@ -11,7 +11,7 @@
                             <h4 class="my-1 text-info">{{ $newShipmentsCount }}</h4>
                         </div>
                         <div class="widgets-icons-2 rounded-circle bg-gradient-blues text-white ms-auto"><i
-                                class='bx bxs-cart'></i>
+                               <i class="fadeIn animated bx bx-selection"></i>
                         </div>
                     </div>
                 </div>
@@ -25,8 +25,7 @@
                             <p class="mb-0 text-secondary">{{ __('translation.In Stock Shipments') }}</p>
                             <h4 class="my-1 text-danger">{{ $inStockShipmentsCount }}</h4>
                         </div>
-                        <div class="widgets-icons-2 rounded-circle bg-gradient-burning text-white ms-auto"><i
-                                class='bx bxs-wallet'></i>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-burning text-white ms-auto"><i class="fadeIn animated bx bx-grid-vertical"></i>
                         </div>
                     </div>
                 </div>
@@ -40,8 +39,7 @@
                             <p class="mb-0 text-secondary">{{ __('translation.Recieved Shipments') }}</p>
                             <h4 class="my-1 text-success">{{ $RecievedShipmentsCount }}</h4>
                         </div>
-                        <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i
-                                class='bx bxs-bar-chart-alt-2'></i>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i class="fadeIn animated bx bx-stats"></i>
                         </div>
                     </div>
                 </div>
@@ -55,8 +53,7 @@
                             <p class="mb-0 text-secondary">{{ __('translation.Waiting Delivery Shipments') }}</p>
                             <h4 class="my-1 text-warning">{{ $waitingDeliveryCount }}</h4>
                         </div>
-                        <div class="widgets-icons-2 rounded-circle bg-gradient-orange text-white ms-auto"><i
-                                class='bx bxs-group'></i>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-orange text-white ms-auto"><i class="fadeIn animated bx bx-slider-alt"></i>
                         </div>
                     </div>
                 </div>
@@ -71,8 +68,9 @@
                             <p class="mb-0 text-secondary">{{ __('translation.Out For Delivery Shipments') }}</p>
                             <h4 class="my-1" style="color:#6a11cb;">{{ $outForDeliveryCount }}</h4>
                         </div>
-                        <div class="widgets-icons-2 rounded-circle bg-gradient-deepblue text-white ms-auto"><i
-                                class='bx bxs-cart'></i>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-deepblue text-white ms-auto">
+                        <i class="fadeIn animated bx bx-expand"></i>
+
                         </div>
                     </div>
                 </div>
@@ -88,8 +86,7 @@
                             <p class="mb-0 text-secondary">{{ __('translation.Delivered Shipments') }}</p>
                             <h4 class="my-1" style="color:#f54ea2;">{{ $deliveredCount }}</h4>
                         </div>
-                        <div class="widgets-icons-2 rounded-circle bg-gradient-bloody text-white ms-auto"><i
-                                class='bx bxs-wallet'></i>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-bloody text-white ms-auto"> <i class="fadeIn animated bx bx-command"></i>
                         </div>
                     </div>
                 </div>
@@ -105,8 +102,7 @@
                             <p class="mb-0 text-secondary">{{ __('translation.Returned Shipments') }}</p>
                             <h4 class="my-1 " style="color:#42e695;">{{ $returnedCount }}</h4>
                         </div>
-                        <div class="widgets-icons-2 rounded-circle bg-gradient-quepal text-white ms-auto"><i
-                                class='bx bxs-bar-chart-alt-2'></i>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-quepal text-white ms-auto"><i class="fadeIn animated bx bx-aperture"></i>
                         </div>
                     </div>
                 </div>
@@ -121,8 +117,8 @@
                             <p class="mb-0 text-secondary">{{ __('translation.Failed Shipments') }}</p>
                             <h4 class="my-1" style="color:#ffdf40;">{{ $failedCount }}</h4>
                         </div>
-                        <div class="widgets-icons-2 rounded-circle bg-gradient-blooker text-white ms-auto"><i
-                                class='bx bxs-group'></i>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-blooker text-white ms-auto">
+                        <i class="fadeIn animated bx bx-layer"></i>
                         </div>
                     </div>
                 </div>
