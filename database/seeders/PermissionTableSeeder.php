@@ -67,6 +67,8 @@ class PermissionTableSeeder extends Seeder
             'shipment-edit',
             'shipment-delete',
             'shipment-show',
+            'shipment-assignDelivery',
+
 
             'setting-list',
             'setting-create',
@@ -79,6 +81,8 @@ class PermissionTableSeeder extends Seeder
             'collectionRequest-delete',
             'collectionRequest-show',
             'collectionRequest-recieve',
+            'collectionRequest-restore',
+
 
         ];
         foreach ($permissions as $permission) {

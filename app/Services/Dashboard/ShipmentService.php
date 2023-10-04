@@ -23,7 +23,8 @@ class ShipmentService{
                          ->where('status','!=','incomplete')
                          ->latest()
                          ->get();
-        return view('dashboard.shipments.index',compact('rows'));
+        $deliveries = Delivery::where('active',1)->get();
+        return view('dashboard.shipments.index',compact('rows','deliveries'));
     }
 
     public function create(){

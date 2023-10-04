@@ -92,6 +92,22 @@
                                 @enderror
                             </div>
 
+                            <div class="mb-3">
+                                <label class="form-label">{{ __('translation.Theme') }}:</label>
+                                <select requierd name="theme"
+                                    class="form-select mb-3 @error('theme') error-input @enderror"
+                                    aria-label="Default select example">
+                                    <option>{{ __('translation.Select Themes') }}</option>
+                                    <option {{  old('theme',setting('theme')) == "light-theme" ?  'selected' : '' }} value="light-theme">Light</option>
+                                    <option {{  old('theme',setting('theme')) == "dark-theme" ?  'selected' : '' }} value="dark-theme">Dark</option>
+                                    <option {{  old('theme',setting('theme')) == "semi-dark" ?  'selected' : '' }} value="semi-dark">Semi Dark</option>
+                                    <option {{  old('theme',setting('theme')) == "minimal-theme" ?  'selected' : '' }} value="minimal-theme">Minimal Theme</option>
+                                </select>
+                                @error('theme')
+                                    <div class="error-validation">{{ $message }}</div>
+                                @enderror
+                            </div>
+
                         </div>
                     </div>
                     @can('setting-create')

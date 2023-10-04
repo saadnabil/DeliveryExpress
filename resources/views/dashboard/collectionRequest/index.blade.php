@@ -22,6 +22,7 @@
                         <tr>
                             <th>#ID</th>
                             <th>{{ __('translation.Store') }}</th>
+                            <th>{{ __('translation.Status') }}</th>
                             <th>{{ __('translation.Type') }}</th>
                             <th>{{ __('translation.Notes') }}</th>
                             <th>{{ __('translation.Actions') }}</th>
@@ -32,7 +33,24 @@
                             <tr>
                                 <td>{{ $row->id }}</td>
                                 <td>{{ $row->store->name }}</td>
-                                <td>{{ $row->type == 1 ? __('translation.Collection Requests') :  __('translation.Collection Bakeup Requests')  }}</td>
+                                @if($row->status == 'recieved_by_stock')
+                                    <td>
+                                        <span class="badge bg-gradient-quepal text-white shadow-sm w-100"> {{ __('translation.Recieved') }}</span>
+                                    </td>
+                                @elseif($row->status == 'pending')
+                                    <td>
+                                        <span class="badge bg-gradient-blooker text-white shadow-sm w-100">{{ __('translation.Pending') }}</span>
+                                    </td>
+                                @endif
+                                @if($row->type == 1)
+                                     <td>
+                                        <span class="badge bg-gradient-bloody text-white shadow-sm w-100">{{ __('translation.Collection Requests') }}</span>
+                                     </td>
+                                @elseif ($row->type == 2)
+                                     <td>
+                                        <span class="badge bg-gradient-deepblue text-white shadow-sm w-100"> {{ __('translation.Collection Bakeup Requests') }}</span>
+                                     </td>
+                                @endif
                                 <td>{{ $row->notes }}</td>
                                 <td>
                                     <div class="d-flex order-actions">
@@ -41,8 +59,11 @@
                                                 class="bx bxs-show"></i></a>
                                         @endcan
 
+
+
+                                        <!--collection request -->
                                         @can('collectionRequest-recieve')
-                                            @if($row->status == 'pending')
+                                            @if($row->status == 'pending' && $row->type == 1)
                                                 <a title="{{ __('translation.Did You Collect These Shipments And In The Stock Now ?') }}" href="{{ route('collectionRequests.destroy', $row) }}" class="ms-3 confirm-collect">
                                                 <i class="fadeIn animated bx bx-message-square-check"></i>
                                                 </a>
@@ -51,6 +72,20 @@
                                                 </form>
                                             @endif
                                         @endcan
+                                        <!--collection request -->
+
+                                        <!--bake up -->
+                                        @can('collectionRequest-restore')
+                                            @if($row->status == 'pending' && $row->type == 2)
+                                            <a title="{{ __('translation.Did You Return These Shipments To The Store ?') }}" href="{{ route('collectionRequests.destroy', $row) }}" class="ms-3 confirm-return">
+                                            <i class="fadeIn animated bx bx-home-smile"></i>
+                                            </a>
+                                            <form method="POST" action="{{ route('collectionRequests.confirmRecieveShipments', $row)}}">
+                                                @csrf
+                                            </form>
+                                            @endif
+                                        @endcan
+                                        <!--bake up -->
 
                                         @can('collectionRequest-delete')
                                         <a href="{{ route('collectionRequests.destroy', $row) }}" class="ms-3 confirm-delete"><i
@@ -69,6 +104,7 @@
                         <tr>
                            <th>#ID</th>
                             <th>{{ __('translation.Store') }}</th>
+                             <th>{{ __('translation.Status') }}</th>
                             <th>{{ __('translation.Type') }}</th>
                             <th>{{ __('translation.Notes') }}</th>
                             <th>{{ __('translation.Actions') }}</th>

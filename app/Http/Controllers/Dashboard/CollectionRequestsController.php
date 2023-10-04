@@ -89,9 +89,11 @@ class CollectionRequestsController extends Controller
     }
 
     public function confirmRecieveShipments(Request $request , CollectionRequest $collectionRequest){
-        $collectionRequest->update([
-            'status' => 'recieved_by_stock',
-        ]);
-        return redirect()->route('collectionRequests.index')->with(['success' => __('translation.Recieved Confirmed Successfully')]);
+        return $this->collectionRequestService->confirmRecieveShipments($collectionRequest);
     }
+
+    public function confirmReturnShipments(Request $request , CollectionRequest $collectionRequest){
+        return $this->collectionRequestService->confirmReturnShipments($collectionRequest);
+    }
+
 }

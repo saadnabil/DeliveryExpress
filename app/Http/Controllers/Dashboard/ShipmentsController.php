@@ -46,7 +46,7 @@ class ShipmentsController extends Controller
     }
 
     public function edit(Shipment $shipment){
-        return $this->shipmentService->edit($shipment); 
+        return $this->shipmentService->edit($shipment);
     }
 
     public function update(UpdateShipmentValidation $request ,Shipment $shipment){
@@ -65,6 +65,14 @@ class ShipmentsController extends Controller
     public function getStoreReturnedShipments(Request $request){
         $store_id = $request->store_id;
         return $this->shipmentService->getStoreReturnedShipments($store_id);
+
+    }
+    public function assignDeliveryInStockShipment(Request $request , Shipment $shipment){
+        $shipment->update([
+            'status' => 'assigned_to_delivery',
+            'delivery_id' => $request->delivery_id,
+        ]);
+        return redirect()->route('shipments.index')->with(['success' => __('translation.Delivery Assigned Successfully')]);
 
     }
 }

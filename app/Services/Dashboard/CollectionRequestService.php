@@ -44,11 +44,34 @@ class CollectionRequestService{
 
     public function show($collectionRequest){
         $collectionRequest->load('store.city','store.country','store.activity','CollectionRequestShipments.shipment.shipmentType','CollectionRequestShipments.shipment.images');
-        return view('dashboard.collectionRequest.show' , compact('collectionRequest'));
+        return view('dashboard.collectionRequest.show',compact('collectionRequest'));
     }
 
     public function destroy($collectionRequest){
         $collectionRequest->delete();
         return redirect()->route('collectionRequests.index')->with(['success' => __('translation.Deleted Successfully')]);
     }
+
+    public function confirmRecieveShipments($collectionRequest){
+        $collectionRequest = $collectionRequest->load('CollectionRequestShipments.shipment');
+        foreach($collectionRequest->CollectionRequestShipments as $CollectionRequestShipment){
+            $CollectionRequestShipment->shipment->update(['status' => 'in_stock']);
+        }
+        $collectionRequest->update([
+            'status' => 'recieved_by_stock',
+        ]);
+        return redirect()->route('collectionRequests.index')->with(['success' => __('translation.Recieved Confirmed Successfully')]);
+    }
+
+    public function confirmReturnShipments($collectionRequest){
+        $collectionRequest = $collectionRequest->load('CollectionRequestShipments.shipment');
+        foreach($collectionRequest->CollectionRequestShipments as $CollectionRequestShipment){
+            $CollectionRequestShipment->shipment->update(['status' => 'returned_to_store']);
+        }
+        $collectionRequest->update([
+            'status' => 'returned_to_store',
+        ]);
+        return redirect()->route('collectionRequests.index')->with(['success' => __('translation.Recieved Confirmed Successfully')]);
+    }
+
 }

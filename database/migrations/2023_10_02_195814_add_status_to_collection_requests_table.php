@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('collection_requests', function (Blueprint $table) {
-            $table->string('status')->default('pending'); //pending , recieved_by_stock
+            $table->string('status')->default('pending'); //pending , recieved_by_stock , returned_to_store
         });
     }
 

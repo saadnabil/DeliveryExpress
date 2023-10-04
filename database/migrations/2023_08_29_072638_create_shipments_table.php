@@ -59,7 +59,7 @@ return new class extends Migration
             $table->text('client_address')->nullable();
             $table->tinyInteger('payment_type')->default(1);//1 for cash , 2 for visa
             $table->longText('qr_code_image')->nullable();
-            $table->string('status')->default('incomplete')->nullable(); // incomplete , pending   , in_stock , assigned_to_delivery , recieved_by_delivery , out_for_delivery , delivered , fail , returned
+            $table->string('status')->default('incomplete')->nullable(); // incomplete , pending   , in_stock , assigned_to_delivery , recieved_by_delivery , out_for_delivery , delivered , fail , returned , returned_to_store /*after accept collection request bakeup*/
             $table->double('shipment_price')->default(0)->nullable();//
             $table->double('delivery_fee')->default(0)->nullable();//
             $table->double('weight_fee')->default(0)->nullable();//

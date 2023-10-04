@@ -30,6 +30,7 @@ svg{
                             <th>{{ __('translation.Code') }}</th>
                             <th>{{ __('translation.Type') }}</th>
                             <th>{{ __('translation.Store') }}</th>
+                            <th>{{ __('translation.Status') }}</th>
                             <th>{{ __('translation.Payment Type') }}</th>
                             <th>{{ __('translation.Actions') }}</th>
                         </tr>
@@ -42,10 +43,20 @@ svg{
                                 </td>
                                 <td>{{ $row->shipment_code }}</td>
                                 <td>{{ $row->shipmentType->type }}</td>
-                                <td>{{ $row->store->name }}</td>
+                                <td>
+                                    <span class="badge bg-gradient-blooker text-white shadow-sm w-100"> {{ $row->store->name }}</span>
+
+                                </td>
+                                <td><span class="badge bg-gradient-quepal text-white shadow-sm w-100">{{ $row->status }}</span></td>
                                 <td>{{ $row->payment_type == 1 ? __('translation.Cash') : __('translation.Visa On Delivery') }}</td>
                                 <td>
                                     <div class="d-flex order-actions">
+                                        @can('shipment-assignDelivery')
+                                        @if($row->status == 'in_stock')
+                                            <a data-bs-toggle="modal" data-route="{{ route('shipments.assignDeliveryInStockShipment', $row) }}" data-bs-target="#DeliveriesPopUp" onclick="event.preventDefault();" title="{{ __('translation.Assign Delivery') }}" href="{{ route('shipments.edit', $row) }}" class="ms-3 assignDeliveryButton"><i class="fadeIn animated bx bx-user-plus"></i></a>
+                                        @endif
+
+                                        @endcan
                                         @can('shipment-edit')
                                         <a href="{{ route('shipments.edit', $row) }}" class="ms-3"><i
                                                 class="bx bxs-edit"></i></a>
@@ -65,10 +76,11 @@ svg{
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>{{ __('translation.QR Image') }}</th>
+                           <th>{{ __('translation.QR Image') }}</th>
                             <th>{{ __('translation.Code') }}</th>
                             <th>{{ __('translation.Type') }}</th>
                             <th>{{ __('translation.Store') }}</th>
+                            <th>{{ __('translation.Status') }}</th>
                             <th>{{ __('translation.Payment Type') }}</th>
                             <th>{{ __('translation.Actions') }}</th>
                         </tr>
@@ -77,6 +89,7 @@ svg{
             </div>
         </div>
     </div>
+     @include('dashboard.shipments.deliveriesPopUp')
 @endsection
 @push('script')
     <script>
@@ -90,5 +103,9 @@ svg{
                 .appendTo('#example2_wrapper .col-md-6:eq(0)');
         });
     </script>
-
+    <script>
+        $('.assignDeliveryButton').click(function(){
+            $('#DeliveriesPopUp').find('form#deliveryForm').attr('action',$(this).attr('data-route'));
+        })
+    </script>
 @endpush

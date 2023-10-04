@@ -77,3 +77,27 @@
         return false;
     });
 </script>
+
+<script>
+    $('.confirm-return').click(function(e){
+        e.preventDefault();
+        Swal.fire({
+            title: '{{ __("translation.You Are About Confirm Returning These Shipments ...") }}',
+            html: `{{ __("translation.Did You Return These Shipments To The Store ?") }}`,
+            icon: "info",
+            buttonsStyling: false,
+            showCancelButton: true,
+            confirmButtonText: "{{ __('translation.Confirm') }}",
+            cancelButtonText: "{{ __('translation.Cancel') }}",
+            customClass: {
+                confirmButton: "btn btn-success ml-10",
+                cancelButton: 'btn btn-danger'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $(this).next('form').submit();
+            }
+        });
+        return false;
+    });
+</script>

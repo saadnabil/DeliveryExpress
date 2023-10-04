@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" dir="rtl">
+<html lang="en" dir="rtl" class="{{ setting('theme') }}">
 @include('dashboard.partials.head')
 <body>
     <!--wrapper-->

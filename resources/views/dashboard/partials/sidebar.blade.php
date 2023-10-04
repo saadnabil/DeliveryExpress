@@ -17,7 +17,7 @@
          @can('dashboard-list')
             <li>
                 <a href="{{ route('adminDashboard') }}">
-                    <div class="parent-icon"><i class='bx bx-menu'></i>
+                    <div class="parent-icon"><i class="bx bx-home-alt __web-inspector-hide-shortcut__"></i>
                     </div>
                     <div class="menu-title">{{ __('translation.Dashboard') }}</div>
                 </a>
@@ -27,7 +27,7 @@
         @can('role-list')
             <li>
                 <a href="{{ route('roles.index') }}">
-                    <div class="parent-icon"><i class='bx bx-door-open'></i>
+                    <div class="parent-icon"><i class="bx bx-repeat"></i>
                     </div>
                     <div class="menu-title">{{ __('translation.Roles') }}</div>
                 </a>
@@ -37,7 +37,7 @@
         @can('shipment-list')
             <li>
                 <a href="{{ route('shipments.index') }}">
-                    <div class="parent-icon"><i class='bx bx-door-open'></i>
+                    <div class="parent-icon"><i class="bx bx-category"></i>
                     </div>
                     <div class="menu-title">{{ __('translation.Shipments') }}</div>
                 </a>
@@ -47,7 +47,7 @@
          @can('collectionRequest-list')
             <li>
                 <a href="{{ route('collectionRequests.index') }}">
-                    <div class="parent-icon"><i class='bx bx-door-open'></i>
+                    <div class="parent-icon"><i class="bx bx-message-square-edit"></i>
                     </div>
                     <div class="menu-title">{{ __('translation.Collection Requests') }}</div>
                 </a>
@@ -57,7 +57,7 @@
         @can('city-list')
             <li>
                 <a href="{{ route('cities.index') }}">
-                    <div class="parent-icon"><i class='bx bx-cart'></i>
+                    <div class="parent-icon"><i class="bx bx-map-alt"></i>
                     </div>
                     <div class="menu-title">{{ __('translation.Cities') }}</div>
                 </a>
@@ -67,7 +67,7 @@
         @can('activity-list')
             <li>
                 <a href="{{ route('activities.index') }}">
-                    <div class="parent-icon"><i class='bx bx-menu'></i>
+                    <div class="parent-icon"><i class="fadeIn animated bx bx-expand __web-inspector-hide-shortcut__"></i>
                     </div>
                     <div class="menu-title">{{ __('translation.Activities') }}</div>
                 </a>
@@ -77,7 +77,7 @@
         @can('cancelReason-list')
             <li>
                 <a href="{{ route('cancelReasons.index') }}">
-                    <div class="parent-icon"><i class='bx bx-menu'></i>
+                    <div class="parent-icon"><i class="fadeIn animated bx bx-comment-edit"></i>
                     </div>
                     <div class="menu-title">{{ __('translation.Cancel Reasons') }}</div>
                 </a>
@@ -87,7 +87,7 @@
         @can('coupon-list')
             <li>
                 <a href="{{ route('coupons.index') }}">
-                    <div class="parent-icon"><i class='bx bx-menu'></i>
+                    <div class="parent-icon"><i class="fadeIn animated bx bx-money"></i>
                     </div>
                     <div class="menu-title">{{ __('translation.Coupons') }}</div>
                 </a>
@@ -97,17 +97,17 @@
         @can('faq-list')
             <li>
                 <a href="{{ route('faqs.index') }}">
-                    <div class="parent-icon"><i class='bx bx-menu'></i>
+                    <div class="parent-icon"><i class="fadeIn animated bx bx-task"></i>
                     </div>
                     <div class="menu-title">{{ __('translation.Questions') }}</div>
                 </a>
             </li>
         @endcan
 
-        @can('complains-list')
+        @can('complain-list')
             <li>
                 <a href="{{ route('complains.index') }}">
-                    <div class="parent-icon"><i class='bx bx-menu'></i>
+                    <div class="parent-icon"><i class="fadeIn animated bx bx-message-rounded-detail"></i>
                     </div>
                     <div class="menu-title">{{ __('translation.Complains') }}</div>
                 </a>
@@ -117,7 +117,7 @@
         @can('store-list')
             <li>
                 <a href="{{ route('stores.index') }}">
-                    <div class="parent-icon"><i class='bx bx-menu'></i>
+                    <div class="parent-icon"><i class="bx bx-cart"></i>
                     </div>
                     <div class="menu-title">{{ __('translation.Stores') }}</div>
                 </a>
@@ -127,7 +127,7 @@
         @can('delivery-list')
             <li>
                 <a href="{{ route('deliveries.index') }}">
-                    <div class="parent-icon"><i class='bx bx-menu'></i>
+                    <div class="parent-icon"><i class="fadeIn animated bx bx-cycling"></i>
                     </div>
                     <div class="menu-title">{{ __('translation.Deliveries') }}</div>
                 </a>
@@ -137,7 +137,7 @@
         @can('user-list')
             <li>
                 <a href="{{ route('users.index') }}">
-                    <div class="parent-icon"><i class='bx bx-menu'></i>
+                    <div class="parent-icon"><i class="fadeIn animated bx bx-user-circle"></i>
                     </div>
                     <div class="menu-title">{{ __('translation.Admins') }}</div>
                 </a>
@@ -147,7 +147,7 @@
         @can('setting-list')
             <li>
                 <a href="{{ route('settings.index') }}">
-                    <div class="parent-icon"><i class='bx bx-menu'></i>
+                    <div class="parent-icon"><i class="fadeIn animated bx bx-cog"></i>
                     </div>
                     <div class="menu-title">{{ __('translation.Setting') }}</div>
                 </a>

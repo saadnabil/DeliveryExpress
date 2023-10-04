@@ -46,9 +46,11 @@ Route::group(['middleware' => 'auth'],function(){
     Route::resource('users' ,UsersController::class);
     Route::resource('collectionRequests' ,CollectionRequestsController::class);// فيها شغل حلو
     Route::post('collectionRequests/confirmRecieveShipments/{collectionRequest}', [CollectionRequestsController::class , 'confirmRecieveShipments'])->name('collectionRequests.confirmRecieveShipments');
+    Route::post('collectionRequests/confirmReturnShipments/{collectionRequest}', [CollectionRequestsController::class , 'confirmReturnShipments'])->name('collectionRequests.confirmReturnShipments');
     Route::resource('stores' ,StoresController::class);
     Route::resource('deliveries' ,DeliveriesController::class);
     Route::resource('shipments' ,ShipmentsController::class);
+    Route::post('shipments/assignDeliveryInStockShipment/{shipment}' ,[ShipmentsController::class,'assignDeliveryInStockShipment'])->name('shipments.assignDeliveryInStockShipment');
     Route::post('getStoreReturnedShipments' ,[ShipmentsController::class , 'getStoreReturnedShipments'])->name('getStoreReturnedShipments');
     Route::resource('settings', SettingsController::class)->only('index','store');
 });
