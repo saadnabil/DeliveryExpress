@@ -18,9 +18,11 @@ class ShipmentController extends Controller
     {
         $this->shipmentService =  $shipmentService;
     }
+
     public function index(){
         return $this->shipmentService->index();
     }
+
     public function recieve(RecieveShipmentValidation $request){
         $data = $request->validated();
         return $this->shipmentService->recieve($data);
