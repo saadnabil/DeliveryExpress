@@ -11,6 +11,6 @@ class DeliveryWorkCity extends Model
     protected $guarded = [];
 
     public function city(){
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(City::class)->withTrashed();
     }
 }

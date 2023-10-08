@@ -13,6 +13,6 @@ class Coupon extends Model
     protected $date = ['deleted_at'];
 
     public function store(){
-        return $this->belongsTo(Store::class);
+        return $this->belongsTo(Store::class)->withTrashed();
     }
 }

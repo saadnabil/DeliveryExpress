@@ -11,17 +11,17 @@ class CollectionRequest extends Model
     use HasFactory, SoftDeletes;
     protected $guarded = [];
     public function store(){
-        return $this->belongsTo(Store::class);
+        return $this->belongsTo(Store::class)->withTrashed();
     }
 
     public function city(){
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(City::class)->withTrashed();
     }
 
     public function country(){
-        return $this->belongsTo(Country::class);
+        return $this->belongsTo(Country::class);;
     }
     public function CollectionRequestShipments(){
-        return $this->hasMany(CollectionRequestShipment::class);
+        return $this->hasMany(CollectionRequestShipment::class);;
     }
 }

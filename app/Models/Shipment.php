@@ -14,7 +14,7 @@ class Shipment extends Model
     protected $date =['deleted_at'];
 
     public function delivery(){
-        return $this->belongsTo(Delivery::class);
+        return $this->belongsTo(Delivery::class)->withTrashed();
     }
 
     public function shipmentType(){
@@ -26,27 +26,25 @@ class Shipment extends Model
     }
 
     public function cancelReason(){
-        return $this->belongsTo(CancelReason::class);
+        return $this->belongsTo(CancelReason::class)->withTrashed();
     }
 
     public function coupon(){
-        return $this->belongsTo(Coupon::class);
+        return $this->belongsTo(Coupon::class)->withTrashed();
     }
     public function city(){
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(City::class)->withTrashed();;
     }
     public function country(){
-        return $this->belongsTo(Country::class);
+        return $this->belongsTo(Country::class)->withTrashed();
     }
     public function store(){
-        return $this->belongsTo(Store::class);
+        return $this->belongsTo(Store::class)->withTrashed();
     }
-
     public function shipmentReplaced()
     {
-        return $this->hasOne(Shipment::class, 'id', 'shipment_replaced_id');
+        return $this->hasOne(Shipment::class, 'id', 'shipment_replaced_id');;
     }
-
     function calculateShipmentInvoice(){
         $data = [
             'delivery_fee' => $this->city->shipmentPrice,
