@@ -17,7 +17,7 @@ use App\Http\Controllers\Dashboard\UsersController;
 use App\Http\Controllers\TrackOrder\TrackOrderController;
 use App\Models\Shipment;
 use Illuminate\Support\Facades\Route;
-use Twilio\Rest\Client;
+// use Twilio\Rest\Client;
 
 
 
@@ -26,6 +26,10 @@ use Infobip\Configuration;
 use Infobip\Model\SmsAdvancedTextualRequest;
 use Infobip\Model\SmsDestination;
 use Infobip\Model\SmsTextualMessage;
+
+
+use GuzzleHttp\Client;
+use GuzzleHttp\RequestOptions;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,6 +46,10 @@ use Infobip\Model\SmsTextualMessage;
  *
  * Dashboard Routes
  */
+
+Route::get('/',function(){
+    return redirect()->route('login');
+});
 Route::auth();
 Route::group(['middleware' => 'auth'],function(){
     Route::get('admin' , [DashboardController::class,'index'])->name('adminDashboard');
@@ -64,43 +72,54 @@ Route::group(['middleware' => 'auth'],function(){
     Route::resource('settings', SettingsController::class)->only('index','store');
 });
 
-Route::get('test',function(){
-    $token = 'dynUSXgdRxK0lUtLeO4RCd:APA91bG5FR3VX4Og8LQJH66qocbCJAUy_bX-l0ga2HsSMdPwl48Ge6g-bmPpOJ4OtQ25pcDk57T1QdkiTGkr4fMf3TsflTo1H2NRGvnpB2XxVdEOmhGkXgr3jJgwR21CGQjxn-qVABeb';
-    $result = pushNotificationStore('title' , 'description' , [$token]);
-    dd($result);
-});
 
 
-// Route::get('testSms', function () {
-//     require_once __DIR__ . '/vendor/autoload.php';
-//     $sid = "AC200fb85d2065ff8e31ce373f82eb14ae";
-//     $token = "aa86757babaf42da9ea251561cadb06d";
-//     $twilio = new Client($sid, $token);
 
-//     $message = $twilio->messages
-//         ->create("+201143707240", // to
-//             array(
-//                 "body" => "test test"
-//             )
-//         );
-//     print($message->sid);
+// Route::get('testSms', function(){
+//     $receiverNumber = "+218928908901";
+//         $message = __('translation.Your Verification PIN Is:'). 1234;
+//         try {
+//             $account_sid = getenv("TWILIO_SID");
+//             $auth_token = getenv("TWILIO_TOKEN");
+//             $twilio_number = getenv("TWILIO_FROM");
+//             $client =  new Twilio\Rest\Client($account_sid, $auth_token);
+//             $client->messages->create($receiverNumber, [
+//                 'from' => $twilio_number,
+//                 'body' => $message]);
+//             dd('SMS Sent Successfully.');
+//         } catch (Exception $e) {
+//             dd("Error: ". $e->getMessage());
+//         }
 // });
 
-
 Route::get('testSms', function(){
-    $receiverNumber = "+201143707240";
-        $message = __('translation.Your Verification PIN Is:'). 1234;
-        try {
-            $account_sid = getenv("TWILIO_SID");
-            $auth_token = getenv("TWILIO_TOKEN");
-            $twilio_number = getenv("TWILIO_FROM");
 
-            $client =  new Twilio\Rest\Client($account_sid, $auth_token);
-            $client->messages->create($receiverNumber, [
-                'from' => $twilio_number,
-                'body' => $message]);
-            dd('SMS Sent Successfully.');
-        } catch (Exception $e) {
-            dd("Error: ". $e->getMessage());
-        }
+    $client = new Client([
+        'base_uri' => "https://9llky4.api.infobip.com/",
+        'headers' => [
+            'Authorization' => "App 845664a868b0e9d3903679e30c776750-ab9ed3bf-c62b-43f8-bf91-8608ef10f1c6",
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+        ]
+    ]);
+    $response = $client->request(
+        'POST',
+        'sms/2/text/advanced',
+        [
+            RequestOptions::JSON => [
+                'messages' => [
+                    [
+                        'from' => 'InfoSMS',
+                        'destinations' => [
+                            ['to' => "201143707240"]
+                        ],
+                        'text' => 'Your verification PIN is: 9318',
+                    ]
+                ]
+            ],
+        ]
+    );
+    echo("HTTP code: " . $response->getStatusCode() . PHP_EOL);
+    echo("Response body: " . $response->getBody()->getContents() . PHP_EOL);
+
 });

@@ -69,7 +69,6 @@ Route::group(['prefix' => 'v1'],function(){
             Route::group(['prefix' => 'costRate'] , function(){
                 Route::post('/calculate', [CostRateController::class, 'calculateCostRate']);
             });
-
             Route::group(['prefix' => 'profile'] , function(){
                 Route::get('/show', [ProfileController::class, 'show']);
                 Route::get('/deleteAccount', [ProfileController::class, 'deleteAccount']);

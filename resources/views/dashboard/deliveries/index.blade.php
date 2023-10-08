@@ -34,11 +34,7 @@
                         @foreach ($rows as $key => $row)
                             <tr style="line-height: 40px !important;">
                                 <td class="text-center">
-                                @if ($row->image)
-                                    <img src=" {{ url('storage/'.$row->image) }}" class="user-img" alt="Store Logo">
-                                @else
-                                    <img src=" {{ url('dashboard/assets/images/store.png') }}" class="user-img" alt="Store Logo">
-                                @endif
+                                    <img src=" {{ url('storage/'.$row->image) }}" class="user-img" alt="Delivery Logo">
                                 </td>
                                 <td>{{ $row->name }}</td>
                                 <td>{{ $row->email }}</td>

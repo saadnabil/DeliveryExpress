@@ -616,7 +616,7 @@
 
                       <li><a class="dropdown-item d-flex align-items-center" href="#"
                             onclick="event.preventDefault(); $('#logout-form').submit();"><i
-                                class="bx bx-log-out-circle"></i><span>Logout</span></a>
+                                class="bx bx-log-out-circle"></i><span>{{ __('translation.Logout') }}</span></a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST">
                             @csrf
                         </form>

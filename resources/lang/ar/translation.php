@@ -200,5 +200,6 @@ return [
     'Select Themes' => 'اختر السمات',
     'Theme' => 'السمة',
     'Your Verification PIN Is:' => 'رقم التعريف الشخصي الخاص بك هو',
-    'Replaced shipment not found' => 'الشحنة المستبدلة غير موجودة'
+    'Replaced shipment not found' => 'الشحنة المستبدلة غير موجودة',
+    'Logout' => 'تسجيل خروج'
 ];

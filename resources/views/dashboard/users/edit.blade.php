@@ -38,24 +38,24 @@
                                     <div class="error-validation">{{ $message }}</div>
                                 @enderror
                             </div>
-
-                             <div class="mb-3">
+                            <div class="mb-3">
                                 <label class="form-label">{{ __('translation.Role') }}:</label>
                                 <select  requierd name="role_id"
                                     class="form-select mb-3 @error('role_id') error-input @enderror"
                                     aria-label="Default select example">
                                     <option>{{ __('translation.Select Role') }}</option>
-                                     @php
+                                    @php
                                         $user_roles = $user -> roles->pluck('id') -> toarray();
                                     @endphp
                                     @foreach ($roles as $role)
-                                         <option value="{{ $role->id }}"{{ in_array($role -> id , $user_roles) ? 'selected' : '' }}>{{ $role->name }}</option>
+                                        <option value="{{ $role->id }}"{{ in_array($role -> id , $user_roles) ? 'selected' : '' }}>{{ $role->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('role_id')
                                     <div class="error-validation">{{ $message }}</div>
                                 @enderror
                             </div>
+
                         </div>
                     </div>
                     <div class="col-lg-4">

@@ -18,8 +18,8 @@ class ProfileService{
         $cities = City::get();
         $countries = Country::get();
         $activities = Activity::get();
-        $termsAndConditions = 'Terms And Conditions'; //constant
-        $privacyPolicy = 'Privacy Policy'; //constant
+        $termsAndConditions = setting('terms_conditions');
+        $privacyPolicy = setting('privacy_policy');
         $responseData = [
             'delivery' => new ProfileResource($delivery),
             'termsAndConditions' => $termsAndConditions,

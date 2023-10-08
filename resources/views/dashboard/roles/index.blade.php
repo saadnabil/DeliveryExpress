@@ -31,11 +31,13 @@
                                             <a href="{{ route('roles.edit', $row) }}" class="ms-3"><i class="bx bxs-edit"></i></a>
                                         @endcan
                                         @can('role-delete')
-                                        <a href="{{ route('roles.destroy' , $row) }}" class="ms-3  confirm-delete" ><i class="bx bxs-trash"></i></a>
-                                        <form method="POST" action="{{ route('roles.destroy', $row)}}">
-                                            @csrf
-                                            @method('delete')
-                                        </form>
+                                            @if($row->system_standard == 0)
+                                                <a href="{{ route('roles.destroy' , $row) }}" class="ms-3  confirm-delete" ><i class="bx bxs-trash"></i></a>
+                                                <form method="POST" action="{{ route('roles.destroy', $row)}}">
+                                                    @csrf
+                                                    @method('delete')
+                                                </form>
+                                            @endif
                                         @endcan
                                 </div>
                             </td>

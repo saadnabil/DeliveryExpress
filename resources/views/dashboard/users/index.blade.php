@@ -37,12 +37,14 @@
                                                 class="bx bxs-edit"></i></a>
                                         @endcan
                                         @can('user-delete')
-                                        <a href="{{ route('users.destroy', $row) }}" class="ms-3 confirm-delete"><i
-                                                class="bx bxs-trash"></i></a>
-                                        <form method="POST" action="{{ route('users.destroy', $row)}}">
-                                            @csrf
-                                            @method('delete')
-                                        </form>
+                                        @if($row->system_standard == 0)
+                                            <a href="{{ route('users.destroy', $row) }}" class="ms-3 confirm-delete"><i
+                                                    class="bx bxs-trash"></i></a>
+                                            <form method="POST" action="{{ route('users.destroy', $row)}}">
+                                                @csrf
+                                                @method('delete')
+                                            </form>
+                                        @endif
                                         @endcan
                                     </div>
                                 </td>
