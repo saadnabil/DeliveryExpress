@@ -27,6 +27,7 @@ class ProfileResource extends JsonResource
             'isVerified' => $this->verified,
             'isActive' => $this->active,
             'city' => $this->city->name,
+            'city_id' => $this->city_id,
             'country' => $this->country->name,
             'image' => $this->image ? url('storage/'. $this->image) : null,
         ];

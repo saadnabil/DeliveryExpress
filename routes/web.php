@@ -72,9 +72,6 @@ Route::group(['middleware' => 'auth'],function(){
     Route::resource('settings', SettingsController::class)->only('index','store');
 });
 
-
-
-
 // Route::get('testSms', function(){
 //     $receiverNumber = "+218928908901";
 //         $message = __('translation.Your Verification PIN Is:'). 1234;
@@ -93,7 +90,6 @@ Route::group(['middleware' => 'auth'],function(){
 // });
 
 Route::get('testSms', function(){
-
     $client = new Client([
         'base_uri' => "https://9llky4.api.infobip.com/",
         'headers' => [
@@ -114,7 +110,7 @@ Route::get('testSms', function(){
                             ['to' => "201143707240"]
                         ],
                         'text' => 'Your verification PIN is: 9318',
-                    ]
+                    ]ا
                 ]
             ],
         ]
