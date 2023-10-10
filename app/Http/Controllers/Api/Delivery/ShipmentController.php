@@ -57,7 +57,7 @@ class ShipmentController extends Controller
             'deliveredCount' => count($shipmentsDelivered),
             'deliveredPrice' =>  $shipmentsDelivered->sum('total_price'),
         ];
-        return response()->json($data );
+        return $this->sendResponse($data);
     }
 
     public function search(SearchValidation $request)
