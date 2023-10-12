@@ -21,7 +21,7 @@ class CreateDeliveryStepTwoValidation extends FormRequest
      */
     public function rules(): array
     {
-        dd(request()->cities_ids);
+        return response()->json(request()->cities_ids);
         return [
             'cities_ids' => ['required','array'],
             'cities_ids.*' => ['numeric'],
