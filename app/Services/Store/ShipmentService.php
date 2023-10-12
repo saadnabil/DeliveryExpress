@@ -8,21 +8,15 @@ use App\Models\ShipmentImage;
 use Illuminate\Http\Request;
 
 class ShipmentService{
-
     use ApiResponseTrait;
-
     public function index(){
-
         $statusArr = ['all' , 'delivered' ,'failed','returned','out_for_delivery','in_stock','recieved_by_delivery' ,'pending' ];
-
         $status = request('status');
-
         if(!in_array($status , $statusArr )){
             return $this->sendResponse([
                 'error' => 'Status must be in: all , delivered ,failed,returned,out_for_delivery,in_stock,recieved_by_delivery,pending',
             ] , 'fail' , 404);
         }
-
         if($status != 'all'){
             $rows = Shipment::with(['images','delivery','shipmentType','shipmentReplaced'])
                        ->where('status' ,$status )
@@ -37,7 +31,6 @@ class ShipmentService{
                        ->simplePaginate();
         }
         return $this->sendResponse(resource_collection(ShipmentResource::collection($rows)));
-
     }
 
     public function storeStepOne(array $data){

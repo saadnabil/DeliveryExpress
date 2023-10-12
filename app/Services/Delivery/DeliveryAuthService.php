@@ -49,6 +49,7 @@ class DeliveryAuthService {
 
     public function registerStepThree(array $data){
         $delivery = auth()->user();
+        
         foreach ($data['days'] as $day) {
             DeliveryWorkTime::create([
                 'day' => $day['day'],

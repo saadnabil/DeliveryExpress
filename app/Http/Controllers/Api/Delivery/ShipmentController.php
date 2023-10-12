@@ -18,16 +18,13 @@ class ShipmentController extends Controller
     {
         $this->shipmentService =  $shipmentService;
     }
-
     public function index(){
         return $this->shipmentService->index();
     }
-
     public function recieve(RecieveShipmentValidation $request){
         $data = $request->validated();
         return $this->shipmentService->recieve($data);
     }
-
     public function startDeliverShipment(StartDeliverShipmentValidation $request){
         $data = $request->validated();
         return $this->shipmentService->startDeliverShipment($data);
@@ -40,7 +37,6 @@ class ShipmentController extends Controller
         $data = $request->validated();
         return $this->shipmentService->failDeliverShipment($data);
     }
-
     public function shipmentInvoice(){
         $delivery = auth()->user();
         $shipmentsAssignedToDelivery = Shipment::where([
@@ -59,7 +55,6 @@ class ShipmentController extends Controller
         ];
         return $this->sendResponse($data);
     }
-
     public function search(SearchValidation $request)
     {
         $data = $request->validated();
