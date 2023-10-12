@@ -21,6 +21,7 @@ class CreateDeliveryStepTwoValidation extends FormRequest
      */
     public function rules(): array
     {
+        info(request()->all());
         return [
             'cities_ids' => ['required','array'],
             'cities_ids.*' => ['string'],
