@@ -23,7 +23,7 @@ class CreateDeliveryStepTwoValidation extends FormRequest
     {
         return [
             'cities_ids' => ['required','array'],
-            'cities_ids.*' => ['numeric'],
+            'cities_ids.*' => ['string'],
         ];
     }
 }
