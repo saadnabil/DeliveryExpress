@@ -29,6 +29,7 @@ class DeliveryResource extends JsonResource
                 'credit' => $this->credit,
                 'isVerified' => $this->verified,
                 'isActive' => $this->active,
+                'registerStep' => $this->register_step,
             ]
         ];
         if($this->token){

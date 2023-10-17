@@ -1,6 +1,5 @@
 <?php
 namespace App\Services\Delivery;
-
 use App\Events\RegisterSendMailEvent;
 use App\Helpers\FileHelper;
 use App\Http\Resources\Api\Delivery\DeliveryResource;
@@ -38,6 +37,9 @@ class DeliveryAuthService {
 
     public function registerStepTwo(array $data){
         $delivery = auth()->user();
+        $delivery->update([
+            'register_step' => 2
+        ]);
         foreach ($data['cities_ids'] as $cityId) {
             DeliveryWorkCity::create([
                 'city_id' => $cityId,
@@ -49,7 +51,10 @@ class DeliveryAuthService {
 
     public function registerStepThree(array $data){
         $delivery = auth()->user();
-        
+        $delivery->update([
+            'register_step' => 3,
+            'active' => 1,
+        ]);
         foreach ($data['days'] as $day) {
             DeliveryWorkTime::create([
                 'day' => $day['day'],
