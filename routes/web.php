@@ -89,33 +89,33 @@ Route::group(['middleware' => 'auth'],function(){
 //         }
 // });
 
-// Route::get('testSms', function(){
-//     $client = new Client([
-//         'base_uri' => "https://9llky4.api.infobip.com/",
-//         'headers' => [
-//             'Authorization' => "App 845664a868b0e9d3903679e30c776750-ab9ed3bf-c62b-43f8-bf91-8608ef10f1c6",
-//             'Content-Type' => 'application/json',
-//             'Accept' => 'application/json',
-//         ]
-//     ]);
-//     $response = $client->request(
-//         'POST',
-//         'sms/2/text/advanced',
-//         [
-//             RequestOptions::JSON => [
-//                 'messages' => [
-//                     [
-//                         'from' => 'InfoSMS',
-//                         'destinations' => [
-//                             ['to' => "201143707240"]
-//                         ],
-//                         'text' => 'Your verification PIN is: 9318',
-//                     ]ا
-//                 ]
-//             ],
-//         ]
-//     );
-//     echo("HTTP code: " . $response->getStatusCode() . PHP_EOL);
-//     echo("Response body: " . $response->getBody()->getContents() . PHP_EOL);
+Route::get('testSms', function(){
+    $client = new Client([
+        'base_uri' => "https://9llky4.api.infobip.com/",
+        'headers' => [
+            'Authorization' => "App 845664a868b0e9d3903679e30c776750-ab9ed3bf-c62b-43f8-bf91-8608ef10f1c6",
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+        ]
+    ]);
+    $response = $client->request(
+        'POST',
+        'sms/2/text/advanced',
+        [
+            RequestOptions::JSON => [
+                'messages' => [
+                    [
+                        'from' => 'InfoSMS',
+                        'destinations' => [
+                            ['to' => "201143707240"]
+                        ],
+                        'text' => 'Your verification PIN is: 9318',
+                    ]
+                ]
+            ],
+        ]
+    );
+    echo("HTTP code: " . $response->getStatusCode() . PHP_EOL);
+    echo("Response body: " . $response->getBody()->getContents() . PHP_EOL);
 
-// });
+});

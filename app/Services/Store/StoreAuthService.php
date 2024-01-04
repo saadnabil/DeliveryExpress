@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 class StoreAuthService {
     use ApiResponseTrait;
+    
     public function register(array $data){
         $data['password'] = Hash::make($data['password']);
         $otpCode = generate_otp_function();
@@ -27,7 +28,6 @@ class StoreAuthService {
         $store = $store->load(['activity','city' , 'country']);
         return $this->sendResponse(new StoreResource($store));
     }
-
 
     public function login(array $data){
         if(auth()->guard('store')->attempt(['password' => $data['password'],'email' => $data['email']])){
